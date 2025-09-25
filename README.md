@@ -1,1 +1,4 @@
-# Projeto-Pequenas-Empresas-Cafeteria
+# Integrantes:
+--Luis Fernando
+--Douglas Oliveira
+--Ryan Mota
