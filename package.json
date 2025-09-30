@@ -1,0 +1,26 @@
+{
+  "name": "projeto-pequenas-empresas-cafeteria",
+  "version": "1.0.0",
+  "description": "--Luis Fernando\r --Douglas Oliveira\r --Ryan Mota",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisfffarias/Projeto-Pequenas-Empresas-Cafeteria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisfffarias/Projeto-Pequenas-Empresas-Cafeteria/issues"
+  },
+  "homepage": "https://github.com/luisfffarias/Projeto-Pequenas-Empresas-Cafeteria#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mssql": "^11.0.1"
+  }
+}
