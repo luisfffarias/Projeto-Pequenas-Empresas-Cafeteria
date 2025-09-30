@@ -1,0 +1,29 @@
+:root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --text-color: #f0f0f0;
+            --heading-color: #e0e0e0;
+            --accent-color: #cd853f;
+            --border-color: #444444;
+            --button-hover-bg: #b07234;
+            --input-bg: #333;
+        }
+
+        /* Estilos globais e de layout (mantidos) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--primary-bg); color: var(--text-color); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        header { background-color: var(--primary-bg); padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+        .nav-links a { color: var(--text-color); text-decoration: none; }
+        .auth-buttons { display: flex; gap: 1rem; }
+        .auth-buttons .btn { padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; }
+        .auth-buttons .btn-login { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-color); }
+        .auth-buttons .btn-cadastro { background-color: var(--secondary-bg); color: var(--text-color); border: none; }
+        .secao_principal { text-align: center; padding: 4rem 0 3rem; border-bottom: 1px solid var(--border-color); }
+        .secao_principal h1 { font-size: 3.2rem; }
+        .secao_principal p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; }
+        .titulo-secao { font-size: 2.5rem; color: var(--heading-color); text-align: center; margin-top: 4rem; margin-bottom: 2rem; font-weight: 600; }
+        .section-subtitle { font-size: 1.5rem; color: var(--accent-color); text-align: center; margin-bottom: 3rem; font-weight: 500; }

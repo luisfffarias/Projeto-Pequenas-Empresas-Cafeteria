@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <title>Coffee</title>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-logo">
+        <p>Coffee</p>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="index.html" class="link active">Loja</a></li>
+            <li><a href="cursos.html" class="link">Aulas</a></li>
+            <li><a href="planos.html" class="link">Planos</a></li>
+            <li><a href="blog.html" class="link">Blog</a></li>
+            <li><i class="fa-solid fa-cart-shopping"></i></li>
+        </ul>
+    </div>
+    <div class="nav-button">
+        <button class="btn white-btn" id="loginBtn">Login</button>
+        <button class="btn" id="registerBtn">Cadastro</button>
+    </div>
+    <div class="nav-menu-btn">
+        <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+    </div>
+</nav>
+
+<section class="secao_principal">
+    <img src="../assets/images/grao_cafe2.png" alt="Grão de Café" class="coffee-grain grain-1">
+    <img src="../assets/images/grao_cafe2.png" alt="Grão de Café" class="coffee-grain grain-2">
+
+    <div class="content-wrapper">
+        <div class="main-content">
+            <h1>Coffee</h1>
+            <h2>DESCUBRA O VERDADEIRO SABOR EM CADA GOLE
+            O CAFÉ ARTESANAL MAIS QUERIDO DA REGIÃO.</h2>
+            <div class="hero-buttons">
+                <button class="btn">CONFIRA PRODUTOS </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal-container" id="formModal">
+    <div class="form-box">
+        <div class="login-container" id="login">
+            <div class="top">
+                <span>Não tem uma conta? <a href="#" onclick="showRegister()">Cadastre-se</a></span>
+                <header>Login</header>
+            </div>
+            <form action="login.php" method="POST">
+                <div class="input-box">
+                    <input type="text" class="input-field" name="email" placeholder="Email" required>
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" name="senha" placeholder="Senha" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Entrar">
+                </div>
+            </form>
+        </div>
+
+        <div class="register-container" id="register">
+            <div class="top">
+                <span>Já tem uma conta? <a href="#" onclick="showLogin()">Login</a></span>
+                <header>Cadastre-se</header>
+            </div>
+            <form action="cadastro.php" method="POST">
+                <div class="two-forms">
+                    <div class="input-box">
+                        <input type="text" class="input-field" name="nome" placeholder="Primeiro Nome" required>
+                        <i class="bx bx-user"></i>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" name="email" placeholder="Email" required>
+                    <i class="bx bx-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" name="senha" placeholder="Senha" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field"  name="conf_senha" placeholder="Confirmar Senha" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Cadastrar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../assets/js/script.js"></script>
+</body>
+</html>

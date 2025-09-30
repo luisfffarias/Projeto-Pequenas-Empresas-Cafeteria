@@ -1,0 +1,289 @@
+/* --- Estilos da Página de Carrinho (Carrinho.css) --- */
+
+/* Estrutura principal do carrinho */
+.carrinho-container {
+    display: flex;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+    /* Faz o layout quebrar em telas menores */
+    flex-wrap: wrap; 
+    justify-content: center;
+}
+
+/* Coluna dos Itens no Carrinho */
+.carrinho-itens {
+    flex: 2; /* Ocupa 2/3 do espaço em telas grandes */
+    min-width: 300px; /* Garante que não fique muito estreito */
+}
+
+/* Card Individual do Produto no Carrinho */
+.item-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    gap: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.item-details {
+    flex-grow: 1;
+}
+
+.item-details h4 {
+    color: var(--heading-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.item-details p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+/* Controle de Quantidade */
+.item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.quantity-btn {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.3rem;
+    border-radius: 4px;
+}
+
+.item-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    min-width: 100px; /* Garante alinhamento dos preços */
+    text-align: right;
+}
+
+.item-remove {
+    color: #777;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.item-remove:hover {
+    color: #ff4d4d; /* Vermelho para a ação de remover */
+}
+
+/* Coluna de Resumo da Compra (Lateral) */
+.carrinho-resumo {
+    flex: 1; /* Ocupa 1/3 do espaço em telas grandes */
+    min-width: 250px;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    height: fit-content; /* Faz a caixa lateral não esticar */
+}
+
+.carrinho-resumo h3 {
+    color: var(--heading-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+.resumo-total {
+    border-top: 2px solid var(--accent-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.btn-finalizar {
+    width: 100%;
+    text-align: center;
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: background-color 0.3s;
+}
+
+.btn-finalizar:hover {
+    background-color: var(--button-hover-bg);
+}
+
+/* Responsividade (Ajuste a estrutura em telas pequenas) */
+@media (max-width: 768px) {
+    .carrinho-container {
+        flex-direction: column;
+    }
+
+    .carrinho-itens, .carrinho-resumo {
+        min-width: 100%;
+        flex: auto;
+    }
+    
+    .item-card {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .item-details {
+        min-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .item-price {
+        text-align: left;
+    }
+}
+
+/* Campo de Cupom */
+.coupon-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+.coupon-section h4 {
+    color: var(--heading-color);
+    margin-bottom: 0.75rem;
+}
+
+.coupon-input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.coupon-input-group input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+
+.btn-apply-coupon {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary-bg);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-apply-coupon:hover {
+    background-color: rgba(205, 133, 63, 0.1);
+}
+
+/* Link para Continuar Comprando */
+.continue-shopping-link {
+    display: inline-block;
+    color: var(--text-color);
+    text-decoration: none;
+    margin-top: 1.5rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.continue-shopping-link:hover {
+    color: var(--accent-color);
+}
+
+/* Seção de Sugestões de Produtos */
+.suggestions-section {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.suggestions-section h3 {
+    color: var(--heading-color);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.suggestions-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.suggestion-card {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    max-width: 180px;
+    transition: transform 0.3s;
+}
+
+.suggestion-card:hover {
+    transform: translateY(-5px);
+}
+
+.suggestion-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 0.75rem;
+}
+
+.suggestion-card h4 {
+    font-size: 1rem;
+    color: var(--heading-color);
+    margin-bottom: 0.25rem;
+}
+
+.suggestion-card p {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}

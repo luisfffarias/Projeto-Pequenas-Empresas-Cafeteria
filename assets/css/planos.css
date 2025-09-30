@@ -1,0 +1,299 @@
+:root {
+    --primary-bg: #1a1a1a; 
+    --secondary-bg: #2a2a2a; 
+    --text-color: #f0f0f0;
+    --heading-color: #e0e0e0; 
+    --accent-color: #cd853f;
+    --border-color: #444444; 
+    --button-hover-bg: #b07234; 
+}
+
+/* Fonte Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ESTILOS GLOBAIS - DARK MODE */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Hero Section */
+.secao_principal {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/images/rrt1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.secao_principal::after {
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.6); 
+    z-index: 0;
+}
+
+.hero-content { 
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--text-color);
+        margin-bottom: 5vh;
+
+}
+
+.hero-content h1 {
+    font-size: 60px;
+    color: var(--heading-color);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero-content h2 {
+    font-size: 28px;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+
+/* Planos Section */
+.planos-section {
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.planos-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--heading-color);
+    margin-bottom: 50px;
+}
+
+.planos-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.plano-card {
+    background: var(--secondary-bg); 
+    border-radius: 10px;
+    width: 300px;
+    padding: 30px 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--border-color);
+}
+
+.plano-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.plano-card.destaque {
+    background: linear-gradient(135deg, var(--accent-color), #b07234);
+    color: var(--primary-bg);
+    transform: scale(1.05); 
+    border: 3px solid var(--heading-color);
+}
+
+.plano-card h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--heading-color); 
+}
+.plano-card.destaque h3 {
+    color: var(--primary-bg); 
+}
+
+.plano-card .price {
+    font-size: 32px; 
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+.plano-card.destaque .price {
+    color: var(--primary-bg); 
+}
+
+.plano-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.plano-card ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    position: relative;
+    padding-left: 25px; 
+}
+
+.plano-card ul li::before {
+    content: "\f00c"; 
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+.plano-card.destaque ul li {
+    color: var(--primary-bg); 
+}
+.plano-card.destaque ul li::before {
+    color: var(--primary-bg); 
+}
+
+.plano-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700; 
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    transition: 0.3s;
+    border: none;
+}
+
+.plano-card.destaque .plano-btn {
+    background: var(--primary-bg); 
+    color: var(--accent-color);
+}
+
+.plano-btn:hover {
+    background: var(--button-hover-bg);
+    color: var(--primary-bg);
+}
+.plano-card.destaque .plano-btn:hover {
+    background: var(--border-color);
+    color: var(--accent-color);
+}
+
+/* NOVO: Testemunhos Section */
+.testimonial-section {
+    background: var(--secondary-bg);
+    padding: 80px 10%;
+    text-align: center;
+}
+.testimonial-section h2 {
+    font-size: 32px;
+    color: var(--heading-color);
+    margin-bottom: 40px;
+}
+.testimonial-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.testimonial-card {
+    background: var(--primary-bg);
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border-left: 5px solid var(--accent-color);
+    text-align: left;
+}
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+.testimonial-author {
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+.testimonial-rating {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+/* NOVO: Garantia Section */
+.guarantee-section {
+    padding: 60px 10%;
+    text-align: center;
+    background: var(--primary-bg);
+}
+.guarantee-section i {
+    font-size: 40px;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+.guarantee-section h3 {
+    font-size: 24px;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+.guarantee-section p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #b0b0b0;
+}
+
+
+/* FAQ Section (Mantido da resposta anterior, mas sem o toggle JS) */
+.faq-section {
+    padding: 50px 10%;
+    background: var(--primary-bg);
+    border-top: 1px solid var(--border-color);
+}
+.faq-section h2 {
+    font-size: 32px;
+    color: var(--heading-color);
+    text-align: center;
+    margin-bottom: 40px;
+}
+.faq-item {
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 0;
+    text-align: left;
+}
+.faq-question {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--heading-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.faq-answer {
+    font-size: 16px;
+    color: var(--text-color);
+    padding: 10px 0 0 0;
+}
+
+/* Responsivo */
+@media only screen and (max-width: 900px) {
+    .planos-section {
+        padding: 50px 5%;
+    }
+    .planos-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .plano-card {
+        width: 90%;
+    }
+    .testimonial-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

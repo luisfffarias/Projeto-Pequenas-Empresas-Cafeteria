@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Carrinho - Coffee</title>
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/carrinho.css"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    
+
+    <section class="secao_principal" id="hero-catalogo">
+        <div class="hero-content">
+            <h1>Seu Carrinho de Compras</h1>
+            <h2>Revise os itens e finalize seu pedido.</h2>
+        </div>
+    </section>
+    
+    <div class="container carrinho-container">
+        
+        <div class="carrinho-itens">
+
+            <div class="item-card" data-id="1">
+                <img src="../assets/images/cafe-brasil.jpg" alt="Café Mogiana" class="item-img">
+                
+                <div class="item-details">
+                    <h4>Café Mogiana</h4>
+                    <p>Grãos | Intenso | 250g</p>
+                    
+                    <div class="item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="number" value="2" min="1" class="quantity-input">
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+
+                <span class="item-price">R$ 70,00</span> 
+                
+                <i class="fas fa-trash item-remove" title="Remover item"></i>
+            </div>
+            
+            <div class="item-card" data-id="2">
+                <img src="../assets/images/moedor.jpg" alt="Moedor Manual" class="item-img">
+                
+                <div class="item-details">
+                    <h4>Moedor Manual de Cerâmica</h4>
+                    <p>Acessório | Unidade</p>
+                    
+                    <div class="item-quantity">
+                        <button class="quantity-btn">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input">
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+
+                <span class="item-price">R$ 139,00</span>
+                
+                <i class="fas fa-trash item-remove" title="Remover item"></i>
+            </div>
+
+            <a href="catalogo.html" class="continue-shopping-link">
+                <i class="fas fa-arrow-left"></i> Continuar Comprando
+            </a>
+
+        </div>
+
+        <div class="carrinho-resumo">
+            <h3>Resumo do Pedido</h3>
+            
+            <div class="resumo-linha">
+                <span>Subtotal (3 itens)</span>
+                <span>R$ 209,00</span>
+            </div>
+            
+            <div class="resumo-linha">
+                <span>Frete Estimado</span>
+                <span>R$ 25,00</span>
+            </div>
+            
+            <div class="coupon-section">
+                <h4>Aplicar Cupom</h4>
+                <div class="coupon-input-group">
+                    <input type="text" placeholder="Código do cupom">
+                    <button class="btn-apply-coupon">Aplicar</button>
+                </div>
+            </div>
+            
+            <div class="resumo-linha resumo-total">
+                <span>Total</span>
+                <span>R$ 234,00</span>
+            </div>
+            
+            <a href="checkout.html" class="btn-finalizar">Finalizar Compra</a>
+        </div>
+
+    </div>
+
+    <section class="container suggestions-section">
+        <h3>Você também pode gostar</h3>
+        <div class="suggestions-grid">
+            
+            <div class="suggestion-card">
+                <img src="../assets/images/coldbrew.jpg" alt="Café Blend da Casa">
+                <h4>Blend da Casa</h4>
+                <p>R$ 38,00</p>
+            </div>
+            
+            <div class="suggestion-card">
+                <img src="../assets/images/prensa-francesa.jpg" alt="Prensa Francesa">
+                <h4>Prensa Francesa</h4>
+                <p>R$ 99,00</p>
+            </div>
+            
+             <div class="suggestion-card">
+                <img src="../assets/images/cafe-colombia.jpg" alt="Café Orgânico Andino">
+                <h4>Café Peruano</h4>
+                <p>R$ 48,00</p>
+            </div>
+            
+        </div>
+    </section>
+
+            
+</body>
+</html>

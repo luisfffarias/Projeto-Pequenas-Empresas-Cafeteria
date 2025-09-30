@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee - Cursos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/cursos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <main>
+        <section class="secao_principal">
+    <div class="hero-content">
+        <h1>Aprenda com Especialistas, Apaixone-se ainda mais por Café</h1>
+        <p>Seja você um iniciante curioso ou um barista experiente em busca de aprimoramento, nossos cursos foram desenhados para aprofundar sua conexão com o universo do café.</p>
+    </div>
+</section>
+
+<section class="container" style="text-align: right; padding-top: 0; padding-bottom: 1rem;">
+    <button id="btn-container" class="btn1" style="padding: 0.7rem 1.5rem; margin-top: 0; font-size: 1rem;">
+        + Adicionar Novo Curso
+    </button>
+</section>
+
+        <section class="container">
+            <h2 class="titulo-secao">Nossos Cursos</h2>
+            <p class="section-subtitle">Explore a nossa biblioteca completa de aulas para todos os níveis.</p>
+
+            <ul class="courses-grid" id="allCoursesList">
+                
+                <li class="course-item">
+                    <h4>Introdução ao Café Especial</h4>
+                    <p>Descubra os fundamentos do café especial, desde o grão até a xícara. Perfeito para quem está começando.</p>
+                    <div class="detalhes">
+                        <span><strong>Duração:</strong> 2 horas</span>
+                        <span><strong>Nível:</strong> Iniciante</span>
+                        <span><strong>Categoria:</strong> Essencial</span>
+                    </div>
+                </li>
+
+                <li class="course-item">
+                    <h4>Métodos de Preparo: V60 e Aeropress</h4>
+                    <p>Aprenda as técnicas para extrair o melhor sabor do seu café usando os métodos V60 e Aeropress.</p>
+                    <div class="detalhes">
+                        <span><strong>Duração:</strong> 3 horas</span>
+                        <span><strong>Nível:</strong> Intermediário</span>
+                        <span><strong>Categoria:</strong> Métodos de Preparo</span>
+                    </div>
+                </li>
+
+                <li class="course-item">
+                    <h4>Latte Art para Iniciantes</h4>
+                    <p>Domine a vaporização do leite e aprenda a criar os desenhos clássicos como o coração e a tulipa no seu cappuccino.</p>
+                    <div class="detalhes">
+                        <span><strong>Duração:</strong> 4 horas</span>
+                        <span><strong>Nível:</strong> Iniciante</span>
+                        <span><strong>Categoria:</strong> Barista</span>
+                    </div>
+                </li>
+
+                <li class="course-item">
+                    <h4>Degustação e Análise Sensorial</h4>
+                    <p>Treine seu paladar para identificar diferentes notas, aromas e sabores nos cafés de diversas origens.</p>
+                    <div class="detalhes">
+                        <span><strong>Duração:</strong> 3 horas</span>
+                        <span><strong>Nível:</strong> Todos os Níveis</span>
+                        <span><strong>Categoria:</strong> Essencial</span>
+                    </div>
+                </li>
+
+                <li class="course-item">
+                    <h4>A História do Café no Brasil</h4>
+                    <p>Uma viagem fascinante pela história do grão que moldou a cultura e a economia do nosso país.</p>
+                    <div class="detalhes">
+                        <span><strong>Duração:</strong> 1.5 horas</span>
+                        <span><strong>Nível:</strong> Todos os Níveis</span>
+                        <span><strong>Categoria:</strong> História</span>
+                    </div>
+                </li>
+
+                <li class="course-item">
+                    <h4>Curso de Barista Profissional</h4>
+                    <p>Um curso completo que abrange desde a regulagem do moinho, extração de espresso perfeito até o atendimento ao cliente.</p>
+                    <div class="detalhes">
+                        <span><strong>Duração:</strong> 20 horas</span>
+                        <span><strong>Nível:</strong> Avançado</span>
+                        <span><strong>Categoria:</strong> Barista</span>
+                    </div>
+                </li>
+
+            </ul>
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#" class="btn1">Ver Calendário e Inscrições</a>
+            </div>
+        </section>
+    </main>
+
+    
+    <div id="addCourseModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Criar Novo Curso</h2>
+            <form id="newCourseForm" action="processar_curso.php" method="POST">
+                <div class="form-group">
+                    <label for="courseTitle">Título do Curso</label>
+                    <input type="text" id="courseTitle" name="courseTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="courseDescription">Descrição Curta</label>
+                    <textarea id="courseDescription" name="courseDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="courseDuration">Duração (ex: 3 horas)</label>
+                    <input type="text" id="courseDuration" name="courseDuration" required>
+                </div>
+                <div class="form-group">
+                    <label for="courseLevel">Nível</label>
+                    <select id="courseLevel" name="courseLevel" required>
+                        <option value="Iniciante">Iniciante</option>
+                        <option value="Intermediário">Intermediário</option>
+                        <option value="Avançado">Avançado</option>
+                        <option value="Todos os níveis">Todos os Níveis</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="courseCategory">Tag/Categoria (Para identificação)</label>
+                    <select id="courseCategory" name="courseCategory" required>
+                        <option value="Essencial">Essencial</option>
+                        <option value="Métodos">Métodos de Preparo</option>
+                        <option value="Barista">Barista</option>
+                        <option value="História">História</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="closeModalBtn">Cancelar</button>
+                    <button type="submit" class="btn1 btn-add-course">Adicionar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('addCourseModal');
+            const openBtn = document.getElementById('btn-container');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const form = document.getElementById('newCourseForm');
+
+            openBtn.addEventListener('click', () => modal.classList.add('open'));
+            closeBtn.addEventListener('click', () => { modal.classList.remove('open'); form.reset(); });
+            modal.addEventListener('click', e => { if (e.target === modal) { modal.classList.remove('open'); form.reset(); } });
+        });
+    </script>
+    
+</body>
+</html>

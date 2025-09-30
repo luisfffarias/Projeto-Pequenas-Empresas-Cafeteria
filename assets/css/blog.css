@@ -1,0 +1,231 @@
+/* Variáveis de Tema Escuro */
+:root {
+    --primary-bg: #1a1a1a;        /* Fundo principal (quase preto) */
+    --secondary-bg: #2a2a2a;      /* Fundo de cards/elementos (cinza escuro) */
+    --text-color: #f0f0f0;        /* Cor do texto principal (branco suave) */
+    --heading-color: #e0e0e0;     /* Cor dos títulos (cinza claro) */
+    --accent-color: #cd853f;      /* Cor de destaque (sépia/ouro) */
+    --border-color: #444444;      /* Cor das bordas e divisores */
+    --button-hover-bg: #b07234;   /* Cor do hover do botão */
+    --input-bg: #333;             /* Fundo de campos de input */
+}
+
+/* Fonte Poppins (Mantida) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+
+/* ESTILOS GLOBAIS E HERO SECTION (Adaptados ao Dark Mode) */
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Usa a variável de fundo principal */
+    background-color: var(--primary-bg); 
+    /* Usa a variável de cor de texto */
+    color: var(--text-color); 
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hero Section */
+.secao_principal {
+    position: relative;
+    width: 100%;
+    /* height: 60vh; */
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/images/rrt1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.secao_principal::after {
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    /* MANTIDO o escurecimento, mas pode ser ajustado se o fundo for muito escuro */
+    background: rgba(0,0,0,0.5); 
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 2vh;
+}
+
+.hero-content h1 {
+    font-size: 60px;
+    color: var(--heading-color); /* Usando a cor de título */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero-content h2 {
+    font-size: 28px;
+    color: var(--accent-color); /* Usando a cor de destaque */
+    margin-top: 10px;
+}
+    
+.hero-btn {
+    background: var(--accent-color);
+    color: var(--primary-bg); /* Botão de destaque com texto escuro */
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    padding: 12px 30px;
+    margin: 20px 10px 0 10px;
+    display: inline-block;
+}
+.hero-btn:hover {
+    background: var(--button-hover-bg);
+}
+
+
+/* BLOG SECTION (Dark Mode) */
+.blog-section {
+    padding: 60px 10%;
+    /* Usa a cor de fundo primária */
+    background: var(--primary-bg); 
+}
+
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.blog-card {
+    /* Usa a cor de fundo secundária para os cards */
+    background: var(--secondary-bg); 
+    border-radius: 12px;
+    overflow: hidden;
+    /* Sombra mais suave em dark mode */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color); /* Adicionado borda sutil */
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-info {
+    padding: 20px;
+}
+
+.blog-info h3 {
+    font-size: 22px;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.blog-info p {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+/* Botão Ler Mais */
+.blog-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--accent-color);
+    color: var(--primary-bg); /* Texto escuro */
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.blog-btn:hover {
+    background: var(--button-hover-bg);
+}
+
+/* Metadados (Data e Categoria) */
+.blog-meta {
+    font-size: 14px;
+    color: var(--accent-color); /* Usando cor de destaque */
+    margin-bottom: 15px; 
+    font-weight: 500;
+    display: block;
+}
+
+.blog-meta span:not(:last-child)::after {
+    content: "•"; 
+    margin: 0 8px;
+    color: var(--border-color); /* Cor discreta */
+}
+
+
+/* DESTAQUE SECTION (Dark Mode) */
+.destaque-container {
+    display: flex;
+    gap: 30px;
+    /* Usa a cor de fundo secundária */
+    background: var(--secondary-bg); 
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border: 1px solid var(--border-color);
+}
+.destaque-container img {
+    width: 50%;
+    object-fit: cover;
+}
+.destaque-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* FOOTER (Dark Mode) */
+.footer {
+    background: var(--secondary-bg); /* Fundo escuro */
+    color: var(--text-color); 
+    text-align:center; 
+    padding:30px 10px;
+    border-top: 1px solid var(--border-color);
+}
+.footer a {
+    color: var(--accent-color); /* Ícones com cor de destaque */
+    margin:0 5px;
+    font-size: 20px;
+    text-decoration: none;
+}
+.footer p {
+    margin-bottom: 10px;
+}
+
+
+/* RESPONSIVO */
+@media(max-width:900px) {
+    .blog-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .destaque-container {
+        flex-direction: column;
+    }
+    .destaque-container img {
+        width: 100%;
+    }
+}

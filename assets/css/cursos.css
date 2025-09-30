@@ -1,0 +1,159 @@
+ :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --text-color: #f0f0f0;
+            --heading-color: #e0e0e0;
+            --accent-color: #cd853f;
+            --border-color: #444444;
+            --button-hover-bg: #b07234;
+            --input-bg: #333;
+        }
+
+        /* Estilos globais e de layout (mantidos) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--primary-bg); color: var(--text-color); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        header { background-color: var(--primary-bg); padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+        .nav-links a { color: var(--text-color); text-decoration: none; }
+        .auth-buttons { display: flex; gap: 1rem; }
+        .auth-buttons .btn { padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; }
+        .auth-buttons .btn-login { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-color); }
+        .auth-buttons .btn-cadastro { background-color: var(--secondary-bg); color: var(--text-color); border: none; }
+        
+        
+        .secao_principal { 
+    position: relative;
+    width: 100%;
+    /* Altura que você usou na Hero do Blog */
+    height: 500px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* ⚠️ TROQUE A URL se a sua imagem for diferente! */
+    background-image: url('../assets/images/cafe.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Removemos a borda de baixo que existia na versão antiga */
+    border-bottom: none; 
+}
+             .secao_principal::after {
+                content: '';
+                position: absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                /* Escurecimento em preto semi-transparente (50% de opacidade) */
+                background: rgba(0,0,0,0.5); 
+                z-index: 0; /* Fica atrás do conteúdo */
+            }
+        .hero-content {
+    position: relative;
+    z-index: 1; /* Garante que o texto fique acima do overlay */
+    text-align: center;
+    color: var(--accent-color);
+    padding: 0 1.5rem; /* Garante margem nas laterais em telas pequenas */
+    max-width: 900px;
+}
+.hero-content h1 { 
+    font-size: 3.2rem; 
+    color: var(--heading-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    margin: 0 0 1rem 0;
+}
+
+             .secao_principal h1 { font-size: 3.2rem;  color: var(--heading-color); }
+        
+        .secao_principal p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; }
+        .titulo-secao { font-size: 2.5rem; color: var(--heading-color); text-align: center; margin-top: 4rem; margin-bottom: 2rem; font-weight: 600; }
+        .section-subtitle { font-size: 1.5rem; color: var(--accent-color); text-align: center; margin-bottom: 3rem; font-weight: 500; }
+
+        /* --- CORREÇÃO VISUAL APLICADA AQUI --- */
+        
+        /* 1. Otimização para grade 3x */
+        .courses-grid { 
+            display: grid; 
+            /* Ajustado para tentar 3 colunas, mas mantendo a responsividade (minmax 300px) */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2rem; 
+            margin-top: 3rem; 
+            list-style: none; 
+            padding: 0; 
+        }
+        
+        .course-item { 
+            background-color: var(--secondary-bg); 
+            border-radius: 10px; 
+            padding: 2rem; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            border: 1px solid var(--border-color);
+            
+            /* 2. Configurações para manter a altura uniforme e alinhar o conteúdo */
+            display: flex;
+            flex-direction: column;
+            min-height: 350px; /* Garante uma altura mínima para todos os cards */
+        }
+        
+        .course-item:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); }
+        .course-item h4 { 
+            font-size: 1.8rem; 
+            color: var(--accent-color); 
+            margin-bottom: 0.8rem; 
+            font-weight: 600;
+            /* 3. Garante que o título se ajuste */
+            word-break: break-word; 
+        }
+        
+        .course-item p { 
+            color: var(--text-color); 
+            margin-top: 1rem; 
+            font-size: 1.05rem; 
+            margin-bottom: 1.5rem;
+            /* Faz a descrição ocupar o máximo de espaço e força a quebra do texto */
+            flex-grow: 1; 
+            word-break: break-word;
+        }
+
+        .course-item .detalhes { 
+            font-size: 0.95rem; 
+            color: #ccc; 
+            margin-top: 0.8rem; 
+            /* Empurra os detalhes para o fundo se houver espaço extra */
+            margin-top: auto;
+        }
+        .course-item .detalhes span { margin-right: 1.5rem; }
+        .course-item .detalhes strong { color: var(--accent-color); }
+        
+        .btn1 { 
+            display: inline-block; 
+            background-color: var(--accent-color); 
+            color: var(--primary-bg); 
+            padding: 1rem 2.5rem; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: background-color 0.3s ease; 
+            border: none; 
+            cursor: pointer; 
+        }
+        .btn1:hover { background-color: var(--button-hover-bg); }
+        
+        /* Estilos do Modal (mantidos) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-content { background-color: var(--secondary-bg); color: var(--text-color); padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); transform: scale(0.9); transition: transform 0.3s ease; }
+        .modal-overlay.open .modal-content { transform: scale(1); }
+        .modal-content h2 { color: var(--accent-color); margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--heading-color); }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--input-bg); color: var(--text-color); font-family: 'Montserrat', sans-serif; font-size: 1rem; }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
+        .btn-secondary { background-color: var(--border-color); color: var(--text-color); padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-add-course { background-color: var(--accent-color); color: var(--primary-bg); font-weight: 600; }
+        .btn-secondary:hover { background-color: #555; }
+        .btn-add-course:hover { background-color: var(--button-hover-bg); }

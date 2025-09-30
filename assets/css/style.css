@@ -1,0 +1,454 @@
+/* POPPINS FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #e8e6e0;
+    overflow-x: hidden;
+}
+
+/* Modal de formulário */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+    z-index: 999;
+}
+
+.modal-container.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Form box agora é um modal */
+.form-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 512px;
+    height: 550px;
+    background: rgba(255, 255, 255, 0.0);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 4px;
+}
+
+.login-container {
+    position: relative;
+    left: 40px;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease-in-out;
+}
+
+.register-container {
+    position: absolute;
+    right: -520px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease-in-out;
+}
+
+/* Estilos de hero section */
+.secao_principal {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente o conteúdo do flexbox */
+    align-items: center; /* Centraliza verticalmente o conteúdo do flexbox */
+    overflow: hidden;
+    background-image: url('../images/rrt1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.content-wrapper {
+    position: abso; /* Corrigi 'abso' para 'absolute' se for a intenção, mas vou manter como está se funcionar para você */
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    flex-direction: row; /* Alinha os itens em linha */
+    justify-content: center; /* Distribui o espaço entre os itens */
+    align-items: center; /* Centraliza os itens verticalmente */
+    padding: 0 50px;
+    z-index: 2;
+}
+
+.main-content {
+    color: #888888;
+    z-index: 3;
+    text-align: center; /* Centraliza o texto dentro da div */
+    width: 75%; /* <-- ALTERADO: Aumenta a largura da div de texto */
+}
+
+.main-content h1 {
+    font-size: 85px; /* <-- ALTERADO: Aumenta o tamanho da fonte do título principal */
+    font-weight: 700;
+    margin: 0;
+}
+
+.main-content h2 {
+    font-size: 34px; /* <-- ALTERADO: Aumenta o tamanho da fonte do subtítulo */
+    font-weight: 500;
+    margin-top: 10px;
+    color: #a87e5b;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+        justify-content: center; /* <-- Centraliza horizontalmente */
+
+}
+
+.hero-buttons .btn {
+    width: 160px;
+    height: 50px;
+    background: #e1b48b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    align-items: center;
+}
+
+.hero-buttons .white-btn {
+    background: #fff;
+    color: #e1b48b;
+    border: 1px solid #e1b48b;
+}
+
+.hero-buttons .btn:hover {
+    opacity: 0.8;
+}
+
+.stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.stat-item {
+    font-size: 30px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1;
+}
+
+.stat-item p {
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    margin-top: 5px;
+}
+
+.cup-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 55vw;
+    max-width: 800px;
+    transform: translateY(10%);
+    z-index: 1;
+}
+
+/* Nav */
+.nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    background: linear-gradient(rgba(39, 39, 39, 0.6), transparent);
+    z-index: 100;
+}
+
+.nav-logo p {
+    color: rgb(208, 204, 195);
+    font-size: 44px;
+    font-weight: 600;
+}
+
+.nav-menu ul {
+    display: flex;
+}
+
+.nav-menu ul li {
+    list-style-type: none;
+}
+
+.nav-menu ul li .link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    padding-bottom: 15px;
+    margin: 0 25px;
+}
+
+.link:hover, .active {
+    border-bottom: 2px solid #fff;
+}
+
+.nav-button .btn {
+    width: 130px;
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.btn:hover {
+    background: rgb(255, 255, 255, 0.4);
+}
+
+#registerBtn {
+    margin-left: 15px;
+}
+
+.btn.white-btn {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.btn.btn.white-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.nav-menu-btn {
+    display: none;
+}
+
+/* Estilos de formulário */
+.top span {
+    color: #fff;
+    font-size: small;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.top span a {
+    font-weight: 500;
+    color: #fff;
+    margin-left: 5px;
+}
+
+header {
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px 0 30px 0;
+}
+
+.two-forms {
+    display: flex;
+    gap: 10px;
+}
+
+.input-field {
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    height: 50px;
+    width: 100%;
+    padding: 0 10px 0 45px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    margin-bottom: 3.9px; /* Altere este valor (ex: 20px) para o espaçamento que você deseja */
+}
+
+.input-field:hover, .input-field:focus {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.input-box i {
+    position: relative;
+    top: -35px;
+    left: 17px;
+    color: #fff;
+}
+
+.submit {
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    height: 45px;
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.submit:hover {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+
+.two-col {
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-size: small;
+    margin-top: 10px;
+}
+
+.two-col .one {
+    display: flex;
+    gap: 5px;
+}
+
+.two label a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.two label a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 786px) {
+    .nav-button {
+        display: none;
+    }
+    .nav-menu.responsive {
+        top: 100px;
+    }
+    .nav-menu {
+        position: absolute;
+        top: -800px;
+        display: flex;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        width: 100%;
+        height: 90vh;
+        backdrop-filter: blur(20px);
+        transition: .3s;
+    }
+    .nav-menu ul {
+        flex-direction: column;
+        text-align: center;
+    }
+    .nav-menu-btn {
+        display: block;
+    }
+    .nav-menu-btn i {
+        font-size: 25px;
+        color: #fff;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: .3s;
+    }
+    .nav-menu-btn i:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .form-box {
+        width: 100%;
+        height: 500px;
+    }
+    .register-container, .login-container {
+        width: 100%;
+        padding: 0 20px;
+    }
+    .register-container .two-forms {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+/* Grão canto inferior esquerdo (mantido como estava) */
+.coffee-grain.grain-1 {
+    width: 770px;
+    height: auto;
+    transform: rotate(20deg);
+    opacity: 0.7;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: rotateSlow 123s linear infinite; /* agora gira */
+}
+
+/* Novo grão canto superior direito */
+.coffee-grain.grain-2 {
+    width: 600px;
+    height: auto;
+    opacity: 0.6;
+    position: absolute;
+    top: -120px;   /* parte para fora */
+    right: -150px; /* parte para fora */
+    animation: rotateSlow 155s linear infinite; /* gira também */
+}
+
+/* Animação de rotação lenta */
+@keyframes rotateSlow {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.nav-menu ul li i.fa-cart-shopping {
+    color: #fff;          /* deixa branco */
+    margin-left: 20px;    /* afasta do item anterior */
+    font-size: 20px;      /* tamanho do ícone, ajuste se quiser */
+    cursor: pointer;      /* muda o cursor ao passar o mouse */
+    transition: 0.3s;     /* efeito suave */
+}
+
+.nav-menu ul li i.fa-cart-shopping:hover {
+    color: #e1b48b;       /* muda de cor ao passar o mouse, opcional */
+}
+
+
+
+
+
+
+/* dddssddsdsdssdsd */
