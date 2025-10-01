@@ -1,59 +1,61 @@
 const express = require("express");
-const fetch = require("node-fetch"); // certifique-se de ter node-fetch@2
+const { GoogleGenAI } = require("@google/genai"); // 👈 Nova importação
 require("dotenv").config();
 
 const router = express.Router();
 
-// Hugging Face API Key
-const HUGGINGFACE_API_KEY = process.env.HF_API_KEY;
+// 1. Chave da API do Google Gemini
+// Obtenha sua chave no Google AI Studio (antigo MakerSuite)
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// Modelo gratuito e funcional
-const MODEL = "facebook/blenderbot-400M-distill";
+// 2. Modelo Gemini a ser usado
+// gemini-2.5-flash é um ótimo modelo rápido e custo-efetivo para chat/tarefas gerais.
+const GEMINI_MODEL = "gemini-2.5-flash"; 
+
+// 3. Inicializa o cliente Gemini
+// O SDK buscará automaticamente a chave GEMINI_API_KEY do seu .env
+const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+
 
 router.post("/", async (req, res) => {
-  const { message } = req.body;
+  const { message } = req.body;
 
-  if (!message) {
-    console.log("⚠️ Requisição sem 'message'");
-    return res.status(400).json({ error: "Mensagem é obrigatória" });
-  }
+  if (!message) {
+    console.log("⚠️ Requisição sem 'message'");
+    return res.status(400).json({ error: "Mensagem é obrigatória" });
+  }
 
-  try {
-    console.log("📩 Enviando para Hugging Face:", message);
+  try {
+    console.log(`📩 Enviando para Gemini (${GEMINI_MODEL}):`, message);
 
-    const response = await fetch(`https://api-inference.huggingface.co/models/${MODEL}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${HUGGINGFACE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: message,
-        parameters: { max_new_tokens: 200 }
-      }),
-    });
+    // 4. Chamada principal para a API do Gemini
+    const response = await ai.models.generateContent({
+      model: GEMINI_MODEL,
+      contents: [{ role: "user", parts: [{ text: message }] }], // Formato de mensagem para o chat
+      config: {
+        // Opcional: Define a temperatura, limita o tamanho da resposta, etc.
+        maxOutputTokens: 200, // Limite de tokens de saída, similar ao max_new_tokens
+      },
+    });
+    
+    // O SDK retorna a resposta de forma estruturada.
+    const reply = response.text; // 👈 O texto gerado está diretamente na propriedade .text
 
-    const data = await response.json();
+    console.log("📨 Resposta Gemini:", reply.substring(0, 80) + "..."); // log de um trecho
 
-    console.log("📨 Resposta Hugging Face (raw):", JSON.stringify(data, null, 2));
+    res.json({
+      reply,
+      model: GEMINI_MODEL,
+      usage: response.usageMetadata, // Metadados sobre tokens usados (útil para custo)
+    });
 
-    // Extrair texto gerado
-    const reply = data?.generated_text || data?.[0]?.generated_text || "Não foi possível gerar resposta.";
-
-    res.json({
-      reply,
-      hf_raw: data,            // JSON completo da Hugging Face
-      status: response.status, // status HTTP
-      statusText: response.statusText
-    });
-
-  } catch (err) {
-    console.error("❌ Erro Hugging Face:", err);
-    res.status(500).json({
-      error: "Erro ao se comunicar com Hugging Face",
-      details: err.message
-    });
-  }
+  } catch (err) {
+    console.error("❌ Erro Gemini API:", err);
+    res.status(500).json({
+      error: "Erro ao se comunicar com a API do Google Gemini",
+      details: err.message
+    });
+  }
 });
 
 module.exports = router;

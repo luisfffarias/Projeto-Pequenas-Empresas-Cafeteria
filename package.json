@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/luisfffarias/Projeto-Pequenas-Empresas-Cafeteria#readme",
   "dependencies": {
+    "@google/genai": "^1.21.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mssql": "^11.0.1",
