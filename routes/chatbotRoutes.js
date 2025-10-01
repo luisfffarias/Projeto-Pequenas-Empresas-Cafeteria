@@ -18,17 +18,17 @@ const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 
 router.post("/", async (req, res) => {
-  const { message } = req.body;
+  const { message } = req.body;
 
-  if (!message) {
-    console.log("⚠️ Requisição sem 'message'");
-    return res.status(400).json({ error: "Mensagem é obrigatória" });
-  }
+  if (!message) {
+    console.log("⚠️ Requisição sem 'message'");
+    return res.status(400).json({ error: "Mensagem é obrigatória" });
+ }
 
-  try {
-    console.log(`📩 Enviando para Gemini (${GEMINI_MODEL}):`, message);
+ try {
+ console.log(`📩 Enviando para Gemini (${GEMINI_MODEL}):`, message);
 
-    // 4. Chamada principal para a API do Gemini
+  // 4. Chamada principal para a API do Gemini
     const response = await ai.models.generateContent({
       model: GEMINI_MODEL,
       contents: [{ role: "user", parts: [{ text: message }] }], // Formato de mensagem para o chat

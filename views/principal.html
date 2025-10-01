@@ -1,619 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee - Principal</title>
 
-<style>
-header { 
-    /* Cor de fundo primária: #1a1a1a */
-    background-color: var(--primary-bg); 
-    /* Espaçamento vertical */
-    padding: 1rem 0; 
-    /* Borda inferior sutil */
-    border-bottom: 1px solid var(--border-color); 
-}
-
-.navbar { 
-    /* Layout flexível */
-    display: flex; 
-    /* Distribui logo à esquerda e links/botões à direita */
-    justify-content: space-between; 
-    /* Alinhamento vertical centralizado */
-    align-items: center; 
-    /* Largura máxima centralizada */
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 1.5rem; 
-}
-
-.logo { 
-    font-size: 1.8rem; 
-    font-weight: 700; 
-    /* Cor do título: #e0e0e0 */
-    color: var(--heading-color); 
-    text-decoration: none; 
-}
-
-.nav-links { 
-    list-style: none; 
-    display: flex; 
-    /* Espaçamento entre os links */
-    gap: 2.5rem; 
-}
-
-.nav-links a { 
-    /* Cor do texto: #f0f0f0 */
-    color: var(--text-color); 
-    text-decoration: none; 
-}
-
-.auth-buttons { 
-    display: flex; 
-    gap: 1rem; 
-}
-
-.auth-buttons .btn { 
-    padding: 0.7rem 1.5rem; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    font-weight: 600; 
-}
-
-.auth-buttons .btn-login { 
-    background-color: transparent; 
-    /* Borda sutil */
-    border: 1px solid var(--border-color); 
-    color: var(--text-color); 
-}
-
-.auth-buttons .btn-cadastro { 
-    /* Cor de fundo secundária: #2a2a2a */
-    background-color: var(--secondary-bg); 
-    color: var(--text-color); 
-    border: none; 
-}
-
-/* Nota: Faltam os estilos de hover, mas usei o que estava no seu código original. */
-
-/*FOOTER----------------------------------*/
-
-.ecommerce-footer {
-            background-color: #222222;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            position: relative;
-            line-height: 1.5;
-        }
-
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-       
-        .ecommerce-footer h4 {
-            color: #f7931e;
-            font-size: 14px;
-            margin-bottom: 8px; 
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        /* 1. Seção Superior: Pagamento e Segurança */
-        .footer-top-bar {
-            border-bottom: 1px solid #333333;
-            padding-bottom: 10px; 
-        }
-
-        .footer-top-bar .footer-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding-top: 15px; 
-        }
-
-        .form-pagamento, .seguranca {
-            flex-basis: 50%;
-        }
-
-        .icones-pagamento .pagamento-img {
-            max-height: 28px; 
-            width: auto;
-            display: block;
-        }
-
-        .selos-seguranca {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .selo-img-google {
-            max-height: 35px;
-            width: auto;
-        }
-
-        .selo-img-ebit {
-            max-height: 80px; 
-            width: auto;
-        }
-
-      
-        .footer-links {
-            padding: 20px 0; 
-            border-bottom: 1px solid #333333;
-        }
-
-        .main-links-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px; 
-        }
-        .lista-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .lista-links li {
-            margin-bottom: 4px;
-        }
-
-        .lista-links a {
-            color: #b0b0b0;
-            text-decoration: none;
-            font-size: 12px;
-            transition: color 0.3s;
-        }
-
-        .lista-links a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        
-        .footer-bottom {
-            padding: 15px 0; 
-        }
-
-        .titulo-siga {
-            text-align: center;
-            margin-bottom: 10px; 
-        }
-
-        .social-icons {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            color: #ffffff;
-            font-size: 22px; 
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #f7931e;
-        }
-
-       
-        .footer-copyright {
-            background-color: #191919;
-            padding: 10px 0;
-            font-size: 12px; 
-            text-align: center;
-            color: #999999;
-        }
-        
-        .copyright-text {
-            margin: 0;
-        }
-
-        /* Responsividade  */
-        @media (max-width: 768px) {
-            .footer-top-bar .footer-container {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .form-pagamento, .seguranca {
-                margin-bottom: 20px;
-            }
-            .seguranca {
-                order: -1;
-            }
-            .main-links-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-links-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-main {
-    flex-grow: 1;
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/principal.css">
     
-}
-main iframe {
-    /* É importante que o iframe seja um bloco para que 100% funcione */
-    display: block; 
-    /* Use uma altura mínima razoável ou 100% */
-    /* min-height: 70vh; /* Exemplo: pelo menos 70% da altura da viewport */
-    /* height: 100%; */ 
-      width: 100%; 
-}
-
-
-
-        /*CATALOGO--------*/
-/* Variáveis de Tema Escuro */
-:root {
-    --primary-bg: #1a1a1a;        
-    --secondary-bg: #2a2a2a;      
-    --text-color: #f0f0f0;        
-    --heading-color: #e0e0e0;     
-    --accent-color: #cd853f;      
-    --border-color: #444444;      
-    --button-hover-bg: #b07234;   
-}
-
-/* ESTILOS GLOBAIS */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--primary-bg);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-        min-height: 100vh;
-     display: flex;
-    flex-direction: column;
-}
-
-/* Hero Section (Reutilizado das outras páginas) */
-.secao_principal {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../assets/images/hero-catalogo.jpg'); /* Adicione sua imagem de fundo aqui */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.secao_principal::after {
-    content: '';
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 0;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: var(--text-color);
-}
-
-.hero-content h1 {
-    font-size: 60px;
-    color: var(--heading-color);
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.hero-content h2 {
-    font-size: 28px;
-    color: var(--accent-color);
-    margin-top: 10px;
-}
-
-/* CATÁLOGO */
-.catalogo-section {
-    padding: 60px 5%;
-}
-
-.catalogo-wrapper {
-    display: flex;
-    gap: 30px;
-}
-
-/* Barra Lateral de Filtros */
-.filtro-sidebar {
-    width: 250px;
-    padding: 20px;
-    background: var(--secondary-bg);
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-    height: fit-content;
-}
-.filtro-sidebar h3 {
-    font-size: 24px;
-    color: var(--heading-color);
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-}
-.filtro-grupo {
-    margin-bottom: 25px;
-}
-.filtro-grupo h4 {
-    font-size: 18px;
-    color: var(--accent-color);
-    margin-bottom: 10px;
-}
-.filtro-grupo label {
-    display: block;
-    margin-bottom: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--text-color);
-}
-.filtro-grupo input[type="checkbox"] {
-    margin-right: 10px;
-    accent-color: var(--accent-color);
-}
-
-/* Grid de Produtos */
-.produtos-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.produto-card {
-    background: var(--secondary-bg);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid var(--border-color);
-}
-.produto-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-.produto-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-.produto-info {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-.produto-tag {
-    display: inline-block;
-    background: var(--accent-color);
-    color: var(--primary-bg);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.produto-info h3 {
-    font-size: 22px;
-    color: var(--heading-color);
-    margin-bottom: 5px;
-}
-.produto-origem, .produto-descricao {
-    font-size: 14px;
-    color: #b0b0b0;
-    margin-bottom: 10px;
-}
-.produto-origem i {
-    color: var(--accent-color);
-    margin-right: 5px;
-}
-.produto-valor {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid var(--border-color);
-}
-.price {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--accent-color);
-}
-.produto-btn {
-    background: var(--accent-color);
-    color: var(--primary-bg);
-    padding: 10px 20px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-.produto-btn:hover {
-    background: var(--button-hover-bg);
-}
-.produto-btn i {
-    margin-right: 5px;
-}
-
-/* Rodapé (Mantido) */
-.footer {
+    <script src="https://cdn.tailwindcss.com"></script> 
     
-    background: var(--secondary-bg);
-    color: var(--text-color); 
-    text-align:center; 
-    padding:30px 10px;
-    border-top: 1px solid var(--border-color);
-}
-.footer a {
-    color: var(--accent-color);
-    margin:0 5px;
-    font-size: 20px;
-    text-decoration: none;
-}
-.footer p {
-    margin-bottom: 10px;
-}
-
-/* Responsivo */
-@media (max-width: 900px) {
-    .catalogo-wrapper {
-        flex-direction: column;
-    }
-    .filtro-sidebar {
-        width: 100%;
-        margin-bottom: 30px;
-    }
-}
-
-
-</style>
+    <style>
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+    </style>
 </head>
 
-<header>
-    <nav class="navbar">
-                <a href="index.html" class="logo">Coffee</a>
-                <ul class="nav-links">
-                    <li><a href="catalogo.html" target="conteudo">Loja</a></li>
-                    <li><a href="cursos.html" class="active" target="conteudo">Aulas</a></li>
-                    <li><a href="planos.html" target="conteudo">Planos</a></li>
-                    <li><a href="blog.html" target="conteudo">Blog</a></li>
-                    <li>
-                    <a href="carrinho.html" target="conteudo">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                    </li>
-                </ul>
-                <div class="auth-buttons">
-                    <a href="#" class="btn btn-login">Login</a>
-                    <a href="#" class="btn btn-cadastro">Cadastro</a>
-                </div>
-    </nav>
-</header>
+<body>
 
-<main>
-<iframe name="conteudo" src="catalogo.html"   width="100%" 
-   frameborder="0"></iframe>
-</main>
-
-
-<footer class="ecommerce-footer">
-        <div class="footer-top-bar">
-            <div class="footer-container">
-                <div class="form-pagamento">
-                    <h4>FORMAS DE PAGAMENTO</h4>
-                    <div class="icones-pagamento">
-                        <img src="../assets/images/forma-pagamento.png" alt="Formas de Pagamento" class="pagamento-img">
-                    </div>
-                </div>
-
-                <div class="seguranca">
-                    <h4>SEGURANÇA</h4>
-                    <div class="selos-seguranca">
-                        <img src="../assets/images/google-safe.png" alt="Google Safe Browsing" class="selo-img-google">
-                        <img src="../assets/images/selo.png" alt="Selo NlQ Ebit" class="selo-img-ebit">
-                    </div>
-                </div>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">Coffee</a>
+            <ul class="nav-links">
+                <li><a href="catalogo.html" target="conteudo">Loja</a></li>
+                <li><a href="cursos.html" class="active" target="conteudo">Aulas</a></li>
+                <li><a href="planos.html" target="conteudo">Planos</a></li>
+                <li><a href="blog.html" target="conteudo">Blog</a></li>
+                <li>
+                <a href="carrinho.html" target="conteudo">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                </li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-login">Login</a>
+                <a href="#" class="btn btn-cadastro">Cadastro</a>
             </div>
+        </nav>
+    </header>
+
+    <main>
+        <iframe name="conteudo" src="catalogo.html" width="100%" frameborder="0"></iframe>
+    </main>
+
+    <footer class="ecommerce-footer">
+        </footer>
+
+<button id="chat-toggle"
+    class="fixed bottom-6 right-6 bg-amber-700 hover:bg-amber-800 text-white rounded-full p-4 shadow-lg z-50 focus:outline-none flex items-center justify-center">
+    
+    <i class="fas fa-comments text-2xl"></i>
+    
+</button>
+    <div id="chat-widget"
+        class="fixed bottom-20 right-6 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden">
+        <div class="bg-amber-600 text-white px-4 py-3 font-semibold flex justify-between">
+            <span>Atendimento Virtual</span>
+            <i class="cursor-pointer" onclick="triggerClick('chat-toggle')">🗙</i>
         </div>
+        <div id="chat-box" class="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-64 text-sm">
+            <div class="text-gray-700 italic">Vamos Falar sobre café...</div>
+        </div>
+        <div class="flex items-center text-gray-700 border-gray-700 px-2 py-2">
+            <input type="text" id="user-input" placeholder="Digite sua mensagem..."
+                class="flex-1 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none">
+            <button onclick="sendMessage()" class="ml-2 text-amber-700 hover:text-blue-800 text-sm">Enviar</button>
+        </div>
+    </div>
+
+   <script>
+    // ----------------------------------------------------
+    // CONFIGURAÇÃO
+    // ----------------------------------------------------
+    // URL do seu endpoint Express que se comunica com o Gemini
+    const GEMINI_ENDPOINT = '/api/chatbot'; 
+
+    // ----------------------------------------------------
+    // VARIÁVEIS DO DOM
+    // ----------------------------------------------------
+    const chatWidget = document.getElementById('chat-widget');
+    const toggleBtn = document.getElementById('chat-toggle');
+    const chatBox = document.getElementById('chat-box');
+    const input = document.getElementById('user-input');
+
+    // ----------------------------------------------------
+    // EVENT LISTENERS
+    // ----------------------------------------------------
+    toggleBtn.addEventListener('click', () => {
+        chatWidget.classList.toggle('hidden');
+    });
+
+    input.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Função auxiliar para o botão de fechar (🗙)
+    function triggerClick(idEl) {
+        const element = document.getElementById(idEl);
+        if (element) {
+            element.click();
+        }
+    }
+    
+    // ----------------------------------------------------
+    // LÓGICA DE MENSAGENS E INTEGRAÇÃO
+    // ----------------------------------------------------
+
+    // Inicia o processo de envio e espera pela resposta do Gemini
+    function sendMessage() {
+        const userMessage = input.value.trim();
+        if (!userMessage) {
+            return;
+        }
+
+        appendMessage('Você', userMessage);
+        input.value = '';
+        input.disabled = true; // Desabilita o input
         
-        <div class="footer-links">
-            <div class="footer-container main-links-grid">
-                
-                <div class="coluna">
-                    <h4 class="coluna-titulo">INSTITUCIONAL</h4>
-                    <ul class="lista-links">
-                        <li><a href="#">Quem somos</a></li>
-                        <li><a href="#">Termos e Condições de Venda</a></li>
-                        <li><a href="#">Política de troca e devoluções</a></li>
-                        <li><a href="#">Política de Segurança e Privacidade</a></li>
-                        <li><a href="#">Política de Cookies</a></li>
-                    </ul>
-                </div>
-                
-                <div class="coluna">
-                    <h4 class="coluna-titulo">DÚVIDAS</h4>
-                    <ul class="lista-links">
-                        <li><a href="#">Como comprar</a></li>
-                        <li><a href="#">Prazos e entregas</a></li>
-                        <li><a href="#">Formas de Pagamento</a></li>
-                        <li><a href="#">Programa de Parceiros</a></li>
-                    </ul>
-                </div>
-                
-                <div class="coluna">
-                    <h4 class="coluna-titulo">CLIENTE</h4>
-                    <ul class="lista-links">
-                        <li><a href="#">Minha conta</a></li>
-                        <li><a href="#">Meus pedidos</a></li>
-                        <li><a href="#">Meus tickets</a></li>
-                    </ul>
-                </div>
-                
-                <div class="coluna">
-                    <h4 class="coluna-titulo">AJUDA</h4>
-                    <ul class="lista-links">
-                        <li><a href="#">Vídeo Tutoriais</a></li>
-                        <li><a href="#">Manuais do Produto</a></li>
-                        <li><a href="#">Fale Conosco</a></li>
-                    </ul>
-                </div>
+        getBotResponse(userMessage); 
+    }
 
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="footer-container">
-                <div class="siga-nos">
-                    <h4 class="titulo-siga">SIGA-NOS</h4>
-                    <div class="social-icons">
-                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> </a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i> </a>
-                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i> </a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i> </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-</footer>
-
-
-<script>
-    const iframe = document.querySelector('iframe[name="conteudo"]');
-
-    function ajustarAlturaIframe() {
+    // Faz a chamada assíncrona para o endpoint Gemini
+    async function getBotResponse(userMessage) {
+        const loadingMsgId = Date.now();
+        appendLoadingMessage(loadingMsgId);
+        
         try {
-            // Tenta obter a altura do conteúdo dentro do iframe
-            const alturaConteudo = iframe.contentWindow.document.body.scrollHeight;
+            const response = await fetch(GEMINI_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage }),
+            });
+
+            const data = await response.json();
             
-            // Define a altura do iframe para a altura do seu conteúdo + uma margem
-            if (alturaConteudo > 0) {
-                iframe.style.height = (alturaConteudo + 30) + 'px';
+            removeLoadingMessage(loadingMsgId);
+
+            if (response.ok && data.reply) {
+                appendMessage('Bot', data.reply);
+            } else {
+                const errorMsg = data.error || 'Erro desconhecido ao obter resposta.';
+                appendMessage('Bot', `❌ Ops! Erro de comunicação: ${errorMsg}`);
             }
-        } catch (e) {
-            // Erro de segurança (CORS) pode acontecer se as páginas não estiverem no mesmo domínio/porta
-            console.warn("Não foi possível ajustar a altura do iframe: Erro de segurança ou iframe não carregado.", e);
+        } catch (error) {
+            removeLoadingMessage(loadingMsgId);
+            console.error('Erro na requisição:', error);
+            appendMessage('Bot', '⚠️ Erro de rede. Tente novamente.');
+        } finally {
+            input.disabled = false; // Reabilita o input
+            input.focus();
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
     }
 
-    // Chama a função após o iframe carregar
-    iframe.onload = ajustarAlturaIframe;
+    // Adiciona uma mensagem de "digitando..."
+    function appendLoadingMessage(id) {
+        const msg = document.createElement('div');
+        msg.id = 'loading-' + id;
+        msg.className = 'text-left mb-1';
+        msg.innerHTML = `
+            <div class="inline-block px-3 py-2 rounded-lg bg-gray-200 text-gray-800 italic">
+                <strong>Bot</strong>: Digitando...
+            </div>`;
+        chatBox.appendChild(msg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 
-    // Tenta ajustar novamente em caso de conteúdo carregado dinamicamente
-    setInterval(ajustarAlturaIframe, 1000); 
+    // Remove a mensagem de "digitando..."
+    function removeLoadingMessage(id) {
+        const loadingMsg = document.getElementById('loading-' + id);
+        if (loadingMsg) {
+            loadingMsg.remove();
+        }
+    }
+    
+    // Adiciona a mensagem formatada à caixa de chat
+    function appendMessage(sender, message) {
+        const isUser = sender === 'Você';
+        const msg = document.createElement('div');
+        
+        // Estilos de mensagens
+        // Usuário: Fundo Marrom/Café, Texto Branco
+        const userClasses = 'bg-amber-700 text-white'; 
+        // Bot: Fundo Cinza Claro, Texto Preto Escuro
+        const botClasses = 'bg-gray-200 text-gray-800'; 
+        
+        msg.className = (isUser ? 'text-right' : 'text-left') + ' mb-2'; 
+        msg.innerHTML = `
+            <div class="inline-block max-w-[80%] px-3 py-2 rounded-lg shadow-sm ${isUser ? userClasses : botClasses}">
+                ${isUser ? '' : '<strong>Bot</strong>: '} ${message}
+            </div>`;
+        
+        chatBox.appendChild(msg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 </script>
+    
+    <script>
+        const iframe = document.querySelector('iframe[name="conteudo"]');
+        // ... (código da função ajustarAlturaIframe e chamadas)
+        function ajustarAlturaIframe() {
+            try {
+                // Tenta obter a altura do conteúdo dentro do iframe
+                const alturaConteudo = iframe.contentWindow.document.body.scrollHeight;
+                
+                // Define a altura do iframe para a altura do seu conteúdo + uma margem
+                if (alturaConteudo > 0) {
+                    iframe.style.height = (alturaConteudo + 30) + 'px';
+                }
+            } catch (e) {
+                // Erro de segurança (CORS) pode acontecer se as páginas não estiverem no mesmo domínio/porta
+                console.warn("Não foi possível ajustar a altura do iframe: Erro de segurança ou iframe não carregado.", e);
+            }
+        }
+
+        // Chama a função após o iframe carregar
+        iframe.onload = ajustarAlturaIframe;
+
+        // Tenta ajustar novamente em caso de conteúdo carregado dinamicamente
+        setInterval(ajustarAlturaIframe, 1000); 
+    </script>
+
+</body>
+</html>
