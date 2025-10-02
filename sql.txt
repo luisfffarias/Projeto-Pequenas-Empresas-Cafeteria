@@ -1,0 +1,99 @@
+--=============================================================================
+-- SCRIPT DE CRIAÇÃO DE TABELAS PARA O BANCO DE DADOS
+-- Dialeto: T-SQL (SQL Server)
+--=============================================================================
+
+-- Substitua [NomeDoSeuBancoDeDados] pelo nome do seu banco de dados.
+-- USE [NomeDoSeuBancoDeDados];
+-- GO
+
+--=============================================================================
+-- Tabela de Usuários
+--=============================================================================
+CREATE TABLE Usuarios (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    -- IMPORTANTE: Armazene SEMPRE o HASH da senha, nunca a senha em texto puro.
+    -- O tamanho pode variar dependendo do algoritmo de hash (ex: bcrypt).
+    SenhaHash NVARCHAR(255) NOT NULL,
+    Nome NVARCHAR(150) NOT NULL,
+    IsAdmin BIT NOT NULL DEFAULT 0,       -- 0 para Falso (Padrão), 1 para Verdadeiro
+    IsAssinante BIT NOT NULL DEFAULT 0   -- 0 para Falso (Padrão), 1 para Verdadeiro
+);
+GO
+
+--=============================================================================
+-- Tabela de Produtos
+--=============================================================================
+CREATE TABLE Produtos (
+    IdProduto INT IDENTITY(1,1) PRIMARY KEY,
+    Nome NVARCHAR(200) NOT NULL,
+    Quantidade INT NOT NULL DEFAULT 0,
+    Origem NVARCHAR(100),
+    Intensidade NVARCHAR(100),
+ -- Assumindo uma escala, ex: 1 a 10
+    Preco DECIMAL(10, 2) NOT NULL,
+    Peso DECIMAL(10, 3), -- Em KG, por exemplo (ex: 0.250 para 250g)
+    Descricao NVARCHAR(MAX),
+    DataDeValidade DATE,
+    Tipo NVARCHAR(100), -- Ex: 'Grão', 'Moído', 'Cápsula'
+    
+    -- Restrições para garantir a integridade dos dados
+    CONSTRAINT CHK_Produtos_Quantidade CHECK (Quantidade >= 0),
+    CONSTRAINT CHK_Produtos_Preco CHECK (Preco > 0)
+);
+GO
+
+--=============================================================================
+-- Tabela de Histórico de Compra
+--=============================================================================
+CREATE TABLE HistoricoDeCompra (
+    IdCompra INT IDENTITY(1,1) PRIMARY KEY,
+    IdProduto INT NOT NULL,
+    EmailUsuario NVARCHAR(255) NOT NULL,
+    PrecoUnitario DECIMAL(10, 2) NOT NULL,
+    QuantidadeUnitaria INT NOT NULL,
+    DataDaCompra DATETIME2 NOT NULL DEFAULT GETDATE(), -- Data e hora da compra
+    PrecoFrete DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    Desconto DECIMAL(10, 2) NOT NULL DEFAULT 0,
+    
+    -- Coluna computada para calcular o preço total automaticamente
+    PrecoTotal AS ( (PrecoUnitario * QuantidadeUnitaria) + PrecoFrete - Desconto ),
+
+    -- Definição das Chaves Estrangeiras
+    CONSTRAINT FK_Historico_Produtos FOREIGN KEY (IdProduto) REFERENCES Produtos(IdProduto),
+    CONSTRAINT FK_Historico_Usuarios FOREIGN KEY (EmailUsuario) REFERENCES Usuarios(Email),
+
+    -- Restrições para garantir a integridade dos dados
+    CONSTRAINT CHK_Historico_Quantidade CHECK (QuantidadeUnitaria > 0)
+);
+GO
+
+--=============================================================================
+-- Tabela de Cursos
+--=============================================================================
+CREATE TABLE Cursos (
+    IdCurso INT IDENTITY(1,1) PRIMARY KEY,
+    Nivel NVARCHAR(100), -- Ex: 'Iniciante', 'Intermediário', 'Avançado'
+    Descricao NVARCHAR(MAX),
+    DataCurso DATETIME2, -- Data e hora de início do curso
+    DuracaoEmMinutos INT, -- Duração total do curso em minutos
+    Categoria NVARCHAR(150)
+);
+GO
+
+--=============================================================================
+-- Tabela de Planos de Assinatura
+--=============================================================================
+CREATE TABLE Planos (
+    IdPlano INT IDENTITY(1,1) PRIMARY KEY,
+    Nome NVARCHAR(150) NOT NULL,
+    Tipo NVARCHAR(50), -- Ex: 'Mensal', 'Anual'
+    Preco DECIMAL(10, 2) NOT NULL,
+    Descricao NVARCHAR(MAX),
+    
+    CONSTRAINT CHK_Planos_Preco CHECK (Preco >= 0)
+);
+GO
+
+PRINT 'Tabelas criadas com sucesso!';

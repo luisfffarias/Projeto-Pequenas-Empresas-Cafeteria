@@ -47,31 +47,111 @@
     <main>
         <iframe name="conteudo" src="catalogo.html" width="100%" frameborder="0"></iframe>
     </main>
-
-    <footer class="ecommerce-footer">
-        </footer>
-
 <button id="chat-toggle"
-    class="fixed bottom-6 right-6 bg-amber-700 hover:bg-amber-800 text-white rounded-full p-4 shadow-lg z-50 focus:outline-none flex items-center justify-center">
-    
-    <i class="fas fa-comments text-2xl"></i>
-    
-</button>
-    <div id="chat-widget"
-        class="fixed bottom-20 right-6 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden">
-        <div class="bg-amber-600 text-white px-4 py-3 font-semibold flex justify-between">
-            <span>Atendimento Virtual</span>
-            <i class="cursor-pointer" onclick="triggerClick('chat-toggle')">🗙</i>
+                            class="fixed bottom-6 right-6 bg-amber-700 hover:bg-amber-800 text-white rounded-full p-4 shadow-lg z-50 focus:outline-none flex items-center justify-center">
+                            
+                            <i class="fas fa-comments text-2xl"></i>
+                            
+                        </button>
+                            <div id="chat-widget"
+                                class="fixed bottom-20 right-6 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden">
+                                <div class="bg-amber-600 text-white px-4 py-3 font-semibold flex justify-between">
+                                    <span>Atendimento Virtual</span>
+                                    <i class="cursor-pointer" onclick="triggerClick('chat-toggle')">🗙</i>
+                                </div>
+                                <div id="chat-box" class="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-64 text-sm">
+                                    <div class="text-gray-700 italic">Vamos Falar sobre café...</div>
+                                </div>
+                                <div class="flex items-center text-gray-700 border-gray-700 px-2 py-2">
+                                    <input type="text" id="user-input" placeholder="Digite sua mensagem..."
+                                        class="flex-1 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none">
+                                    <button onclick="sendMessage()" class="ml-2 text-amber-700 hover:text-blue-800 text-sm">Enviar</button>
+                                </div>
+                            </div>
+    <footer class="ecommerce-footer">
+
+        <div class="footer-top-bar">
+            <div class="footer-container">
+                <div class="form-pagamento">
+                    <h4>FORMAS DE PAGAMENTO</h4>
+                    <div class="icones-pagamento">
+                        <img src="images/forma-pagamento.png" alt="Formas de Pagamento" class="pagamento-img">
+                    </div>
+                </div>
+
+                <div class="seguranca">
+                    <h4>SEGURANÇA</h4>
+                    <div class="selos-seguranca">
+                        <img src="images/google-safe.png" alt="Google Safe Browsing" class="selo-img-google">
+                        <img src="images/selo.png" alt="Selo NlQ Ebit" class="selo-img-ebit">
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="chat-box" class="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-64 text-sm">
-            <div class="text-gray-700 italic">Vamos Falar sobre café...</div>
+        
+        <div class="footer-links">
+            <div class="footer-container main-links-grid">
+                
+                <div class="coluna">
+                    <h4 class="coluna-titulo">INSTITUCIONAL</h4>
+                    <ul class="lista-links">
+                        <li><a href="#">Quem somos</a></li>
+                        <li><a href="#">Termos e Condições de Venda</a></li>
+                        <li><a href="#">Política de troca e devoluções</a></li>
+                        <li><a href="#">Política de Segurança e Privacidade</a></li>
+                        
+                        <li><a href="#">Política de Cookies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="coluna">
+                    <h4 class="coluna-titulo">DÚVIDAS</h4>
+                    <ul class="lista-links">
+                        <li><a href="#">Como comprar</a></li>
+                        <li><a href="#">Prazos e entregas</a></li>
+                        <li><a href="#">Formas de Pagamento</a></li>
+                        <li><a href="#">Programa de Parceiros</a></li>
+                    </ul>
+                </div>
+                
+                <div class="coluna">
+                    <h4 class="coluna-titulo">CLIENTE</h4>
+                    <ul class="lista-links">
+                        <li><a href="#">Minha conta</a></li>
+                        <li><a href="#">Meus pedidos</a></li>
+                        <li><a href="#">Meus tickets</a></li>
+                    </ul>
+                </div>
+                
+                <div class="coluna">
+                    <h4 class="coluna-titulo">AJUDA</h4>
+                    <ul class="lista-links">
+                        <li><a href="#">Vídeo Tutoriais</a></li>
+                        <li><a href="#">Manuais do Produto</a></li>
+                        <li><a href="#">Fale Conosco</a></li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
-        <div class="flex items-center text-gray-700 border-gray-700 px-2 py-2">
-            <input type="text" id="user-input" placeholder="Digite sua mensagem..."
-                class="flex-1 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none">
-            <button onclick="sendMessage()" class="ml-2 text-amber-700 hover:text-blue-800 text-sm">Enviar</button>
+
+        <div class="footer-bottom">
+            <div class="footer-container">
+                <div class="siga-nos">
+                    <h4 class="titulo-siga">SIGA-NOS</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i> </a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i> </a>
+                        <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i> </a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i> </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
+
+
+
 
    <script>
     // ----------------------------------------------------
@@ -124,8 +204,8 @@
         appendMessage('Você', userMessage);
         input.value = '';
         input.disabled = true; // Desabilita o input
-        
-        getBotResponse(userMessage); 
+        const vies = "Voce é um especialista em cafe artesanal, responda de forma amigavel em poucas palavras" + userMessage
+        getBotResponse(vies); 
     }
 
     // Faz a chamada assíncrona para o endpoint Gemini
@@ -147,15 +227,15 @@
             removeLoadingMessage(loadingMsgId);
 
             if (response.ok && data.reply) {
-                appendMessage('Bot', data.reply);
+                appendMessage('Cafecito', data.reply);
             } else {
                 const errorMsg = data.error || 'Erro desconhecido ao obter resposta.';
-                appendMessage('Bot', `❌ Ops! Erro de comunicação: ${errorMsg}`);
+                appendMessage('Cafecito', `❌ Ops! Erro de comunicação: ${errorMsg}`);
             }
         } catch (error) {
             removeLoadingMessage(loadingMsgId);
             console.error('Erro na requisição:', error);
-            appendMessage('Bot', '⚠️ Erro de rede. Tente novamente.');
+            appendMessage('Cafecito', '⚠️ Erro de rede. Tente novamente.');
         } finally {
             input.disabled = false; // Reabilita o input
             input.focus();
@@ -170,7 +250,7 @@
         msg.className = 'text-left mb-1';
         msg.innerHTML = `
             <div class="inline-block px-3 py-2 rounded-lg bg-gray-200 text-gray-800 italic">
-                <strong>Bot</strong>: Digitando...
+                <strong>Cafecito</strong>: Digitando...
             </div>`;
         chatBox.appendChild(msg);
         chatBox.scrollTop = chatBox.scrollHeight;
@@ -192,13 +272,13 @@
         // Estilos de mensagens
         // Usuário: Fundo Marrom/Café, Texto Branco
         const userClasses = 'bg-amber-700 text-white'; 
-        // Bot: Fundo Cinza Claro, Texto Preto Escuro
+        //  Cafecito: Fundo Cinza Claro, Texto Preto Escuro
         const botClasses = 'bg-gray-200 text-gray-800'; 
         
         msg.className = (isUser ? 'text-right' : 'text-left') + ' mb-2'; 
         msg.innerHTML = `
             <div class="inline-block max-w-[80%] px-3 py-2 rounded-lg shadow-sm ${isUser ? userClasses : botClasses}">
-                ${isUser ? '' : '<strong>Bot</strong>: '} ${message}
+                ${isUser ? '' : '<strong> Cafecito</strong>: '} ${message}
             </div>`;
         
         chatBox.appendChild(msg);
