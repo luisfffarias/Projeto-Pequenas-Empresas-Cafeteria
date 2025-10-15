@@ -20,8 +20,10 @@
   "homepage": "https://github.com/luisfffarias/Projeto-Pequenas-Empresas-Cafeteria#readme",
   "dependencies": {
     "@google/genai": "^1.21.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mssql": "^11.0.1",
     "node-fetch": "^2.7.0",
     "openai": "^6.0.0",

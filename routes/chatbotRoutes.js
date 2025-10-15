@@ -44,7 +44,7 @@ contents: [{ role: "user", parts: [{ text: message }] }], // Formato de mensagem
     // O SDK retorna a resposta de forma estruturada.
 const reply = response.text; // 👈 O texto gerado está diretamente na propriedade .text
 
- console.log("📨 Resposta Gemini:", reply.substring(0, 80) + "..."); // log de um trecho
+ 
 
 res.json({
  reply,
