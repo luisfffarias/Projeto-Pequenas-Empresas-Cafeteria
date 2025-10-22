@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento por IA (Admin) - Gemini API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        // Configuração do Tailwind para usar cores e fontes do seu tema
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-bg': '#e8e6e0', // Fundo principal
+                        'primary-text': '#333333',
+                        'accent-dark': '#a87e5b', // Marrom escuro (para texto de destaque/h2)
+                        'accent-light': '#e1b48b', // Marrom claro (para botões/ação)
+                        'chat-user-bg': '#a87e5b', // Fundo da mensagem do usuário
+                        'chat-ai-bg': '#f8f5f0', // Fundo da mensagem da IA (quase branco, suave)
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Define a altura máxima para a área de chat */
+        #chat-area {
+            height: calc(100vh - 12rem);
+            overflow-y: auto;
+        }
+        /* Estilo para simular o efeito de digitação do Gemini */
+        .typing::after {
+            content: "|";
+            animation: blink 0.7s infinite;
+            display: inline-block;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+
+<body class="bg-primary-bg flex flex-col h-screen font-sans text-primary-text">
+
+    <header class="p-4 bg-white shadow-md flex justify-between items-center z-10">
+        <h1 class="text-2xl font-bold text-accent-dark">Gerenciamento com Assistente AI</h1>
+        <span class="text-sm text-accent-dark font-medium bg-accent-light bg-opacity-30 px-3 py-1 rounded-full">ADMIN TOOL</span>
+    </header>
+
+    <main class="flex-grow p-4 overflow-hidden">
+        <div id="chat-area" class="bg-white rounded-xl shadow-inner p-6 flex flex-col space-y-6">
+            </div>
+    </main>
+
+    <footer class="p-4 bg-white shadow-t-lg border-t border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div id="loading-indicator" class="text-center text-sm text-accent-dark font-semibold mb-2 hidden">
+                Analisando mensagens...
+            </div>
+            <div class="flex items-center space-x-3">
+                <input 
+                    type="text" 
+                    id="user-input" 
+                    placeholder="Adicionar 50 unidades ao Café Arábica e agendar curso Básico para amanhã." 
+                    class="flex-grow p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-accent-light focus:border-accent-light transition duration-150"
+                    onkeypress="if(event.key === 'Enter') sendMessage()"
+                >
+                <button 
+                    id="send-button"
+                    onclick="sendMessage()"
+                    class="bg-accent-light hover:bg-accent-dark text-white p-3 rounded-full shadow-lg transition duration-150 active:scale-95 disabled:bg-gray-400"
+                    aria-label="Enviar"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const chatArea = document.getElementById('chat-area');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        
+        // SUBSTITUA ESTE ENDPOINT!
+        const CHAT_ENDPOINT = 'http://localhost:3000/api/chatbot/admin'; 
+        
+        // O Prompt Prévio do Sistema (Instrução para a IA)
+        const PRE_PROMPT = `
+        Você é um Assistente de Gerenciamento de Site (Admin). Sua única função é receber o pedido do usuário
+        e usar a função apropriada do 'tool use' para realizar a tarefa. 
+        Se o usuário não solicitar uma ação que envolva o banco de dados, peça que ele reformule o pedido para uma ação administrativa (ex: 'adicionar estoque', 'agendar curso').
+        Sua resposta final deve ser clara e confirmar a ação.
+        `;
+
+        /**
+         * Renders a message bubble in the chat area.
+         */
+        function renderMessage(content, sender) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-2xl px-4 py-3 rounded-2xl shadow-md font-medium ${
+                sender === 'user'
+                    ? 'bg-chat-user-bg text-white rounded-br-none' // Usa cor accent-dark
+                    : 'bg-chat-ai-bg text-primary-text rounded-tl-none' // Usa cor suave do tema
+            }`;
+
+            // Efeito de Digitação
+            if (sender === 'ai') {
+                bubble.innerHTML = `<span class="typing"></span>`;
+                messageContainer.appendChild(bubble);
+                chatArea.appendChild(messageContainer);
+                chatArea.scrollTop = chatArea.scrollHeight;
+                
+                let i = 0;
+                const speed = 15;
+                const typingSpan = bubble.querySelector('.typing');
+
+                function typeWriter() {
+                    if (i < content.length) {
+                        typingSpan.textContent += content.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, speed);
+                    } else {
+                        typingSpan.classList.remove('typing');
+                    }
+                }
+                typeWriter();
+
+            } else {
+                bubble.textContent = content;
+                messageContainer.appendChild(bubble);
+                chatArea.appendChild(messageContainer);
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
+        }
+
+        /**
+         * Handles sending the message to the backend.
+         */
+        async function sendMessage() {
+            const prompt = userInput.value.trim();
+            if (!prompt) return;
+
+            renderMessage(prompt, 'user');
+            userInput.value = '';
+            
+            userInput.disabled = true;
+            sendButton.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+
+            try {
+                const response = await fetch(CHAT_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        prompt: prompt,
+                        system_instruction: PRE_PROMPT 
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro de rede: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                const aiResponse = data.response_text || "Ocorreu um erro. A resposta da IA está vazia.";
+                renderMessage(aiResponse, 'ai');
+
+            } catch (error) {
+                console.error("Erro na comunicação com o backend:", error);
+                renderMessage(`❌ Erro crítico: ${error.message}. Verifique a conexão do backend.`, 'ai');
+            } finally {
+                userInput.disabled = false;
+                sendButton.disabled = false;
+                loadingIndicator.classList.add('hidden');
+                userInput.focus();
+            }
+        }
+
+        // Mensagem de boas-vindas inicial da IA
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMessage("Olá Admin! Sou seu assistente de gerenciamento. Como posso ajudar a modificar ou consultar o sistema hoje?", 'ai');
+        });
+    </script>
+</body>
+</html>

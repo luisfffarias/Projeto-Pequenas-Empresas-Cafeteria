@@ -8,8 +8,8 @@ const rssRoutes = require("./routes/rssRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
 
 // Novas rotas da loja
-const productsRoute = require("./routes/productsRoute");
-const shopRoutes = require("./routes/shopRoutes");
+//const productsRoute = require("./routes/productsRoute");
+//const shopRoutes = require("./routes/shopRoutes");
 
 const app = express();
 
@@ -41,8 +41,8 @@ app.use("/api/chatbot", chatbotRoutes);
 // ----------------------------------------------------
 // Novas rotas da loja
 // ----------------------------------------------------
-app.use("/api/products", productsRoute);
-app.use("/api/shop", shopRoutes);
+//app.use("/api/products", productsRoute);
+//app.use("/api/shop", shopRoutes);
 
 // ----------------------------------------------------
 // Rota raiz
