@@ -229,3 +229,84 @@ body {
         width: 100%;
     }
 }
+
+
+/* Adicione ao blog.css */
+.load-more-container {
+    text-align: center;
+    margin: 40px 0;
+    padding: 20px;
+}
+
+.load-more-btn {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    border: none;
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.load-more-btn:hover:not(:disabled) {
+    background: var(--button-hover-bg);
+    transform: translateY(-2px);
+}
+
+.load-more-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.loading-spinner {
+    font-style: italic;
+}
+
+.no-more-items {
+    color: var(--accent-color);
+    font-style: italic;
+    padding: 20px;
+}
+
+.no-more-items p {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Loading animation */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--accent-color);
+    font-size: 18px;
+}
+
+/* Melhoria para muitos cards */
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Responsividade para muitos itens */
+@media (max-width: 1200px) {
+    .blog-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .load-more-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
