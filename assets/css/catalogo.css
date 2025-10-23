@@ -1,4 +1,4 @@
-/* Variáveis de Tema Escuro */
+
 :root {
     --primary-bg: #1a1a1a;        
     --secondary-bg: #2a2a2a;      
@@ -26,7 +26,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../assets/images/hero-catalogo.jpg'); /* Adicione sua imagem de fundo aqui */
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

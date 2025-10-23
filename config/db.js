@@ -11,6 +11,12 @@ const configMaster = {
   }
 };
 
+// CONFIGURAÇÃO NOVA ADICIONADA ↓
+const dbConfig = {
+  ...configMaster,
+  database: process.env.DB_NAME
+};
+
 async function connectDB() {
   try {
     // Conectar ao banco "master"
@@ -39,5 +45,7 @@ async function connectDB() {
     process.exit(1);
   }
 }
+
+connectDB.dbConfig = dbConfig;
 
 module.exports = connectDB;

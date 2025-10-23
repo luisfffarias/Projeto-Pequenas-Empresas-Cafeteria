@@ -1,131 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coffee - Principal</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee - Principal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/principal.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/assets/css/principal.css" />
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 9999px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <nav class="navbar">
-        <a href="index.html" class="logo">Coffee</a>
-        <ul class="nav-links">
-          <li><a href="catalogo.html" target="conteudo">Loja</a></li>
-          <li>
-            <a href="cursos.html" class="active" target="conteudo">Aulas</a>
-          </li>
-          <li><a href="planos.html" target="conteudo">Planos</a></li>
-          <li><a href="blog.html" target="conteudo">Blog</a></li>
-          <li>
-            <a href="carrinho.html" target="conteudo">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </a>
-          </li>
-        </ul>
-        <div class="auth-buttons">
-          <a href="#" class="btn btn-login">Login</a>
-          <a href="#" class="btn btn-cadastro">Cadastro</a>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <iframe
-        name="conteudo"
-        src="catalogo.html"
-        width="100%"
-        frameborder="0"
-      ></iframe>
-    </main>
-    <button
-      id="chat-toggle"
-      class="fixed bottom-6 right-6 bg-amber-700 hover:bg-amber-800 text-white rounded-full p-4 shadow-lg z-50 focus:outline-none flex items-center justify-center"
-    >
-      <i class="fas fa-comments text-2xl"></i>
-    </button>
-    <div
-      id="chat-widget"
-      class="fixed bottom-20 right-6 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden"
-    >
-      <div
-        class="bg-amber-600 text-white px-4 py-3 font-semibold flex justify-between"
-      >
-        <span>Atendimento Virtual</span>
-        <i class="cursor-pointer" onclick="triggerClick('chat-toggle')">🗙</i>
-      </div>
-      <div
-        id="chat-box"
-        class="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-64 text-sm"
-      >
-        <div class="text-gray-700 italic">Vamos Falar sobre café...</div>
-      </div>
-      <div class="flex items-center text-gray-700 border-gray-700 px-2 py-2">
-        <input
-          type="text"
-          id="user-input"
-          placeholder="Digite sua mensagem..."
-          class="flex-1 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none"
-        />
-        <button
-          onclick="sendMessage()"
-          class="ml-2 text-amber-700 hover:text-blue-800 text-sm"
-        >
-          Enviar
-        </button>
-      </div>
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Coffee</a>
+    <ul class="nav-links">
+      <li><a href="catalogo.html" target="conteudo">Loja</a></li>
+      <li><a href="cursos.html" target="conteudo">Aulas</a></li>
+      <li><a href="planos.html" target="conteudo">Planos</a></li>
+      <li><a href="blog.html" target="conteudo">Blog</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="#" class="btn btn-login">Login</a>
+      <a href="#" class="btn btn-cadastro">Cadastro</a>
     </div>
-    <footer class="ecommerce-footer">
-      <div class="footer-top-bar">
-        <div class="footer-container">
-          <div class="form-pagamento">
-            <h4>FORMAS DE PAGAMENTO</h4>
-            <div class="icones-pagamento">
-              <img
-                src="images/forma-pagamento.png"
-                alt="Formas de Pagamento"
-                class="pagamento-img"
-              />
-            </div>
-          </div>
+  </nav>
+</header>
 
-          <div class="seguranca">
-            <h4>SEGURANÇA</h4>
-            <div class="selos-seguranca">
-              <img
-                src="images/google-safe.png"
-                alt="Google Safe Browsing"
-                class="selo-img-google"
-              />
-              <img
-                src="images/selo.png"
-                alt="Selo NlQ Ebit"
-                class="selo-img-ebit"
-              />
-            </div>
-          </div>
-        </div>
+<main>
+  <iframe name="conteudo" src="catalogo.html" width="100%" frameborder="0"></iframe>
+</main>
+
+<!-- BOTÃO E WIDGET CHAT -->
+<button id="chat-toggle" class="fixed bottom-6 right-6 bg-amber-700 hover:bg-amber-800 text-white rounded-full p-4 shadow-lg z-50 focus:outline-none">
+  <i class="fas fa-comments text-2xl"></i>
+</button>
+
+<div id="chat-widget" class="fixed bottom-20 right-6 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden">
+  <div class="bg-amber-600 text-white px-4 py-3 font-semibold flex justify-between">
+    <span>Atendimento Virtual</span>
+    <i class="cursor-pointer" onclick="document.getElementById('chat-toggle').click()">🗙</i>
+  </div>
+  <div id="chat-box" class="flex-1 px-4 py-2 space-y-2 overflow-y-auto h-64 text-sm">
+    <div class="text-gray-700 italic">Vamos falar sobre café...</div>
+  </div>
+  <div class="flex items-center text-gray-700 border-gray-700 px-2 py-2">
+    <input type="text" id="user-input" placeholder="Digite sua mensagem..." class="flex-1 border border-gray-700 rounded px-3 py-2 text-sm focus:outline-none">
+    <button onclick="sendMessage()" class="ml-2 text-amber-700 hover:text-blue-800 text-sm">Enviar</button>
+  </div>
+</div>
+
+<!-- MODAL LOGIN / CADASTRO -->
+<div class="modal-container " id="formModal">
+  <div class="form-box">
+    <div class="login-container" id="login">
+      <div class="top">
+        <span>Não tem uma conta? <a href="#" onclick="showRegister()">Cadastre-se</a></span>
+        <header>Login</header>
       </div>
+      <form id="formLogin">
+        <div class="input-box">
+          <input type="text" id="txt_emailLogin" class="input-field" name="email" placeholder="Email" required>
+          <i class="bx bx-user"></i>
+        </div>
+        <div class="input-box">
+          <input type="password" id="txt_senhaLogin" class="input-field" name="senha" placeholder="Senha" required>
+          <i class="bx bx-lock-alt"></i>
+        </div>
+        <div class="input-box">
+          <input type="submit" class="submit" value="Entrar">
+        </div>
+      </form>
+    </div>
 
-      <div class="footer-links">
+    <div class="register-container" id="register">
+      <div class="top">
+        <span>Já tem uma conta? <a href="#" onclick="showLogin()">Login</a></span>
+        <header>Cadastre-se</header>
+      </div>
+      <form id="formCadastro">
+        <div class="input-box">
+          <input type="text" id="txt_nome" class="input-field" name="nome" placeholder="Primeiro Nome" required>
+          <i class="bx bx-user"></i>
+        </div>
+        <div class="input-box">
+          <input type="text" id="txt_email" class="input-field" name="email" placeholder="Email" required>
+          <i class="bx bx-envelope"></i>
+        </div>
+        <div class="input-box">
+          <input type="password" id="txt_senha" class="input-field" name="senha" placeholder="Senha" required>
+          <i class="bx bx-lock-alt"></i>
+        </div>
+        <div class="input-box">
+          <input type="password" id="txt_senhaConfirmar" class="input-field" name="conf_senha" placeholder="Confirmar Senha" required>
+          <i class="bx bx-lock-alt"></i>
+        </div>
+        <div class="input-box">
+          <input type="submit" class="submit" value="Cadastrar">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+ <div class="footer-links">
         <div class="footer-container main-links-grid">
           <div class="coluna">
             <h4 class="coluna-titulo">INSTITUCIONAL</h4>
@@ -191,175 +167,6 @@
         </div>
       </div>
     </footer>
-
-    <script>
-      // ----------------------------------------------------
-      // CONFIGURAÇÃO
-      // ----------------------------------------------------
-      // URL do seu endpoint Express que se comunica com o Gemini
-      const GEMINI_ENDPOINT = "/api/chatbot";
-
-      // ----------------------------------------------------
-      // VARIÁVEIS DO DOM
-      // ----------------------------------------------------
-      const chatWidget = document.getElementById("chat-widget");
-      const toggleBtn = document.getElementById("chat-toggle");
-      const chatBox = document.getElementById("chat-box");
-      const input = document.getElementById("user-input");
-
-      // ----------------------------------------------------
-      // EVENT LISTENERS
-      // ----------------------------------------------------
-      toggleBtn.addEventListener("click", () => {
-        chatWidget.classList.toggle("hidden");
-      });
-
-      input.addEventListener("keypress", (event) => {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          sendMessage();
-        }
-      });
-
-      // Função auxiliar para o botão de fechar (🗙)
-      function triggerClick(idEl) {
-        const element = document.getElementById(idEl);
-        if (element) {
-          element.click();
-        }
-      }
-
-      // ----------------------------------------------------
-      // LÓGICA DE MENSAGENS E INTEGRAÇÃO
-      // ----------------------------------------------------
-
-      // Inicia o processo de envio e espera pela resposta do Gemini
-      function sendMessage() {
-        const userMessage = input.value.trim();
-        if (!userMessage) {
-          return;
-        }
-
-        appendMessage("Você", userMessage);
-        input.value = "";
-        input.disabled = true; // Desabilita o input
-        const vies =
-          "Voce é um especialista em cafe artesanal, responda de forma amigavel em poucas palavras: " +
-          userMessage;
-        getBotResponse(vies);
-      }
-
-      // Faz a chamada assíncrona para o endpoint Gemini
-      async function getBotResponse(userMessage) {
-        const loadingMsgId = Date.now();
-        appendLoadingMessage(loadingMsgId);
-
-        try {
-          const response = await fetch(GEMINI_ENDPOINT, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message: userMessage }),
-          });
-
-          const data = await response.json();
-
-          removeLoadingMessage(loadingMsgId);
-
-          if (response.ok && data.reply) {
-            appendMessage("Cafecito", data.reply);
-          } else {
-            const errorMsg =
-              data.error || "Erro desconhecido ao obter resposta.";
-            appendMessage(
-              "Cafecito",
-              `❌ Ops! Erro de comunicação: ${errorMsg}`
-            );
-          }
-        } catch (error) {
-          removeLoadingMessage(loadingMsgId);
-          console.error("Erro na requisição:", error);
-          appendMessage("Cafecito", "⚠️ Erro de rede. Tente novamente.");
-        } finally {
-          input.disabled = false; // Reabilita o input
-          input.focus();
-          chatBox.scrollTop = chatBox.scrollHeight;
-        }
-      }
-
-      // Adiciona uma mensagem de "digitando..."
-      function appendLoadingMessage(id) {
-        const msg = document.createElement("div");
-        msg.id = "loading-" + id;
-        msg.className = "text-left mb-1";
-        msg.innerHTML = `
-            <div class="inline-block px-3 py-2 rounded-lg bg-gray-200 text-gray-800 italic">
-                <strong>Cafecito</strong>: Digitando...
-            </div>`;
-        chatBox.appendChild(msg);
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }
-
-      // Remove a mensagem de "digitando..."
-      function removeLoadingMessage(id) {
-        const loadingMsg = document.getElementById("loading-" + id);
-        if (loadingMsg) {
-          loadingMsg.remove();
-        }
-      }
-
-      // Adiciona a mensagem formatada à caixa de chat
-      function appendMessage(sender, message) {
-        const isUser = sender === "Você";
-        const msg = document.createElement("div");
-
-        // Estilos de mensagens
-        // Usuário: Fundo Marrom/Café, Texto Branco
-        const userClasses = "bg-amber-700 text-white";
-        //  Cafecito: Fundo Cinza Claro, Texto Preto Escuro
-        const botClasses = "bg-gray-200 text-gray-800";
-
-        msg.className = (isUser ? "text-right" : "text-left") + " mb-2";
-        msg.innerHTML = `
-            <div class="inline-block max-w-[80%] px-3 py-2 rounded-lg shadow-sm ${
-              isUser ? userClasses : botClasses
-            }">
-                ${isUser ? "" : "<strong> Cafecito</strong>: "} ${message}
-            </div>`;
-
-        chatBox.appendChild(msg);
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }
-    </script>
-
-    <script>
-      const iframe = document.querySelector('iframe[name="conteudo"]');
-      // ... (código da função ajustarAlturaIframe e chamadas)
-      function ajustarAlturaIframe() {
-        try {
-          // Tenta obter a altura do conteúdo dentro do iframe
-          const alturaConteudo =
-            iframe.contentWindow.document.body.scrollHeight;
-
-          // Define a altura do iframe para a altura do seu conteúdo + uma margem
-          if (alturaConteudo > 0) {
-            iframe.style.height = alturaConteudo + 30 + "px";
-          }
-        } catch (e) {
-          // Erro de segurança (CORS) pode acontecer se as páginas não estiverem no mesmo domínio/porta
-          console.warn(
-            "Não foi possível ajustar a altura do iframe: Erro de segurança ou iframe não carregado.",
-            e
-          );
-        }
-      }
-
-      // Chama a função após o iframe carregar
-      iframe.onload = ajustarAlturaIframe;
-
-      // Tenta ajustar novamente em caso de conteúdo carregado dinamicamente
-      setInterval(ajustarAlturaIframe, 1000);
-    </script>
-  </body>
+<script src="../assets/js/principal.js"></script>
+</body>
 </html>

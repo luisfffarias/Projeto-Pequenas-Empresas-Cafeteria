@@ -3,7 +3,7 @@ class SimpleBlogFeed {
     constructor() {
         this.currentItems = [];
         this.displayedCount = 0;
-        this.itemsPerLoad = 5;
+        this.itemsPerLoad = 8;
         this.init();
     }
 
@@ -156,7 +156,7 @@ class SimpleBlogFeed {
         const buttonHTML = `
             <div class="load-more-container">
                 <button id="loadMoreBtn" class="load-more-btn">
-                    Carregar Mais ${this.itemsPerLoad} Notícias
+                    Carregar Mais Notícias
                 </button>
             </div>
         `;

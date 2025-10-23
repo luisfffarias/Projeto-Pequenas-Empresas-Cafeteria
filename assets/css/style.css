@@ -13,62 +13,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Modal de formulário */
-.modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s ease;
-    z-index: 999;
-}
-
-.modal-container.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Form box agora é um modal */
-.form-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 512px;
-    height: 550px;
-    background: rgba(255, 255, 255, 0.0);
-    border-radius: 10px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 4px;
-}
-
-.login-container {
-    position: relative;
-    left: 40px;
-    width: 380px;
-    display: flex;
-    flex-direction: column;
-    transition: .5s ease-in-out;
-}
-
-.register-container {
-    position: absolute;
-    right: -520px;
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    transition: .5s ease-in-out;
-}
 
 /* Estilos de hero section */
 .secao_principal {

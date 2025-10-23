@@ -11,6 +11,9 @@ const chatbotRoutes = require("./routes/chatbotRoutes");
 //const productsRoute = require("./routes/productsRoute");
 //const shopRoutes = require("./routes/shopRoutes");
 
+// Novas rotas de usuário
+const userRoutes = require("./routes/userRoutes");
+
 const app = express();
 
 // Conecta ao banco
@@ -37,6 +40,11 @@ app.get("/principal", (req, res) => {
 // ----------------------------------------------------
 app.use("/api/rss", rssRoutes);
 app.use("/api/chatbot", chatbotRoutes);
+
+// ----------------------------------------------------
+// Novas rotas de usuário
+// ----------------------------------------------------
+app.use("/api/usuarios", userRoutes);
 
 // ----------------------------------------------------
 // Novas rotas da loja

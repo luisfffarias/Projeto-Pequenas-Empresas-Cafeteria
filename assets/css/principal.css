@@ -68,8 +68,6 @@ header {
     border: none; 
 }
 
-/* Nota: Faltam os estilos de hover, mas usei o que estava no seu código original. */
-
 /*FOOTER----------------------------------*/
 
 .ecommerce-footer {
@@ -476,4 +474,169 @@ body {
     }
 }
 
+
+/* -------------------- MODAL - TEMA ESCURO -------------------- */
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.4s ease;
+    z-index: 9999; /* Sempre sobre outros elementos */
+}
+
+.modal-container.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Caixa do modal */
+.form-box {
+    position: relative;
+    width: 500px;
+    max-width: 90%;
+    background: var(--secondary-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(10px); /* efeito de desfoque leve */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    flex-direction: column;
+    transition: transform 0.4s ease;
+    margin-bottom: 10px;
+}
+
+/* Containers de login e cadastro */
+.login-container,
+.register-container {
+    width: 100%;
+    display: none; /* Inicialmente ocultos */
+    flex-direction: column;
+    gap: 45px; /* Adiciona espaço entre inputs e botões */
+   
+}
+.input-box {
+    margin: 0; 
+}
+
+.submit {
+    /* ... seu estilo existente ... */
+    margin-top: 0 !important; /* Importante para anular qualquer estilo anterior */
+}
+
+.top header, 
+.top span {
+    margin: 0;
+}
+
+/* Exibir container ativo */
+.login-container.active,
+.register-container.active {
+    display: flex;
+}
+
+/* Inputs */
+.input-field {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    background: rgba(255,255,255,0.05);
+    color: var(--text-color);
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+    margin-bottom: 0;
+}
+
+.input-field::placeholder {
+    color: #aaa;
+}
+
+.input-field:focus {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--accent-color);
+}
+
+/* Botão submit */
+.submit {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 30px;
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+.submit:hover {
+    background: var(--button-hover-bg);
+    transform: translateY(-2px);
+}
+
+/* Links de alternância login/cadastro */
+.form-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.form-toggle a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.form-toggle a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .form-box {
+        width: 90%;
+        padding: 20px;
+    }
+    .input-field {
+        height: 45px;
+        font-size: 14px;
+    }
+    .submit {
+        height: 42px;
+        font-size: 14px;
+    }
+}
+
+/* Fechar modal */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--accent-color);
+}
 
