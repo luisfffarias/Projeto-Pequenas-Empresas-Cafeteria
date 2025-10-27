@@ -1,0 +1,155 @@
+/* assets/css/produto-detalhe.css */
+
+/* --- Layout Principal --- */
+.produto-detalhe-section {
+    padding: 40px 20px;
+    color: #eee; /* Texto claro para fundo escuro */
+    max-width: 1200px;
+    margin: 20px auto; /* Centraliza a seção */
+}
+
+.produto-detalhe-wrapper {
+    display: flex; /* A MÁGICA: cria as duas colunas */
+    flex-wrap: wrap; /* Em telas pequenas, quebra para uma coluna */
+    gap: 40px; /* Espaço entre a imagem e as informações */
+    background: #1c1c1c; /* Fundo um pouco mais claro que o preto total */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Coluna da Imagem (Esquerda) --- */
+.produto-detalhe-imagem {
+    flex: 1; /* Ocupa metade do espaço */
+    min-width: 300px; /* Largura mínima */
+}
+
+.produto-detalhe-imagem img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+/* --- Coluna de Informações (Direita) --- */
+.produto-detalhe-info {
+    flex: 1; /* Ocupa a outra metade */
+    min-width: 300px;
+    display: flex;
+    flex-direction: column; /* Organiza os itens verticalmente */
+}
+
+.produto-detalhe-info h1 {
+    font-size: 2.8rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #FFA500; /* Laranja (cor de destaque) */
+}
+
+/* --- Tags (Tipo, Origem, Intensidade) --- */
+.produto-tags-detalhe {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.produto-tags-detalhe span {
+    background: #333;
+    color: #ccc;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+/* Remove a tag se ela estiver vazia (ex: sem intensidade) */
+.produto-tags-detalhe span:empty {
+    display: none;
+}
+
+
+/* --- Preço --- */
+.price-detalhe {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFA500; /* Laranja */
+    margin-bottom: 20px;
+}
+
+/* --- Descrição e Especificações --- */
+.produto-detalhe-info h3 {
+    font-size: 1.2rem;
+    color: #FFA500;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+.produto-detalhe-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.produto-especificacoes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.produto-especificacoes li {
+    padding: 5px 0;
+}
+
+.produto-especificacoes li span {
+    font-weight: 600;
+    color: #fff;
+}
+
+
+/* --- Botão Comprar --- */
+.produto-btn-detalhe {
+    display: inline-block;
+    background-color: #FFA500; /* Laranja */
+    color: #111; /* Texto escuro para botão claro */
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 18px 30px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 30px; /* Espaço acima do botão */
+    transition: all 0.3s ease;
+}
+
+.produto-btn-detalhe i {
+    margin-right: 10px;
+}
+
+.produto-btn-detalhe:hover {
+    background-color: #ffc24d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 165, 0, 0.2);
+}
+
+
+/* --- Responsividade (Telas Pequenas) --- */
+@media (max-width: 768px) {
+    .produto-detalhe-wrapper {
+        flex-direction: column; /* Empilha as colunas */
+        padding: 20px;
+    }
+
+    .produto-detalhe-info h1 {
+        font-size: 2.2rem;
+    }
+
+    .price-detalhe {
+        font-size: 2rem;
+    }
+}

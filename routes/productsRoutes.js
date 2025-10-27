@@ -1,95 +1,172 @@
-// routes/productsRoute.js
-import express from "express";
-import sql from "mssql";
+// routes/productRoutes.js
+// VERSÃO COMPLETA E CORRIGIDA (CommonJS)
+
+const express = require("express");
+const sql = require("mssql");
 const router = express.Router();
-const db = require("../config/dbconfig");
+const db = require("../config/dbconfig.js"); // Garanta que este caminho está correto
 
-// 🔹 Listar todos os produtos
+// 🔹 1. Listar todos os produtos
 router.get("/", async (req, res) => {
-  try {
-    const pool = await sql.connect(db);
-    const result = await pool.request().query("SELECT * FROM Produtos");
-    res.json(result.recordset);
-  } catch (err) {
-    console.error("Erro ao buscar produtos:", err);
-    res.status(500).send("Erro ao buscar produtos");
-  }
+  try {
+    const pool = await sql.connect(db);
+    const result = await pool.request().query("SELECT * FROM Produtos");
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("Erro ao buscar produtos:", err);
+    res.status(500).send("Erro ao buscar produtos");
+  }
 });
 
-// 🔹 Cadastrar novo produto
+// 🔹 2. Buscar um produto específico pelo ID
+router.get('/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        return res.status(400).json({ error: 'ID do produto é obrigatório' });
+      }
+  
+      const pool = await sql.connect(db);
+      const result = await pool.request()
+        .input('IdProduto', sql.Int, id)
+        .query('SELECT * FROM Produtos WHERE IdProduto = @IdProduto');
+  
+      if (result.recordset.length === 0) {
+        return res.status(404).json({ error: 'Produto não encontrado' });
+      }
+  
+      res.json(result.recordset[0]); // Retorna apenas o primeiro (e único) objeto
+  
+    } catch (err) {
+      console.error("Erro ao buscar produto por ID:", err);
+      res.status(500).send("Erro ao buscar produto");
+    }
+});
+
+// 🔹 3. Cadastrar novo produto (Estava faltando)
 router.post('/', async (req, res) => {
-  try {
-    const { nome, descricao, preco, categoria, imagem, estoque } = req.body;
+  try {
+    const { 
+        nome, quantidade, origem, intensidade, preco, 
+        peso, descricao, dataDeValidade, tipo, imagem
+    } = req.body;
 
-    if (!nome || !preco) {
-      return res.status(400).json({ error: 'Nome e preço são obrigatórios' });
-    }
+    if (!nome || !preco) {
+      return res.status(400).json({ error: 'Nome e Preço são obrigatórios' });
+    }
 
-    const pool = await sql.connect(db);
-    const result = await pool.request()
-      .input('Nome', sql.NVarChar, nome)
-      .input('Descricao', sql.NVarChar, descricao || '')
-      .input('Preco', sql.Decimal(10, 2), preco)
-      .input('Categoria', sql.NVarChar, categoria || '')
-      .input('Imagem', sql.NVarChar, imagem || '')
-      .input('Estoque', sql.Int, estoque || 0)
-      .query(`
-        INSERT INTO Produtos (Nome, Descricao, Preco, Categoria, Imagem, Estoque, DataCriacao) 
-        VALUES (@Nome, @Descricao, @Preco, @Categoria, @Imagem, @Estoque, GETDATE());
-        SELECT * FROM Produtos WHERE IdProduto = SCOPE_IDENTITY();
-      `);
+    const pool = await sql.connect(db);
+    const result = await pool.request()
+      .input('Nome', sql.NVarChar(200), nome)
+      .input('Quantidade', sql.Int, quantidade || 0)
+      .input('Origem', sql.NVarChar(100), origem || null)
+      .input('Intensidade', sql.NVarChar(100), intensidade || null)
+      .input('Preco', sql.Decimal(10, 2), preco)
+      .input('Peso', sql.Decimal(10, 3), peso || null)
+      .input('Descricao', sql.NVarChar(sql.MAX), descricao || null)
+      .input('DataDeValidade', sql.Date, dataDeValidade || null)
+      .input('Tipo', sql.NVarChar(100), tipo || null)
+      .input('Imagem', sql.NVarChar(500), imagem || null)
+      .query(`
+        INSERT INTO Produtos (
+            Nome, Quantidade, Origem, Intensidade, Preco, Peso, 
+            Descricao, DataDeValidade, Tipo, Imagem 
+        ) 
+        VALUES (
+            @Nome, @Quantidade, @Origem, @Intensidade, @Preco, @Peso, 
+            @Descricao, @DataDeValidade, @Tipo, @Imagem
+        );
+        SELECT * FROM Produtos WHERE IdProduto = SCOPE_IDENTITY();
+      `);
 
-    res.status(201).json(result.recordset[0]);
-  } catch (err) {
-    console.error("Erro ao cadastrar produto:", err);
-    res.status(500).send("Erro ao cadastrar produto");
-  }
+    res.status(201).json(result.recordset[0]);
+  } catch (err) {
+    console.error("Erro ao cadastrar produto:", err);
+    res.status(500).send("Erro ao cadastrar produto");
+  }
 });
 
-// 🔹 Atualizar produto existente
+// 🔹 4. Atualizar produto existente (Estava faltando)
 router.put('/:id', async (req, res) => {
-  try {
-    const { nome, descricao, preco, categoria, imagem, estoque } = req.body;
-    const productId = req.params.id;
+  try {
+    const { 
+        nome, quantidade, origem, intensidade, preco, 
+        peso, descricao, dataDeValidade, tipo, imagem
+    } = req.body;
+    const productId = req.params.id;
 
-    if (!nome || !preco) {
-      return res.status(400).json({ error: 'Nome e preço são obrigatórios' });
-    }
+    if (!nome || !preco) {
+      return res.status(400).json({ error: 'Nome e preço são obrigatórios' });
+    }
 
-    const pool = await sql.connect(db);
-    
-    // Verificar se produto existe
-    const checkResult = await pool.request()
-      .input('IdProduto', sql.Int, productId)
-      .query('SELECT IdProduto FROM Produtos WHERE IdProduto = @IdProduto');
-    
-    if (checkResult.recordset.length === 0) {
-      return res.status(404).json({ error: 'Produto não encontrado' });
-    }
+    const pool = await sql.connect(db);
+    const result = await pool.request()
+      .input('IdProduto', sql.Int, productId)
+      .input('Nome', sql.NVarChar(200), nome)
+      .input('Quantidade', sql.Int, quantidade || 0)
+      .input('Origem', sql.NVarChar(100), origem || null)
+      .input('Intensidade', sql.NVarChar(100), intensidade || null)
+      .input('Preco', sql.Decimal(10, 2), preco)
+      .input('Peso', sql.Decimal(10, 3), peso || null)
+      .input('Descricao', sql.NVarChar(sql.MAX), descricao || null)
+      .input('DataDeValidade', sql.Date, dataDeValidade || null)
+      .input('Tipo', sql.NVarChar(100), tipo || null)
+      .input('Imagem', sql.NVarChar(500), imagem || null)
+      .query(`
+        UPDATE Produtos 
+        SET 
+            Nome = @Nome, Quantidade = @Quantidade, Origem = @Origem, 
+            Intensidade = @Intensidade, Preco = @Preco, Peso = @Peso, 
+            Descricao = @Descricao, DataDeValidade = @DataDeValidade, 
+            Tipo = @Tipo, Imagem = @Imagem
+        WHERE IdProduto = @IdProduto;
+        SELECT * FROM Produtos WHERE IdProduto = @IdProduto;
+      `);
 
-    // Atualizar produto
-    const result = await pool.request()
-      .input('IdProduto', sql.Int, productId)
-      .input('Nome', sql.NVarChar, nome)
-      .input('Descricao', sql.NVarChar, descricao || '')
-      .input('Preco', sql.Decimal(10, 2), preco)
-      .input('Categoria', sql.NVarChar, categoria || '')
-      .input('Imagem', sql.NVarChar, imagem || '')
-      .input('Estoque', sql.Int, estoque || 0)
-      .query(`
-        UPDATE Produtos 
-        SET Nome = @Nome, Descricao = @Descricao, Preco = @Preco, 
-            Categoria = @Categoria, Imagem = @Imagem, Estoque = @Estoque,
-            DataAtualizacao = GETDATE()
-        WHERE IdProduto = @IdProduto;
-        SELECT * FROM Produtos WHERE IdProduto = @IdProduto;
-      `);
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ error: 'Produto não encontrado' });
+    }
 
-    res.json(result.recordset[0]);
-  } catch (err) {
-    console.error("Erro ao atualizar produto:", err);
-    res.status(500).send("Erro ao atualizar produto");
-  }
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error("Erro ao atualizar produto:", err);
+    res.status(500).send("Erro ao atualizar produto");
+  }
 });
 
-export default router;
+// 🔹 5. Atualizar (PATCH) apenas o estoque
+router.patch('/:id/estoque', async (req, res) => {
+    try {
+      const { novaQuantidade } = req.body;
+      const { id } = req.params;
+  
+      if (novaQuantidade === undefined || typeof novaQuantidade !== 'number' || novaQuantidade < 0) {
+        return res.status(400).json({ 
+            error: 'O campo "novaQuantidade" é obrigatório, deve ser um número e não pode ser negativo.' 
+        });
+      }
+  
+      const pool = await sql.connect(db);
+      const result = await pool.request()
+        .input('IdProduto', sql.Int, id)
+        .input('Quantidade', sql.Int, novaQuantidade)
+        .query(`
+          UPDATE Produtos SET Quantidade = @Quantidade
+          WHERE IdProduto = @IdProduto;
+          SELECT * FROM Produtos WHERE IdProduto = @IdProduto;
+        `);
+  
+      if (result.recordset.length === 0) {
+        return res.status(404).json({ error: 'Produto não encontrado' });
+      }
+  
+      res.json(result.recordset[0]);
+  
+    } catch (err) {
+      console.error("Erro ao atualizar estoque:", err);
+      res.status(500).send("Erro ao atualizar estoque");
+    }
+});
+
+// Exporta o router para o server.js
+module.exports = router;

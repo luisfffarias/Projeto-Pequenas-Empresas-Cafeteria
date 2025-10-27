@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregando produto...</title>
+    
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/catalogo.css">
+    
+    <link rel="stylesheet" href="../assets/css/produto-detalhe.css"> 
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <section class="secao_principal" id="hero-catalogo">
+        <div class="hero-content">
+            <h1>Loja Virtual</h1>
+                <h2>Produtos indicados pela nossa equipe de especialistas</h2>            
+        </div>
+     </section>
+
+    <section class="produto-detalhe-section">
+        <div class="produto-detalhe-wrapper">
+
+            <div class="produto-detalhe-imagem">
+                <img id="produto-imagem" src="" alt="Carregando imagem do produto...">
+            </div>
+
+            <div class="produto-detalhe-info">
+                <h1 id="produto-nome">Carregando...</h1>
+                
+                <div class="produto-tags-detalhe">
+                    <span id="produto-tipo"></span>
+                    <span id="produto-origem"></span>
+                    <span id="produto-intensidade"></span>
+                </div>
+
+                <span id="produto-preco" class="price-detalhe"></span>
+
+                <h3>Descrição</h3>
+                <p id="produto-descricao"></p>
+
+                <ul class="produto-especificacoes">
+                    <li>Peso: <span id="produto-peso"></span></li>
+                    <li>Validade: <span id="produto-validade"></span></li>
+                    <li>Estoque: <span id="produto-estoque"></span> unidades</li>
+                </ul>
+
+                <a href="#" id="produto-btn-comprar" class="produto-btn-detalhe">
+                    <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../assets/js/produtos.js" type="module"></script>
+    <script src="../assets/js/produto-pagina.js" type="module"></script>
+</body>
+</html>
