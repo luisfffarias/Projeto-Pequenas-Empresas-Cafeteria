@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregando plano...</title>
+    
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/catalogo.css"> <link rel="stylesheet" href="../assets/css/produto-detalhe.css"> 
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <section class="secao_principal" id="hero-planos" style="height: 350px;">
+        <div class="hero-content">
+            <h1>Coffee Fan Club</h1>
+            <h2>Torne-se agora um assinante do nosso fan club</h2>
+        </div>
+    </section>
+
+    <section class="produto-detalhe-section">
+        <div class="produto-detalhe-wrapper" id="detalhe-container"> 
+
+            <div class="produto-detalhe-imagem"> 
+                <img id="plano-imagem" src="" alt="Carregando imagem do plano...">
+            </div>
+
+            <div class="produto-detalhe-info"> 
+                <h1 id="plano-nome">Carregando...</h1>
+                
+                <div class="produto-tags-detalhe"> 
+                    <span id="plano-tipo"></span>
+                    <span id="plano-modalidade"></span>
+                </div>
+
+                <span id="plano-preco" class="price-detalhe"></span>
+
+                <h3>Descrição do Plano</h3>
+                <p id="plano-descricao"></p>
+
+                <a href="#" id="plano-btn-assinar" class="produto-btn-detalhe"> 
+                    <i class="fas fa-check-circle"></i> Assinar Agora
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../assets/js/planosFactory.js" type="module"></script>
+    <script src="../assets/js/plano-detalhe.js" type="module"></script>
+</body>
+</html>

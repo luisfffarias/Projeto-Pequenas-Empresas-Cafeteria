@@ -28,7 +28,7 @@
     position: relative;
     width: 100%;
     /* Altura que você usou na Hero do Blog */
-    height: 500px; 
+    height: 300px; 
     display: flex;
     justify-content: center;
     align-items: center;
