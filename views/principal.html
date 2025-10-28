@@ -30,12 +30,28 @@
   <iframe name="conteudo" src="catalogo.html" width="100%" frameborder="0"></iframe>
 </main>
 
+
+<!-- Acessibilidade -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+
+<!-- SCRIPT OFICIAL VLibras -->
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+
 <!-- BOTÃO E WIDGET CHAT -->
 <button id="chat-toggle" class="fixed bottom-6 right-6 bg-amber-700 hover:bg-amber-800 text-white rounded-full p-4 shadow-lg z-50 focus:outline-none">
   <i class="fas fa-comments text-2xl"></i>
 </button>
 
-<div id="chat-widget" class="fixed bottom-20 right-6 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden">
+<div id="chat-widget" class="fixed bottom-20 right-14 w-80 h-96 bg-white rounded-xl shadow-lg border border-gray-300 flex flex-col overflow-hidden z-50 mb-5 hidden">
   <div class="bg-amber-600 text-white px-4 py-3 font-semibold flex justify-between">
     <span>Atendimento Virtual</span>
     <i class="cursor-pointer" onclick="document.getElementById('chat-toggle').click()">🗙</i>
@@ -168,5 +184,6 @@
       </div>
     </footer>
 <script src="../assets/js/principal.js"></script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </body>
 </html>

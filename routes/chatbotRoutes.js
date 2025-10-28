@@ -70,7 +70,7 @@ async function buscarProdutosPorNome(nome) {
     const produtos = await response.json();
     return { success: true, data: produtos };
   } catch (error) {
-    console.error('❌ Erro ao buscar produtos:', error);
+    console.error('Erro ao buscar produtos:', error);
     return { success: false, message: "Erro ao conectar com a API." };
   }
 }
@@ -78,6 +78,7 @@ async function buscarProdutosPorNome(nome) {
 async function cadastrarProduto(dados) {
   try {
     const baseUrl = 'http://localhost:3000';
+    
     const response = await fetch(`${baseUrl}/api/produtos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -91,7 +92,7 @@ async function cadastrarProduto(dados) {
     const produto = await response.json();
     return { success: true, data: produto };
   } catch (error) {
-    console.error('❌ Erro ao cadastrar produto:', error);
+    console.error('Erro ao cadastrar produto:', error);
     return { success: false, message: "Erro ao cadastrar produto." };
   }
 }
@@ -118,9 +119,30 @@ async function atualizarEstoque(id, novaQuantidade) {
     const produto = await response.json();
     return { success: true, data: produto };
   } catch (error) {
-    console.error('❌ Erro ao atualizar estoque:', error);
+    console.error('Erro ao atualizar estoque:', error);
     return { success: false, message: "Erro ao atualizar estoque." };
   }
+}
+
+// ======================================================
+// ✅ VALIDAÇÃO DE DADOS DO PRODUTO
+// ======================================================
+function validarDadosProduto(dados) {
+  const erros = [];
+  
+  if (!dados.nome || dados.nome.trim().length === 0) {
+    erros.push("Nome do produto é obrigatório");
+  }
+  
+  if (!dados.preco || isNaN(dados.preco) || dados.preco <= 0) {
+    erros.push("Preço deve ser um número maior que zero");
+  }
+  
+  if (dados.quantidade !== undefined && (isNaN(dados.quantidade) || dados.quantidade < 0)) {
+    erros.push("Quantidade deve ser um número positivo");
+  }
+  
+  return erros;
 }
 
 // ======================================================
@@ -129,7 +151,13 @@ async function atualizarEstoque(id, novaQuantidade) {
 function processarDadosSimples(texto) {
   const partes = texto.split(',').map(parte => parte.trim());
   
-  // Exemplo: "cafe baggio caramelo, 10, brasil, forte, 30.23, 250g, cafe moido com aroma de caramelo, 20/10/2028, pó"
+  // Processa a imagem se for fornecida
+  let imagem = null;
+  if (partes[9] && partes[9].trim() !== '') {
+    const nomeArquivo = partes[9].trim();
+    imagem = `../assets/images/${nomeArquivo}`;
+  }
+  
   const dados = {
     nome: partes[0] || '',
     quantidade: parseInt(partes[1]) || 0,
@@ -139,7 +167,8 @@ function processarDadosSimples(texto) {
     peso: partes[5] || null,
     descricao: partes[6] || null,
     datadevalidade: partes[7] || null,
-    tipo: partes[8] || null
+    tipo: partes[8] || null,
+    imagem: imagem
   };
 
   return dados;
@@ -156,32 +185,31 @@ async function executarBusca(termo) {
   }
 
   if (resultado.data.length === 0) {
-    return `🔍 Nenhum produto encontrado com "${termo}".`;
+    return `Nenhum produto encontrado com "${termo}".`;
   }
 
-  let resposta = `🔍 **Produtos encontrados:**\n\n`;
+  let resposta = `Produtos encontrados:\n\n`;
   resultado.data.forEach(produto => {
-    resposta += `🆔 ${produto.IdProduto} | ${produto.Nome} | R$ ${produto.Preco} | 📦 ${produto.Quantidade} unidades\n`;
+    resposta += `ID ${produto.IdProduto} | ${produto.Nome} | R$ ${produto.Preco} | ${produto.Quantidade} unidades\n`;
   });
-  resposta += `\n📊 Total: ${resultado.data.length} produto(s)`;
+  resposta += `\nTotal: ${resultado.data.length} produto(s)`;
   
   return resposta;
 }
 
-async function executarCadastro(dadosTexto) {
-  const produtoData = processarDadosSimples(dadosTexto);
-  
-  if (!produtoData.nome || !produtoData.preco) {
-    return "❌ **Faltam informações!** Precisa pelo menos do **nome** e **preço** do produto.";
+async function executarCadastro(dadosProduto) {
+  const erros = validarDadosProduto(dadosProduto);
+  if (erros.length > 0) {
+    return `Erros de validação:\n${erros.map(erro => `• ${erro}`).join('\n')}`;
   }
 
-  const resultado = await cadastrarProduto(produtoData);
+  const resultado = await cadastrarProduto(dadosProduto);
   
   if (!resultado.success) {
     return resultado.message;
   }
 
-  return `✅ **Produto cadastrado!**\n\n📦 ${resultado.data.Nome}\n💰 R$ ${resultado.data.Preco}\n📦 ${resultado.data.Quantidade} unidades\n🆔 ID: ${resultado.data.IdProduto}`;
+  return `Produto cadastrado com sucesso!\n\n${resultado.data.Nome}\nR$ ${resultado.data.Preco}\n${resultado.data.Quantidade} unidades\nImagem: ${resultado.data.Imagem || 'Padrão'}\nID: ${resultado.data.IdProduto}`;
 }
 
 async function executarAtualizacaoEstoque(id, quantidade) {
@@ -191,67 +219,213 @@ async function executarAtualizacaoEstoque(id, quantidade) {
     return resultado.message;
   }
 
-  return `✅ **Estoque atualizado!**\n\n📦 ${resultado.data.Nome}\n🔄 Nova quantidade: ${resultado.data.Quantidade} unidades\n🆔 ID: ${resultado.data.IdProduto}`;
+  return `Estoque atualizado!\n\n${resultado.data.Nome}\nNova quantidade: ${resultado.data.Quantidade} unidades\nID: ${resultado.data.IdProduto}`;
 }
 
 // ======================================================
-// ✅ PROCESSAR COMANDOS SIMPLES
+// ✅ DETECTOR DE INTENÇÕES INTELIGENTE
 // ======================================================
-function processarComandoSimples(message, sessionId) {
+function detectarIntencao(message) {
   const lower = message.toLowerCase().trim();
-  const userState = getUserState(sessionId);
   
-  if (userState.state !== 'idle') {
-    return null;
+  // Intenções de cadastro
+  if (lower.includes('cadastrar') || lower.includes('adicionar') || lower.includes('novo') || 
+      lower.includes('criar') || lower.includes('registrar')) {
+    return 'cadastrar';
   }
   
-  if (lower === 'cadastrar' || lower === 'cadastro' || lower === 'adicionar' || lower === 'novo') {
-    userState.state = 'aguardando_dados';
-    userState.data = {};
-    return `➕ **CADASTRAR PRODUTO**\n\n📝 Digite os dados na ordem:\n\n` +
-           `**nome, quantidade, origem, intensidade, preço, peso, descrição, data_validade, tipo**\n\n` +
-           `💡 **Exemplo:** cafe baggio caramelo, 10, brasil, forte, 30.23, 250g, cafe moido com aroma de caramelo, 20/10/2028, pó\n\n` +
-           `⚠️ **Apenas nome e preço são obrigatórios!**`;
+  // Intenções de busca
+  if (lower.includes('buscar') || lower.includes('procurar') || lower.includes('pesquisar') ||
+      lower.includes('encontrar') || lower.includes('localizar')) {
+    return 'buscar';
   }
   
-  if (lower === 'buscar' || lower === 'procurar' || lower === 'pesquisar') {
-    userState.state = 'aguardando_busca';
-    return `🔍 **BUSCAR PRODUTO**\n\n📝 Digite o **nome** do produto que deseja buscar:`;
+  // Intenções de estoque
+  if (lower.includes('estoque') || lower.includes('quantidade') || lower.includes('inventário') ||
+      lower.includes('atualizar') || lower.includes('alterar estoque')) {
+    return 'estoque';
   }
   
-  if (lower === 'atualizar' || lower === 'estoque' || lower === 'quantidade') {
-    userState.state = 'aguardando_id_estoque';
-    return `📦 **ATUALIZAR ESTOQUE**\n\n📝 Digite o **ID** do produto:`;
+  // Intenções de ajuda
+  if (lower.includes('ajuda') || lower.includes('help') || lower.includes('comandos') ||
+      lower.includes('opções') || lower.includes('o que pode fazer')) {
+    return 'ajuda';
   }
   
-  if (lower === 'ajuda' || lower === 'help' || lower === 'comandos') {
-      return `🔧 **SISTEMA ADMINISTRATIVO**\n\nComandos disponíveis:\n\n` +
-           `➕ **CADASTRAR** - Adicionar novo produto\n` +
-           `🔍 **BUSCAR** - Procurar produtos\n` +
-           `📦 **ESTOQUE** - Atualizar quantidade em estoque\n\n` +
-           `💡 **Dica:** Digite o comando desejado para iniciar o fluxo guiado!`;
+  // Intenções de cancelamento
+  if (lower.includes('cancelar') || lower.includes('parar') || lower.includes('sair') ||
+      lower.includes('voltar')) {
+    return 'cancelar';
   }
   
   return null;
 }
 
 // ======================================================
-// ✅ PROCESSAR ESTADOS DO FLUXO
+// ✅ PROCESSAR COMANDOS INTELIGENTES
+// ======================================================
+function processarComandoInteligente(message, sessionId) {
+  const userState = getUserState(sessionId);
+  
+  // Se já está em um fluxo, continua nele
+  if (userState.state !== 'idle') {
+    return null;
+  }
+  
+  const intencao = detectarIntencao(message);
+  
+  switch (intencao) {
+    case 'cadastrar':
+      userState.state = 'cadastro_nome';
+      userState.data = {};
+      return `Vamos cadastrar um novo produto!\n\nQual é o nome do produto?`;
+      
+    case 'buscar':
+      userState.state = 'aguardando_busca';
+      return `Vou ajudar você a buscar produtos!\n\nQual produto você está procurando?`;
+      
+    case 'estoque':
+      userState.state = 'aguardando_id_estoque';
+      return `Atualização de estoque\n\nQual é o ID do produto que deseja atualizar?`;
+      
+    case 'ajuda':
+      return `🔧 Como posso ajudar você?\n\nPosso ajudar com:\n\n` +
+             `➕ Cadastrar novos produtos\n` +
+             `🔍 Buscar produtos no sistema\n` +
+             `📦 Atualizar quantidades em estoque\n\n` +
+             `Exemplos:\n"Quero cadastrar um novo café"\n"Preciso buscar um produto"\n"Como atualizar o estoque?"`;
+      
+    case 'cancelar':
+      resetUserState(sessionId);
+      return `Voltando ao menu principal.\n\nEm que mais posso ajudar?`;
+      
+    default:
+      return null;
+  }
+}
+
+// ======================================================
+// ✅ PROCESSAR ESTADOS DO FLUXO (ATUALIZADO)
 // ======================================================
 async function processarEstadoUsuario(message, sessionId) {
   const userState = getUserState(sessionId);
   
   switch (userState.state) {
     
-    // 🔄 FLUXO DE CADASTRO SIMPLES
-    case 'aguardando_dados':
-      try {
-        const resultado = await executarCadastro(message);
+    // 🔄 FLUXO DE CADASTRO PASSO A PASSO
+    case 'cadastro_nome':
+      if (!message || message.trim().length === 0) {
+        return `Preciso saber o nome do produto.\n\nQual é o nome?`;
+      }
+      userState.data.nome = message.trim();
+      userState.state = 'cadastro_preco';
+      return `Nome: ${userState.data.nome}\n\nQual é o preço do produto?`;
+    
+    case 'cadastro_preco':
+      const preco = parseFloat(message.replace(',', '.'));
+      if (isNaN(preco) || preco <= 0) {
+        return `Preço inválido. Digite um valor como 29.90:\n\nQual é o preço?`;
+      }
+      userState.data.preco = preco;
+      userState.state = 'cadastro_quantidade';
+      return `Preço: R$ ${preco.toFixed(2)}\n\nQuantas unidades temos em estoque?`;
+    
+    case 'cadastro_quantidade':
+      const quantidade = parseInt(message);
+      if (isNaN(quantidade) || quantidade < 0) {
+        return `Quantidade inválida. Digite um número:\n\nQuantas unidades?`;
+      }
+      userState.data.quantidade = quantidade;
+      userState.state = 'cadastro_peso';
+      return `Quantidade: ${quantidade} unidades\n\nQual é o peso? (ex: 250g, 1kg)`;
+    
+    case 'cadastro_peso':
+      userState.data.peso = message.trim() || null;
+      userState.state = 'cadastro_origem';
+      return `Peso: ${userState.data.peso || 'Não informado'}\n\nDe onde é este produto? (ou "pular")`;
+    
+    case 'cadastro_origem':
+      if (message.toLowerCase() !== 'pular') {
+        userState.data.origem = message.trim();
+      }
+      userState.state = 'cadastro_intensidade';
+      return `Origem: ${userState.data.origem || 'Não informada'}\n\nQual a intensidade? (Suave, Médio, Forte - ou "pular")`;
+    
+    case 'cadastro_intensidade':
+      if (message.toLowerCase() !== 'pular') {
+        userState.data.intensidade = message.trim();
+      }
+      userState.state = 'cadastro_tipo';
+      return `Intensidade: ${userState.data.intensidade || 'Não informada'}\n\nQual o tipo? (Grão, Moído, Cápsula - ou "pular")`;
+    
+    case 'cadastro_tipo':
+      if (message.toLowerCase() !== 'pular') {
+        userState.data.tipo = message.trim();
+      }
+      userState.state = 'cadastro_descricao';
+      return `Tipo: ${userState.data.tipo || 'Não informado'}\n\nAlguma descrição especial? (ou "pular")`;
+    
+    case 'cadastro_descricao':
+      if (message.toLowerCase() !== 'pular') {
+        userState.data.descricao = message.trim();
+      }
+      userState.state = 'cadastro_validade';
+      return `Descrição: ${userState.data.descricao || 'Não informada'}\n\nData de validade? (DD/MM/AAAA ou "pular")`;
+    
+    case 'cadastro_validade':
+      if (message.toLowerCase() !== 'pular') {
+        const dataRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+        if (dataRegex.test(message)) {
+          userState.data.datadevalidade = message;
+        } else {
+          userState.data.datadevalidade = null;
+        }
+      }
+      userState.state = 'cadastro_imagem';
+      return `Validade: ${userState.data.datadevalidade || 'Não informada'}\n\nNome da imagem? (ex: cafepreto.jpg ou "pular")`;
+    
+    case 'cadastro_imagem':
+      if (message.toLowerCase() !== 'pular' && message.trim() !== '') {
+        const nomeArquivo = message.trim();
+        userState.data.imagem = `../assets/images/${nomeArquivo}`;
+      } else {
+        userState.data.imagem = null;
+      }
+      userState.state = 'cadastro_confirmacao';
+      return `Resumo do produto:\n\n` +
+             `Nome: ${userState.data.nome}\n` +
+             `Preço: R$ ${userState.data.preco.toFixed(2)}\n` +
+             `Estoque: ${userState.data.quantidade} unidades\n` +
+             `Peso: ${userState.data.peso || 'Não informado'}\n` +
+             `Origem: ${userState.data.origem || 'Não informada'}\n` +
+             `Intensidade: ${userState.data.intensidade || 'Não informada'}\n` +
+             `Tipo: ${userState.data.tipo || 'Não informado'}\n` +
+             `Descrição: ${userState.data.descricao || 'Não informada'}\n` +
+             `Validade: ${userState.data.datadevalidade || 'Não informada'}\n` +
+             `Imagem: ${userState.data.imagem ? 'Personalizada' : 'Padrão'}\n\n` +
+             `Confirmar cadastro? (sim/não)`;
+    
+    case 'cadastro_confirmacao':
+      if (message.toLowerCase() === 'sim' || message.toLowerCase() === 's' || message.toLowerCase() === 'yes') {
+        try {
+          const resultado = await executarCadastro(userState.data);
+          resetUserState(sessionId);
+          return resultado;
+        } catch (error) {
+          resetUserState(sessionId);
+          return `Erro no cadastro: ${error.message}`;
+        }
+      } else if (message.toLowerCase() === 'não' || message.toLowerCase() === 'nao' || message.toLowerCase() === 'n' || message.toLowerCase() === 'no') {
         resetUserState(sessionId);
-        return resultado;
-      } catch (error) {
-        resetUserState(sessionId);
-        return `❌ **Erro no cadastro:** ${error.message}`;
+        return `Cadastro cancelado.\n\nVoltando ao menu principal.`;
+      } else {
+        // Se não é sim/não, trata como conversa normal
+        const intencao = detectarIntencao(message);
+        if (intencao === 'cancelar') {
+          resetUserState(sessionId);
+          return `Cadastro cancelado.\n\nVoltando ao menu principal.`;
+        }
+        return `Não entendi. Confirmar cadastro? (sim/não)`;
       }
     
     // 🔄 FLUXO DE BUSCA
@@ -264,70 +438,25 @@ async function processarEstadoUsuario(message, sessionId) {
     case 'aguardando_id_estoque':
       const id = parseInt(message);
       if (isNaN(id) || id <= 0) {
-        return `❌ ID inválido! Digite um número válido:`;
+        return `ID inválido. Digite um número:\n\nQual o ID do produto?`;
       }
       userState.data.id = id;
       userState.state = 'aguardando_nova_quantidade';
-      return `✏️ Atualizando estoque do produto ID: **${id}**\n\n📦 Digite a **nova quantidade**:`;
+      return `Produto ID: ${id}\n\nQual a nova quantidade em estoque?`;
     
     case 'aguardando_nova_quantidade':
-      const quantidade = parseInt(message);
-      if (isNaN(quantidade) || quantidade < 0) {
-        return `❌ Quantidade inválida! Digite um número positivo:`;
+      const quantidadeEstoque = parseInt(message);
+      if (isNaN(quantidadeEstoque) || quantidadeEstoque < 0) {
+        return `Quantidade inválida. Digite um número:\n\nNova quantidade?`;
       }
       
-      const resultadoEstoque = await executarAtualizacaoEstoque(userState.data.id, quantidade);
+      const resultadoEstoque = await executarAtualizacaoEstoque(userState.data.id, quantidadeEstoque);
       resetUserState(sessionId);
       return resultadoEstoque;
     
     default:
       return null;
   }
-}
-
-// ======================================================
-// ✅ SISTEMA GUIADO COMPLETO (para compatibilidade)
-// ======================================================
-function processarComandoGuiado(message) {
-  const lower = message.toLowerCase();
-  
-  // 🔍 BUSCAR PRODUTO
-  const formatoBuscar = message.match(/Produto:\s*(.+)/i);
-  if (formatoBuscar && formatoBuscar[1]) {
-    const termo = formatoBuscar[1].trim();
-    if (termo.length > 0) {
-      return { tipo: 'buscar', termo: termo };
-    }
-  }
-  
-  // ➕ CADASTRAR PRODUTO (formato antigo)
-  const formatoCadastrar = message.match(/Cadastrar:\s*(.+)/i);
-  if (formatoCadastrar && formatoCadastrar[1]) {
-    const dados = formatoCadastrar[1].trim();
-    if (dados.length > 0) {
-      return { tipo: 'cadastrar', dados: dados };
-    }
-  }
-  
-  // 📦 ATUALIZAR ESTOQUE (formato antigo)
-  const formatoEstoque = message.match(/Estoque:\s*ID:\s*(\d+),\s*quantidade:\s*(\d+)/i);
-  if (formatoEstoque && formatoEstoque[1] && formatoEstoque[2]) {
-    return { 
-      tipo: 'estoque', 
-      id: parseInt(formatoEstoque[1]), 
-      quantidade: parseInt(formatoEstoque[2]) 
-    };
-  }
-  
-  // ❓ AJUDA GERAL
-  if (lower.includes('procurar') || lower.includes('buscar') || 
-      lower.includes('cadastrar') || lower.includes('adicionar') ||
-      lower.includes('estoque') || lower.includes('quantidade') ||
-      lower.includes('como') || lower.includes('ajuda')) {
-    return { tipo: 'ajuda' };
-  }
-  
-  return null;
 }
 
 // ======================================================
@@ -348,33 +477,32 @@ function verificarToken(req, res, next) {
 }
 
 // ======================================================
-// ✅ PROMPT DIFERENCIADO PARA ADMIN
+// ✅ PROMPT DIFERENCIADO PARA ADMIN (ATUALIZADO)
 // ======================================================
 function createPromptTemplate(isAdmin = false) {
   if (isAdmin) {
     return PromptTemplate.fromTemplate(`
 Você é o Cafecito, assistente especializado em cafés.
 
-**MODO ADMIN ATIVADO** - Comandos disponíveis:
+MODO ADMIN ATIVADO - Você pode:
 
-➕ CADASTRAR - Adicionar novo produto
-🔍 BUSCAR - Procurar produtos  
-📦 ESTOQUE - Atualizar quantidade
+• Cadastrar novos produtos (guia passo a passo)
+• Buscar produtos no sistema  
+• Atualizar quantidades em estoque
+• Cancelar operações a qualquer momento
 
-💡 **Formato para cadastro:**
-nome, quantidade, origem, intensidade, preço, peso, descrição, data_validade, tipo
+IMPORTANTE: Se o usuário demonstrar intenção de realizar alguma ação administrativa (cadastrar, buscar, estoque), inicie o fluxo guiado apropriado.
 
-📋 **Exemplo:**
-cafe baggio caramelo, 10, brasil, forte, 30.23, 250g, cafe moido com aroma de caramelo, 20/10/2028, pó
+Para outras conversas, seja natural e útil.
 
-Seja direto. Máximo 2-3 frases.
+Sistema automático de imagens: usuário digita "nome.jpg" → sistema converte para "../assets/images/nome.jpg"
 
 Histórico:
 {history}
 
-Pergunta: {input}
+Usuário: {input}
 
-Resposta admin:
+Cafecito:
 `);
   }
 
@@ -386,14 +514,14 @@ Seja direto e objetivo. Máximo 2-3 frases.
 Histórico:
 {history}
 
-Pergunta: {input}
+Usuário: {input}
 
-Resposta:
+Cafecito:
 `);
 }
 
 // ======================================================
-// ✅ ENDPOINT ÚNICO
+// ✅ ENDPOINT ÚNICO (ATUALIZADO)
 // ======================================================
 router.post("/", verificarToken, async (req, res) => {
   const { message, sessionId = "default" } = req.body;
@@ -407,17 +535,9 @@ router.post("/", verificarToken, async (req, res) => {
     const history = formatHistory(memory);
     const isAdmin = req.user && req.user.isAdmin;
 
-    // 🛠️ Se for admin, processar sistema guiado MELHORADO
+    // 🛠️ Se for admin, processar sistema INTELIGENTE
     if (isAdmin) {
-      // 1. Primeiro tenta processar comandos simples
-      const respostaSimples = processarComandoSimples(message, sessionId);
-      if (respostaSimples) {
-        memory.push({ role: "user", content: message });
-        memory.push({ role: "assistant", content: respostaSimples });
-        return res.json({ reply: respostaSimples, success: true, isAdmin: true });
-      }
-      
-      // 2. Depois tenta processar estados em andamento
+      // 1. Primeiro tenta processar estados em andamento (fluxo guiado)
       const respostaEstado = await processarEstadoUsuario(message, sessionId);
       if (respostaEstado) {
         memory.push({ role: "user", content: message });
@@ -425,39 +545,16 @@ router.post("/", verificarToken, async (req, res) => {
         return res.json({ reply: respostaEstado, success: true, isAdmin: true });
       }
       
-      // 3. Por último tenta o sistema de formatos antigo (para compatibilidade)
-      const comando = processarComandoGuiado(message);
-      if (comando) {
-        let resposta;
-        switch (comando.tipo) {
-          case 'buscar':
-            resposta = await executarBusca(comando.termo);
-            break;
-          case 'cadastrar':
-            resposta = await executarCadastro(comando.dados);
-            break;
-          case 'estoque':
-            resposta = await executarAtualizacaoEstoque(comando.id, comando.quantidade);
-            break;
-          case 'ajuda':
-            resposta = `🔧 **SISTEMA ADMINISTRATIVO**\n\nComandos disponíveis:\n\n` +
-                      `➕ **CADASTRAR** - Adicionar novo produto\n` +
-                      `🔍 **BUSCAR** - Procurar produtos\n` +
-                      `📦 **ESTOQUE** - Atualizar quantidade em estoque\n\n` +
-                      `💡 **Formato para cadastro:**\n` +
-                      `nome, quantidade, origem, intensidade, preço, peso, descrição, data_validade, tipo`;
-            break;
-        }
-        
-        if (resposta) {
-          memory.push({ role: "user", content: message });
-          memory.push({ role: "assistant", content: resposta });
-          return res.json({ reply: resposta, success: true, isAdmin: true });
-        }
+      // 2. Depois tenta detectar intenções para iniciar fluxos
+      const respostaInteligente = processarComandoInteligente(message, sessionId);
+      if (respostaInteligente) {
+        memory.push({ role: "user", content: message });
+        memory.push({ role: "assistant", content: respostaInteligente });
+        return res.json({ reply: respostaInteligente, success: true, isAdmin: true });
       }
     }
 
-    // 💬 Chat normal com LangChain (para não-admin ou mensagens não relacionadas)
+    // 💬 Chat normal com LangChain (para não-admin ou conversas naturais)
     const promptTemplate = createPromptTemplate(isAdmin);
     const chain = RunnableSequence.from([
       promptTemplate,
@@ -479,7 +576,7 @@ router.post("/", verificarToken, async (req, res) => {
     });
 
   } catch (err) {
-    console.error("❌ Erro Chatbot:", err);
+    console.error("Erro Chatbot:", err);
     res.status(500).json({
       error: "Erro no processamento",
     });
