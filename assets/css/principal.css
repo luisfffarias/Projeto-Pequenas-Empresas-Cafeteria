@@ -8,6 +8,7 @@ header {
     border-bottom: 1px solid var(--border-color); 
 }
 
+
 .navbar { 
     /* Layout flexível */
     display: flex; 
@@ -646,3 +647,57 @@ body {
     color: var(--accent-color);
 }
 
+/* Espaçamento entre campos do modal */
+.login-container form,
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* espaço vertical entre os campos */
+}
+
+.input-box {
+  margin: 0;
+}
+
+.input-field {
+  margin-bottom: 0;
+}
+
+
+/* Título principal do modal (Login / Registre-se) */
+.registro-login {
+    display: block;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #f5f5f5;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #cd853f, #e09b50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Texto inferior para alternar login/cadastro */
+.top {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.top span {
+    color: #b0b0b0;
+    font-size: 14px;
+}
+
+.top a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.top a:hover {
+    color: #f5c57c;
+    text-decoration: underline;
+}

@@ -18,7 +18,15 @@
       <li><a href="cursos.html" target="conteudo">Aulas</a></li>
       <li><a href="planos.html" target="conteudo">Planos</a></li>
       <li><a href="blog.html" target="conteudo">Blog</a></li>
+
     </ul>
+    <!-- Ícone do Carrinho -->
+    <div class="cart-icon-container relative">
+      <button id="cart-toggle" class="btn btn-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count" class="cart-count">0</span>
+      </button>
+    </div>
     <div class="auth-buttons">
       <a href="#" class="btn btn-login">Login</a>
       <a href="#" class="btn btn-cadastro">Cadastro</a>
@@ -69,11 +77,8 @@
 <div class="modal-container " id="formModal">
   <div class="form-box">
     <div class="login-container" id="login">
-      <div class="top">
-        <span>Não tem uma conta? <a href="#" onclick="showRegister()">Cadastre-se</a></span>
-        <header>Login</header>
-      </div>
       <form id="formLogin">
+        <span class="registro-login">Login</span>
         <div class="input-box">
           <input type="text" id="txt_emailLogin" class="input-field" name="email" placeholder="Email" required>
           <i class="bx bx-user"></i>
@@ -85,15 +90,15 @@
         <div class="input-box">
           <input type="submit" class="submit" value="Entrar">
         </div>
+         <div class="top">
+        <span>Não tem uma conta? <a href="#" onclick="showRegister()">Cadastre-se</a></span>
+      </div>
       </form>
     </div>
 
     <div class="register-container" id="register">
-      <div class="top">
-        <span>Já tem uma conta? <a href="#" onclick="showLogin()">Login</a></span>
-        <header>Cadastre-se</header>
-      </div>
       <form id="formCadastro">
+        <span class="registro-login">Cadastro</span>
         <div class="input-box">
           <input type="text" id="txt_nome" class="input-field" name="nome" placeholder="Primeiro Nome" required>
           <i class="bx bx-user"></i>
@@ -112,6 +117,9 @@
         </div>
         <div class="input-box">
           <input type="submit" class="submit" value="Cadastrar">
+        </div>
+        <div class="top">
+          <span>Já tem uma conta? <a href="#" onclick="showLogin()">Login</a></span>
         </div>
       </form>
     </div>

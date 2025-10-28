@@ -26,7 +26,7 @@ function updateAuthButtons() {
     const authButtons = document.querySelector('.auth-buttons');
     if (currentUser) {
         authButtons.innerHTML = `
-            <span class="text-amber-700 mr-4">Olá, ${currentUser.nome}</span>
+            <span class="text-amber-700 mr-4 px-6 py-3">  Olá, ${currentUser.nome}</span>
             <a href="#" class="btn btn-logout" onclick="logout()">Sair</a>
         `;
     } else {
