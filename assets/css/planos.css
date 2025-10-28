@@ -1,299 +1,154 @@
-:root {
-    --primary-bg: #1a1a1a; 
-    --secondary-bg: #2a2a2a; 
-    --text-color: #f0f0f0;
-    --heading-color: #e0e0e0; 
-    --accent-color: #cd853f;
-    --border-color: #444444; 
-    --button-hover-bg: #b07234; 
-}
+/* assets/css/planos.css */
 
-/* Fonte Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-/* ESTILOS GLOBAIS - DARK MODE */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--primary-bg);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-}
-
-/* Hero Section */
-.secao_principal {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../assets/images/rrt1.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.secao_principal::after {
-    content: '';
-    position: absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.6); 
-    z-index: 0;
-}
-
-.hero-content { 
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: var(--text-color);
-        margin-bottom: 5vh;
-
-}
-
-.hero-content h1 {
-    font-size: 60px;
-    color: var(--heading-color);
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.hero-content h2 {
-    font-size: 28px;
-    color: var(--accent-color);
-    margin-top: 10px;
-}
-
-/* Planos Section */
 .planos-section {
-    padding: 80px 10%;
-    text-align: center;
+    padding: 60px 5%;
+    background-color: var(--primary-bg);
 }
 
-.planos-title {
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--heading-color);
-    margin-bottom: 50px;
-}
-
-.planos-container {
-    display: flex;
-    justify-content: center;
+.planos-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#loading-message-planos {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    text-align: center;
+    grid-column: 1 / -1; 
 }
 
 .plano-card {
-    background: var(--secondary-bg); 
-    border-radius: 10px;
-    width: 300px;
-    padding: 30px 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: var(--secondary-bg);
     border: 1px solid var(--border-color);
+    border-radius: 10px;
+    /* padding é removido para a imagem encostar */
+    padding: 0; 
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Garante que a imagem não vaze */
 }
 
 .plano-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    border-color: var(--accent-color);
 }
 
-.plano-card.destaque {
-    background: linear-gradient(135deg, var(--accent-color), #b07234);
-    color: var(--primary-bg);
-    transform: scale(1.05); 
-    border: 3px solid var(--heading-color);
+/* Estilo da Imagem (adicionado na correção anterior) */
+.plano-card img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;
+    /* Imagem não tem mais margem negativa, pois removemos o padding do card */
+}
+
+/* Container para o conteúdo de texto */
+.plano-card-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Faz esta área crescer */
 }
 
 .plano-card h3 {
-    font-size: 28px;
+    font-size: 24px;
+    color: var(--accent-color); 
+    margin-top: 0;
     margin-bottom: 15px;
-    color: var(--heading-color); 
+    /* Remove a decoração do link */
+    text-decoration: none; 
 }
-.plano-card.destaque h3 {
-    color: var(--primary-bg); 
+/* Links para a página de detalhe */
+.plano-link-imagem {
+    display: block;
+    line-height: 0; /* Remove espaço extra da imagem */
+}
+.plano-link-titulo {
+    text-decoration: none;
+    color: inherit;
+}
+.plano-link-titulo:hover h3 {
+    text-decoration: underline;
 }
 
-.plano-card .price {
-    font-size: 32px; 
+
+.plano-card .plano-preco {
+    font-size: 40px;
     font-weight: 700;
-    color: var(--accent-color);
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.plano-card .plano-preco span {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.plano-card .plano-descricao {
+    font-size: 15px;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Faz a descrição crescer e empurrar o botão para baixo */
+}
+
+.plano-tags {
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
 }
-.plano-card.destaque .price {
-    color: var(--primary-bg); 
+
+.plano-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 15px;
 }
 
-.plano-card ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 30px;
-    text-align: left;
+.plano-tag.tipo-mensal,
+.plano-tag.tipo-anual {
+    background: #3a3a3a;
+    color: #f0f0f0;
 }
 
-.plano-card ul li {
-    font-size: 16px;
-    margin-bottom: 10px;
-    color: var(--text-color);
-    position: relative;
-    padding-left: 25px; 
+.plano-tag.modalidade-online {
+    background: #2e4e6a; 
+    color: #e0f7ff;
 }
 
-.plano-card ul li::before {
-    content: "\f00c"; 
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    color: var(--accent-color);
-    position: absolute;
-    left: 0;
+.plano-tag.modalidade-presencial {
+    background: #6a4a2e;
+    color: #fff4e0;
 }
 
-.plano-card.destaque ul li {
-    color: var(--primary-bg); 
-}
-.plano-card.destaque ul li::before {
-    color: var(--primary-bg); 
-}
-
-.plano-btn {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 700; 
+.plano-btn-assinar {
+    display: block;
     background: var(--accent-color);
     color: var(--primary-bg);
-    transition: 0.3s;
-    border: none;
-}
-
-.plano-card.destaque .plano-btn {
-    background: var(--primary-bg); 
-    color: var(--accent-color);
-}
-
-.plano-btn:hover {
-    background: var(--button-hover-bg);
-    color: var(--primary-bg);
-}
-.plano-card.destaque .plano-btn:hover {
-    background: var(--border-color);
-    color: var(--accent-color);
-}
-
-/* NOVO: Testemunhos Section */
-.testimonial-section {
-    background: var(--secondary-bg);
-    padding: 80px 10%;
-    text-align: center;
-}
-.testimonial-section h2 {
-    font-size: 32px;
-    color: var(--heading-color);
-    margin-bottom: 40px;
-}
-.testimonial-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-.testimonial-card {
-    background: var(--primary-bg);
-    padding: 30px;
-    border-radius: 10px;
-    width: 350px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    border-left: 5px solid var(--accent-color);
-    text-align: left;
-}
-.testimonial-text {
-    font-style: italic;
-    margin-bottom: 15px;
-    color: var(--text-color);
-}
-.testimonial-author {
-    font-weight: 600;
-    color: var(--accent-color);
-    margin-top: 10px;
-}
-.testimonial-rating {
-    color: gold;
-    margin-bottom: 10px;
-}
-
-/* NOVO: Garantia Section */
-.guarantee-section {
-    padding: 60px 10%;
-    text-align: center;
-    background: var(--primary-bg);
-}
-.guarantee-section i {
-    font-size: 40px;
-    color: var(--accent-color);
-    margin-bottom: 15px;
-}
-.guarantee-section h3 {
-    font-size: 24px;
-    color: var(--heading-color);
-    margin-bottom: 10px;
-}
-.guarantee-section p {
-    max-width: 700px;
-    margin: 0 auto;
-    color: #b0b0b0;
-}
-
-
-/* FAQ Section (Mantido da resposta anterior, mas sem o toggle JS) */
-.faq-section {
-    padding: 50px 10%;
-    background: var(--primary-bg);
-    border-top: 1px solid var(--border-color);
-}
-.faq-section h2 {
-    font-size: 32px;
-    color: var(--heading-color);
-    text-align: center;
-    margin-bottom: 40px;
-}
-.faq-item {
-    border-bottom: 1px solid var(--border-color);
-    padding: 15px 0;
-    text-align: left;
-}
-.faq-question {
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
     font-size: 18px;
-    font-weight: 600;
-    color: var(--heading-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.faq-answer {
-    font-size: 16px;
-    color: var(--text-color);
-    padding: 10px 0 0 0;
+    text-align: center;
+    transition: background 0.3s;
+    margin-top: auto; /* Alinha o botão no fim */
 }
 
-/* Responsivo */
-@media only screen and (max-width: 900px) {
-    .planos-section {
-        padding: 50px 5%;
-    }
-    .planos-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .plano-card {
-        width: 90%;
-    }
-    .testimonial-container {
-        flex-direction: column;
-        align-items: center;
-    }
+.plano-btn-assinar:hover {
+    background: var(--button-hover-bg);
+}
+
+.plano-card.plano-destaque {
+    border-color: var(--accent-color);
+    transform: scale(1.03);
+}
+.plano-card.plano-destaque:hover {
+    transform: scale(1.05) translateY(-8px);
 }

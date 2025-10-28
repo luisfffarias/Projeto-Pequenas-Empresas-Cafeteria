@@ -1,159 +1,221 @@
- :root {
-            --primary-bg: #1a1a1a;
-            --secondary-bg: #2a2a2a;
-            --text-color: #f0f0f0;
-            --heading-color: #e0e0e0;
-            --accent-color: #cd853f;
-            --border-color: #444444;
-            --button-hover-bg: #b07234;
-            --input-bg: #333;
-        }
+/* assets/css/cursos.css 
+   (TEMA CLARO - Inversão de Cores) 
+*/
 
-        /* Estilos globais e de layout (mantidos) */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--primary-bg); color: var(--text-color); line-height: 1.6; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-        header { background-color: var(--primary-bg); padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-decoration: none; }
-        .nav-links { list-style: none; display: flex; gap: 2.5rem; }
-        .nav-links a { color: var(--text-color); text-decoration: none; }
-        .auth-buttons { display: flex; gap: 1rem; }
-        .auth-buttons .btn { padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; }
-        .auth-buttons .btn-login { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-color); }
-        .auth-buttons .btn-cadastro { background-color: var(--secondary-bg); color: var(--text-color); border: none; }
-        
-        
-        .secao_principal { 
-    position: relative;
-    width: 100%;
-    /* Altura que você usou na Hero do Blog */
-    height: 500px; 
+/* PASSO 1: Inversão de Cores
+  Este :root SOBRESCREVE o :root escuro do seu CSS global,
+  APENAS quando esta folha de estilo (cursos.css) é carregada.
+*/
+:root {
+    --primary-bg: #f4f4f4;       /* Invertido: Fundo principal (claro) */
+    --secondary-bg: #ffffff;     /* Invertido: Fundo dos cards (branco) */
+    --text-color: #333333;       /* Invertido: Texto principal (escuro) */
+    --heading-color: #111111;    /* Invertido: Títulos (preto) */
+    --accent-color: #cd853f;       /* Mantido: Cor de destaque */
+    --border-color: #dddddd;     /* Invertido: Bordas (cinza claro) */
+    --button-hover-bg: #b07234;   /* Mantido: Hover do botão */
+    
+    /* Variáveis bônus para sombras e tags no tema claro */
+    --shadow-color: rgba(0,0,0,0.1);
+    --shadow-hover-color: rgba(0,0,0,0.15);
+    --tag-bg: #e0e0e0;
+    --tag-text: #1a1a1a;
+}
+
+/* PASSO 2: Aplicar o Fundo
+  Força o <body> a usar o novo fundo claro.
+*/
+body {
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+}
+
+
+/* PASSO 3: Layout (O CSS anterior que você queria)
+  Todo o código abaixo é o CSS anterior do cursos.css (com 220px de imagem).
+  Ele automaticamente usará as variáveis claras que definimos acima.
+*/
+
+
+
+.cursos-section {
+    padding: 60px 5%;
+    /* Não precisa de 'background-color' aqui, pois o body já mudou */
+}
+
+.cursos-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    /* ⚠️ TROQUE A URL se a sua imagem for diferente! */
-    background-image: url('../assets/images/cafe.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* Removemos a borda de baixo que existia na versão antiga */
-    border-bottom: none; 
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
-             .secao_principal::after {
-                content: '';
-                position: absolute;
-                top:0;
-                left:0;
-                width:100%;
-                height:100%;
-                /* Escurecimento em preto semi-transparente (50% de opacidade) */
-                background: rgba(0,0,0,0.5); 
-                z-index: 0; /* Fica atrás do conteúdo */
-            }
-        .hero-content {
-    position: relative;
-    z-index: 1; /* Garante que o texto fique acima do overlay */
-    text-align: center;
-    color: var(--accent-color);
-    padding: 0 1.5rem; /* Garante margem nas laterais em telas pequenas */
-    max-width: 900px;
+
+/* Barra Lateral de Filtros */
+.filtro-sidebar {
+    width: 250px;
+    padding: 20px;
+    background: var(--secondary-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    height: fit-content;
 }
-.hero-content h1 { 
-    font-size: 3.2rem; 
+.filtro-sidebar h3 {
+    font-size: 24px;
     color: var(--heading-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    margin: 0 0 1rem 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.filtro-grupo {
+    margin-bottom: 25px;
+}
+.filtro-grupo h4 {
+    font-size: 18px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+.filtro-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color);
+}
+.filtro-grupo input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: var(--accent-color);
 }
 
-             .secao_principal h1 { font-size: 3.2rem;  color: var(--heading-color); }
-        
-        .secao_principal p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; }
-        .titulo-secao { font-size: 2.5rem; color: var(--heading-color); text-align: center; margin-top: 4rem; margin-bottom: 2rem; font-weight: 600; }
-        .section-subtitle { font-size: 1.5rem; color: var(--accent-color); text-align: center; margin-bottom: 3rem; font-weight: 500; }
+/* --- FIM DOS ESTILOS DO FILTRO --- */
 
-        /* --- CORREÇÃO VISUAL APLICADA AQUI --- */
-        
-        /* 1. Otimização para grade 3x */
-        .courses-grid { 
-            display: grid; 
-            /* Ajustado para tentar 3 colunas, mas mantendo a responsividade (minmax 300px) */
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 2rem; 
-            margin-top: 3rem; 
-            list-style: none; 
-            padding: 0; 
-        }
-        
-        .course-item { 
-            background-color: var(--secondary-bg); 
-            border-radius: 10px; 
-            padding: 2rem; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-            border: 1px solid var(--border-color);
-            
-            /* 2. Configurações para manter a altura uniforme e alinhar o conteúdo */
-            display: flex;
-            flex-direction: column;
-            min-height: 350px; /* Garante uma altura mínima para todos os cards */
-        }
-        
-        .course-item:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); }
-        .course-item h4 { 
-            font-size: 1.8rem; 
-            color: var(--accent-color); 
-            margin-bottom: 0.8rem; 
-            font-weight: 600;
-            /* 3. Garante que o título se ajuste */
-            word-break: break-word; 
-        }
-        
-        .course-item p { 
-            color: var(--text-color); 
-            margin-top: 1rem; 
-            font-size: 1.05rem; 
-            margin-bottom: 1.5rem;
-            /* Faz a descrição ocupar o máximo de espaço e força a quebra do texto */
-            flex-grow: 1; 
-            word-break: break-word;
-        }
 
-        .course-item .detalhes { 
-            font-size: 0.95rem; 
-            color: #ccc; 
-            margin-top: 0.8rem; 
-            /* Empurra os detalhes para o fundo se houver espaço extra */
-            margin-top: auto;
-        }
-        .course-item .detalhes span { margin-right: 1.5rem; }
-        .course-item .detalhes strong { color: var(--accent-color); }
-        
-        .btn1 { 
-            display: inline-block; 
-            background-color: var(--accent-color); 
-            color: var(--primary-bg); 
-            padding: 1rem 2.5rem; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: 600; 
-            transition: background-color 0.3s ease; 
-            border: none; 
-            cursor: pointer; 
-        }
-        .btn1:hover { background-color: var(--button-hover-bg); }
-        
-        /* Estilos do Modal (mantidos) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-        .modal-overlay.open { opacity: 1; visibility: visible; }
-        .modal-content { background-color: var(--secondary-bg); color: var(--text-color); padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); transform: scale(0.9); transition: transform 0.3s ease; }
-        .modal-overlay.open .modal-content { transform: scale(1); }
-        .modal-content h2 { color: var(--accent-color); margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--heading-color); }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--input-bg); color: var(--text-color); font-family: 'Montserrat', sans-serif; font-size: 1rem; }
-        .modal-actions { display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem; }
-        .btn-secondary { background-color: var(--border-color); color: var(--text-color); padding: 0.75rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; }
-        .btn-add-course { background-color: var(--accent-color); color: var(--primary-bg); font-weight: 600; }
-        .btn-secondary:hover { background-color: #555; }
-        .btn-add-course:hover { background-color: var(--button-hover-bg); }
+.cursos-grid {
+    flex: 1; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+#loading-message-cursos,
+.nenhum-curso { 
+    color: var(--text-color); /* Será cinza escuro */
+    font-size: 1.2rem;
+    text-align: center;
+    grid-column: 1 / -1; 
+}
+
+/* --- CARD DO CURSO (Agora em tema claro) --- */
+.curso-card {
+    background: var(--secondary-bg); /* Será branco */
+    border: 1px solid var(--border-color); /* Será cinza claro */
+    box-shadow: 0 5px 20px var(--shadow-color); /* Sombra suave */
+    /* ... (resto dos estilos do card) ... */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; 
+}
+
+.curso-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px var(--shadow-hover-color); /* Sombra mais forte */
+    border-color: var(--accent-color);
+}
+
+.curso-card img {
+    width: 100%;
+    height: 220px; /* <- A altura original que você preferiu */
+    object-fit: cover;
+}
+
+.curso-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+/* Links do título e imagem */
+.curso-link-imagem { display: block; }
+.curso-link-titulo { text-decoration: none; color: inherit; }
+
+.curso-info h3 {
+    font-size: 22px;
+    color: var(--accent-color); /* Será laranja */
+    margin-top: 0;
+    margin-bottom: 10px;
+    min-height: 56px; 
+}
+
+.curso-info .curso-descricao-basica {
+    font-size: 15px;
+    color: var(--text-color); /* Será cinza escuro */
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; 
+}
+
+.curso-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666; /* Cor de texto secundário (claro) */
+    margin-bottom: 20px;
+}
+
+.curso-meta span {
+    font-weight: 600;
+}
+
+/* Tag de modalidade (Invertida) */
+.curso-meta .modalidade {
+    background: var(--tag-bg); /* Será cinza claro */
+    color: var(--tag-text); /* Será preto */
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.curso-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color); /* Será cinza claro */
+}
+
+.curso-footer .curso-preco {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--heading-color); /* Será preto */
+}
+
+.curso-btn-detalhes {
+    display: block;
+    background: var(--accent-color); /* Laranja */
+    color: #ffffff; /* Texto branco fica melhor no botão laranja */
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.curso-btn-detalhes:hover {
+    background: var(--button-hover-bg); /* Laranja mais escuro */
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .cursos-wrapper {
+        flex-direction: column; 
+    }
+    .filtro-sidebar {
+        width: 100%;
+        box-sizing: border-box; 
+        margin-bottom: 30px;
+    }
+}
