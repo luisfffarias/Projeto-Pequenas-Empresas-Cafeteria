@@ -13,6 +13,7 @@ const chatbotRoutes = require("./routes/chatbotRoutes");
 const productsRoute = require("./routes/productsRoutes");
 const planosRoutes = require("./routes/planosRoutes");
 const cursosRoutes = require("./routes/cursosRoutes");
+const receitasRoutes = require("./routes/receitasRoutes");
 //const shopRoutes = require("./routes/shopRoutes");
 
 // Novas rotas de usuário
@@ -57,6 +58,7 @@ app.use("/api/usuarios", userRoutes);
 app.use("/api/produtos", productsRoute);
 app.use("/api/planos", planosRoutes);
 app.use("/api/cursos", cursosRoutes);
+app.use("/api/receitas", receitasRoutes);
 //app.use("/api/shop", shopRoutes);
 
 // ----------------------------------------------------
