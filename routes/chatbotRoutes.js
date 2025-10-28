@@ -225,7 +225,7 @@ function processarComandoSimples(message, sessionId) {
   }
   
   if (lower === 'ajuda' || lower === 'help' || lower === 'comandos') {
-    return `🔧 **SISTEMA ADMINISTRATIVO**\n\nComandos disponíveis:\n\n` +
+      return `🔧 **SISTEMA ADMINISTRATIVO**\n\nComandos disponíveis:\n\n` +
            `➕ **CADASTRAR** - Adicionar novo produto\n` +
            `🔍 **BUSCAR** - Procurar produtos\n` +
            `📦 **ESTOQUE** - Atualizar quantidade em estoque\n\n` +
