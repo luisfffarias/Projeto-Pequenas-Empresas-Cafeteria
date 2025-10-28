@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregando receita...</title>
+
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/receita-detalhe.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax.libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+    <section class="receita-detalhe-section">
+        <div class="receita-detalhe-container">
+
+            <header class="receita-header">
+                <h1 id="receita-nome">Carregando...</h1>
+                <div class="receita-meta-detalhe">
+                    <span id="receita-tipo"><i class="fas fa-tag"></i></span>
+                    <span id="receita-dificuldade"><i class="fas fa-signal"></i></span>
+                    <span id="receita-tempo"><i class="fas fa-clock"></i></span>
+                </div>
+                <p id="receita-descricao-breve" class="receita-descricao-breve"></p>
+            </header>
+
+            <div class="receita-imagem-container-detalhe">
+                <img id="receita-imagem" src="" alt="Imagem da receita">
+            </div>
+
+            <div class="receita-corpo">
+                <div class="receita-ingredientes">
+                    <h2><i class="fas fa-carrot"></i> Ingredientes</h2>
+                    <ul id="lista-ingredientes">
+                        <li>Carregando ingredientes...</li>
+                    </ul>
+                </div>
+
+                <div class="receita-preparo">
+                    <h2><i class="fas fa-utensils"></i> Modo de Preparo</h2>
+                    <div id="modo-preparo-passos">
+                        <p>Carregando modo de preparo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="receita-footer-detalhe">
+                 <a href="receitas.html" class="btn-voltar"><i class="fas fa-arrow-left"></i>Voltar para receitas</a>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../assets/js/receitasFactory.js" type="module"></script>
+    <script src="../assets/js/receita-detalhe.js" type="module"></script>
+</body>
+</html>

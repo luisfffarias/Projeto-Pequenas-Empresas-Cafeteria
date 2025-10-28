@@ -1,0 +1,176 @@
+/* assets/css/receitas.css */
+/* LAYOUT COM FILTROS LATERAIS (Tipo e Dificuldade) - CARDS MAIS ESTREITOS */
+
+/* :root e body devem vir do seu CSS global */
+
+/* Hero Section (Mantido - ajuste a altura se necessário) */
+.secao_principal {
+    position: relative; width: 100%; height: 250px; /* Ajuste aqui */
+    display: flex; justify-content: center; align-items: center;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+}
+.secao_principal::after { /* Overlay escuro */
+    content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6); z-index: 0;
+}
+.hero-content { /* Conteúdo do Hero */
+    position: relative; z-index: 1; text-align: center; color: var(--text-color); margin-bottom: 30px;
+}
+.hero-content h1 { font-size: 50px; color: var(--heading-color); margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+.hero-content h2 { font-size: 24px; color: var(--accent-color); margin-top: 10px; }
+
+
+/* Seção da Lista de Receitas */
+.receitas-section {
+    padding: 40px 5%;
+}
+
+/* Wrapper principal */
+.receitas-wrapper {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px; /* REDUZIDA de 1400px para 1200px */
+    margin: 0 auto; /* Centraliza */
+}
+
+/* Barra Lateral de Filtros */
+.filtro-sidebar {
+    width: 250px;
+    padding: 20px;
+    background: var(--secondary-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    height: fit-content;
+}
+.filtro-sidebar h3 {
+    font-size: 24px;
+    color: var(--heading-color);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.filtro-grupo {
+    margin-bottom: 25px;
+}
+.filtro-grupo h4 {
+    font-size: 18px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+.filtro-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color);
+}
+.filtro-grupo input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: var(--accent-color);
+}
+
+
+/* Container dos Cards */
+.receitas-list-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 800px; /* NOVO: Adiciona max-width para o container dos cards */
+    /* REMOVIDO: margin: 0 auto; aqui, pois já é centralizado pelo wrapper pai */
+}
+
+
+#loading-message-receitas,
+.nenhuma-receita {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 40px 0;
+}
+
+/* Card Horizontal de Receita */
+.receita-card-horizontal {
+    display: flex; background: var(--secondary-bg); border-radius: 10px; overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.receita-card-horizontal:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+.receita-card-horizontal .receita-imagem-container {
+    flex: 0 0 200px; /* REDUZIDA de 250px para 200px */
+    height: 150px;  /* REDUZIDA de 200px para 150px */
+}
+.receita-card-horizontal img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.receita-card-horizontal .receita-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; } /* Padding um pouco menor */
+.receita-card-horizontal h3 { font-size: 18px; color: var(--accent-color); margin-top: 0; margin-bottom: 8px; } /* Texto um pouco menor */
+/* Links */
+.receita-link-imagem { display: block; height: 100%; }
+.receita-link-titulo { text-decoration: none; color: inherit; }
+/* Meta */
+.receita-card-horizontal .receita-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; font-size: 12px; color: #ccc; } /* Fonte e gap menores */
+.receita-card-horizontal .receita-meta span { display: flex; align-items: center; gap: 5px; }
+.receita-card-horizontal .receita-meta i { color: var(--accent-color); width: 15px; text-align: center; }
+/* Descrição */
+.receita-card-horizontal .receita-descricao-curta {
+    font-size: 13px; color: var(--text-color); line-height: 1.5; margin-bottom: 10px; flex-grow: 1; /* Fonte e line-height menores */
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
+}
+/* Footer e Botão */
+.receita-card-horizontal .receita-footer { margin-top: auto; text-align: right; }
+.receita-btn-ver {
+    background: var(--accent-color); color: var(--primary-bg); padding: 7px 15px; border-radius: 30px; /* Botão um pouco menor */
+    text-decoration: none; font-weight: 600; font-size: 12px; transition: background 0.3s; display: inline-block;
+}
+.receita-btn-ver:hover { background: var(--button-hover-bg); }
+
+
+/* Botão Carregar Mais */
+.load-more-container {
+width: 100%;
+display: flex;
+justify-content: center;  
+margin: 40px auto 0;  
+padding-bottom: 40px;
+}
+
+.load-more-row {
+max-width: 1200px;
+margin: 40px auto 0;
+display: flex;
+justify-content: center;
+}
+
+.load-more-btn {
+    background: var(--accent-color); display: inline-block; color: var(--primary-bg); border: none; padding: 12px 30px;
+    font-size: 16px; font-weight: 600; border-radius: 30px; cursor: pointer; transition: background 0.3s ease; position: static;
+}
+.load-more-btn:hover { background: var(--button-hover-bg); }
+.load-more-btn:disabled { background-color: #555; cursor: not-allowed; }
+
+
+/* Responsividade (Atualizada) */
+@media (max-width: 900px) { /* Aumenta o breakpoint para empilhar filtro e cards mais cedo */
+    .receitas-wrapper {
+        flex-direction: column; /* Empilha filtro e grid */
+    }
+    .filtro-sidebar {
+        width: 100%; /* Ocupa largura total */
+        box-sizing: border-box;
+        margin-bottom: 30px; /* Espaço abaixo do filtro */
+    }
+    .receitas-list-container {
+        max-width: 100%; /* Permite que os cards usem a largura total disponível */
+    }
+}
+
+/* Responsividade do card (Mantida e ajustada) */
+@media (max-width: 600px) {
+    .receita-card-horizontal { flex-direction: column; }
+    .receita-card-horizontal .receita-imagem-container { flex-basis: auto; width: 100%; height: 180px; } /* Ajuste de altura */
+    .receita-card-horizontal .receita-info { padding: 10px; } /* Padding ainda menor */
+    .receita-card-horizontal h3 { font-size: 16px; margin-bottom: 5px; } /* Fonte menor */
+    .receita-card-horizontal .receita-meta { gap: 10px; font-size: 11px; margin-bottom: 8px; } /* Fonte menor */
+    .receita-card-horizontal .receita-descricao-curta { font-size: 12px; line-height: 1.4; margin-bottom: 8px; } /* Fonte menor */
+    .receita-btn-ver { padding: 6px 12px; font-size: 11px; } /* Botão menor */
+    .receitas-list-section { padding: 30px 3%; } /* Padding da seção */
+}
