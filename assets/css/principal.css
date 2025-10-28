@@ -47,6 +47,12 @@ header {
     gap: 1rem; 
 }
 
+.auth-buttons span {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
 .auth-buttons .btn { 
     padding: 0.7rem 1.5rem; 
     border-radius: 5px; 

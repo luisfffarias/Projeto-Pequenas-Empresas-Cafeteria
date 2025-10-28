@@ -17,8 +17,8 @@ function setUser(user) {
     // Fechar modal
     closeModal();
 
-    // Atualizar endpoint do chat para admin ou geral
-    GEMINI_ENDPOINT = currentUser.isAdmin ? "/api/chatbot/admin" : "/api/chatbot";
+    GEMINI_ENDPOINT = "/api/chatbot";
+   
 }
 
 // Atualizar botões de autenticação
@@ -48,10 +48,24 @@ function updateAuthButtons() {
 
 // Logout
 function logout() {
+    // Zera o estado global
     currentUser = null;
     GEMINI_ENDPOINT = "/api/chatbot";
+
+    // Remove dados do localStorage
+    localStorage.clear(); // limpa tudo (token, user, etc.)
+
+    // Atualiza interface de autenticação
     updateAuthButtons();
+
+    // Limpa o chat
+    const chatBox = document.getElementById("chat-box");
+    if (chatBox) chatBox.innerHTML = ""; // remove todas as mensagens
+
     alert('Logout realizado com sucesso!');
+
+    // Recarrega a página para resetar qualquer estado
+    location.reload();
 }
 
 // ====================================================
@@ -268,7 +282,9 @@ function appendMessage(sender, message) {
     const botClasses = "bg-gray-200 text-gray-800";
 
     msg.className = (isUser ? "text-right" : "text-left") + " mb-2";
-    msg.innerHTML = `<div class="inline-block max-w-[80%] px-3 py-2 rounded-lg shadow-sm ${
+    
+    // ✅ Adicionar whitespace-pre-line para manter quebras de linha
+    msg.innerHTML = `<div class="inline-block max-w-[80%] px-3 py-2 rounded-lg shadow-sm whitespace-pre-line ${
         isUser ? userClasses : botClasses
     }">${isUser ? "" : "<strong>Cafecito</strong>: "}${message}</div>`;
 

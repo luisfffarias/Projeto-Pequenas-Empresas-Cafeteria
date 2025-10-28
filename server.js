@@ -11,7 +11,8 @@ const chatbotRoutes = require("./routes/chatbotRoutes");
 
 // Novas rotas da loja
 const productsRoute = require("./routes/productsRoutes");
-const planosRoutes = require("./routes/planosRoutes"); // <-- DESCOMENTADO
+const planosRoutes = require("./routes/planosRoutes");
+const cursosRoutes = require("./routes/cursosRoutes");
 //const shopRoutes = require("./routes/shopRoutes");
 
 // Novas rotas de usuário
@@ -55,6 +56,7 @@ app.use("/api/usuarios", userRoutes);
 // A URL '/api/produtos' deve bater com a BASE_URL do seu produtos.js (fábrica)
 app.use("/api/produtos", productsRoute);
 app.use("/api/planos", planosRoutes);
+app.use("/api/cursos", cursosRoutes);
 //app.use("/api/shop", shopRoutes);
 
 // ----------------------------------------------------

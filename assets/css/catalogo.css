@@ -22,7 +22,7 @@ body {
 .secao_principal {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,6 +140,7 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    flex-grow: 0;
 }
 .produto-tag {
     display: inline-block;
@@ -160,6 +161,7 @@ body {
     font-size: 14px;
     color: #b0b0b0;
     margin-bottom: 10px;
+    flex-grow: 0;
 }
 .produto-origem i {
     color: var(--accent-color);

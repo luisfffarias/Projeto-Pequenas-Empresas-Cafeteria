@@ -22,7 +22,7 @@
         .auth-buttons .btn { padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; }
         .auth-buttons .btn-login { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-color); }
         .auth-buttons .btn-cadastro { background-color: var(--secondary-bg); color: var(--text-color); border: none; }
-        .secao_principal { text-align: center; padding: 4rem 0 3rem; border-bottom: 1px solid var(--border-color); }
+        .secao_principal { text-align: center; padding: 2rem 0 2rem; border-bottom: 1px solid var(--border-color);}
         .secao_principal h1 { font-size: 3.2rem; }
         .secao_principal p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; }
         .titulo-secao { font-size: 2.5rem; color: var(--heading-color); text-align: center; margin-top: 4rem; margin-bottom: 2rem; font-weight: 600; }
