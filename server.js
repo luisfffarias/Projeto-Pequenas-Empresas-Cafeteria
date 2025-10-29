@@ -15,6 +15,7 @@ const planosRoutes = require("./routes/planosRoutes");
 const cursosRoutes = require("./routes/cursosRoutes");
 const receitasRoutes = require("./routes/receitasRoutes");
 const adminUserRoutes = require("./routes/adminUserRoutes");
+const adminHistoricoRoutes = require("./routes/adminHistoricoRoutes");
 //const shopRoutes = require("./routes/shopRoutes");
 
 // Novas rotas de usuário
@@ -61,6 +62,7 @@ app.use("/api/planos", planosRoutes);
 app.use("/api/cursos", cursosRoutes);
 app.use("/api/receitas", receitasRoutes);
 app.use("/api/admin/usuarios", adminUserRoutes);
+app.use("/api/admin/historico", adminHistoricoRoutes);
 
 //app.use("/api/shop", shopRoutes);
 

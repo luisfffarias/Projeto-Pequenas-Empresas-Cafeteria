@@ -5,18 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Histórico de Compras</title>
     <link rel="stylesheet" href="../assets/css/navbar.css">
-    <link rel="stylesheet" href="../assets/css/admin-panel.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/admin-panel.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <main class="admin-container">
         <h1>Histórico de Compras</h1>
-        <p><a href="admin.html">&larr; Voltar ao Painel Principal</a></p>
+        <p><a href="admin.html" class="link-voltar">&larr; Voltar ao Painel Principal</a></p>
 
-        <section class="admin-section">
-            <h2>Histórico</h2>
-            <p>Funcionalidade em construção...</p>
-            </section>
+        <section class="admin-section list-history-section">
+            <h2>Todas as Compras Registadas</h2>
+            <div class="table-container">
+                <table id="history-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID Compra</th>
+                            <th>Data</th>
+                            <th>Utilizador</th>
+                            <th>Email</th>
+                            <th>Produto</th>
+                            <th>Qtd.</th>
+                            <th>Preço Unit.</th>
+                            <th>Frete</th>
+                            <th>Desconto</th>
+                            <th>Preço Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body">
+                        <tr><td colspan="10">A carregar histórico...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="list-history-message" class="message"></p>
+        </section>
+
     </main>
-    </body>
+
+    <script src="../assets/js/adminHistoricoFactory.js" type="module"></script>
+    <script src="../assets/js/historico-compras.js" type="module"></script>
+
+</body>
 </html>
