@@ -1,9 +1,16 @@
+const express = require("express");
+const sql = require("mssql");
+const dbConfig = require("../config/dbconfig.js");
+
+const router = express.Router();
+
+// 🔹 Montar Carrinho (retorna dados dos produtos com quantidade inicial 1)
 router.post("/montar-carrinho", async (req, res) => {
   try {
     const { itens } = req.body; // Ex: [1, 2]
 
     if (!Array.isArray(itens) || itens.length === 0) {
-      return res.status(400).send("Nenhum item informado.");
+      return res.status(400).json({ carrinho: [], subtotal: 0, frete: 0, total: 0 });
     }
 
     const pool = await sql.connect(dbConfig);
@@ -22,14 +29,14 @@ router.post("/montar-carrinho", async (req, res) => {
           nome: produto.Nome,
           tipo: produto.Tipo,
           preco: produto.Preco,
-          quantidade: 1,          // Quantidade padrão
-          subtotal: produto.Preco, // Preço x quantidade
+          quantidade: 1,        // quantidade inicial
+          subtotal: produto.Preco
         });
       }
     }
 
     const subtotal = carrinho.reduce((acc, i) => acc + i.subtotal, 0);
-    const frete = 25.0;
+    const frete = carrinho.length > 0 ? 25.0 : 0;
     const total = subtotal + frete;
 
     res.json({ carrinho, subtotal, frete, total });
@@ -38,3 +45,5 @@ router.post("/montar-carrinho", async (req, res) => {
     res.status(500).send("Erro ao montar carrinho.");
   }
 });
+
+module.exports = router;

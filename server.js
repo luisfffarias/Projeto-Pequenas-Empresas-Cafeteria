@@ -14,7 +14,7 @@ const productsRoute = require("./routes/productsRoutes");
 const planosRoutes = require("./routes/planosRoutes");
 const cursosRoutes = require("./routes/cursosRoutes");
 const receitasRoutes = require("./routes/receitasRoutes");
-//const shopRoutes = require("./routes/shopRoutes");
+const shopRoutes = require("./routes/shopRoutes");
 
 // Novas rotas de usuário
 const userRoutes = require("./routes/userRoutes");
@@ -59,7 +59,7 @@ app.use("/api/produtos", productsRoute);
 app.use("/api/planos", planosRoutes);
 app.use("/api/cursos", cursosRoutes);
 app.use("/api/receitas", receitasRoutes);
-//app.use("/api/shop", shopRoutes);
+app.use("/api/shop", shopRoutes);
 
 // ----------------------------------------------------
 // Rota raiz

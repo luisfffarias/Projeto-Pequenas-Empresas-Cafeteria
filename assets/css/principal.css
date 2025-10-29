@@ -90,7 +90,17 @@ header {
             max-width: 1200px;
             margin: 0 auto;
             padding: 15px;
+           
         }
+
+        .footer-links::before {
+    content: "";
+    display: block;
+    height: 1px; /* altura da linha */
+    background-color: rgba(255, 255, 255, 0.1); /* quase transparente */
+    margin-bottom: 15px; /* espaço entre a linha e o conteúdo do footer */
+        }
+
 
        
         .ecommerce-footer h4 {

@@ -185,18 +185,21 @@ function renderizarProdutos(produtos) {
 }
 
 
-/**
- * Lógica do botão "Comprar".
- */
-function adicionarAoCarrinho(idProduto) {
-    const produto = todosOsProdutos.find(p => p.IdProduto == idProduto);
-    
-    console.log("--- LÓGICA DO CARRINHO ---");
-    console.log("Adicionando ao carrinho (lógica não implementada):");
-    console.log("ID:", idProduto);
-    console.log("Produto:", produto.Nome);
-    console.log("Preço:", produto.Preco);
-    console.log("--------------------------");
 
-    alert(`"${produto.Nome}" foi adicionado ao carrinho! (ver console)`);
+function adicionarAoCarrinho(idProduto) {
+    // Pega o item no localStorage
+    let carrinho = JSON.parse(localStorage.getItem("carrinhoSelecionados")) || [];
+
+    // Verifica se já existe
+    const existe = carrinho.find(i => i.id == idProduto);
+    if (existe) {
+        alert("Produto já está no carrinho!");
+        return;
+    }
+
+    // Adiciona o produto com quantidade 1
+    carrinho.push({ id: parseInt(idProduto), quantidade: 1 });
+    localStorage.setItem("carrinhoSelecionados", JSON.stringify(carrinho));
+
+    alert("Produto adicionado ao carrinho!");
 }
