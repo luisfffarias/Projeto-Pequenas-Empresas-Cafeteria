@@ -18,8 +18,16 @@ function setUser(user) {
     closeModal();
 
     GEMINI_ENDPOINT = "/api/chatbot";
-   
+
+    // ✅ Mostrar link ADM se o usuário for admin
+    if (user.isAdmin === true) {
+    adminLink.style.display = "inline-block";
+    } else {
+    adminLink.style.display = "none";
 }
+
+}
+
 
 // Atualizar botões de autenticação
 function updateAuthButtons() {
@@ -63,6 +71,11 @@ function logout() {
     if (chatBox) chatBox.innerHTML = ""; // remove todas as mensagens
 
     alert('Logout realizado com sucesso!');
+
+    // Esconder link de admin
+    const adminLink = document.getElementById("admin-link");
+    if (adminLink) adminLink.style.display = "none";
+
 
     // Recarrega a página para resetar qualquer estado
     location.reload();

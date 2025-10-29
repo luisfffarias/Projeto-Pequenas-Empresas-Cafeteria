@@ -287,3 +287,158 @@
     color: var(--accent-color);
     font-weight: 600;
 }
+
+/* Estilos para estados do carrinho */
+.carrinho-vazio {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #666;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.erro-carrinho {
+  text-align: center;
+  padding: 40px;
+  color: #d32f2f;
+  font-size: 16px;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.quantidade-display {
+  min-width: 30px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Seção de Cálculo de Frete */
+.shipping-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.shipping-section h4 {
+    color: var(--heading-color);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.shipping-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.shipping-input-group input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.shipping-input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.btn-calcular-frete {
+    padding: 0.75rem;
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-calcular-frete:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.btn-calcular-frete:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.shipping-result {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    min-height: 20px;
+}
+
+.shipping-result.success {
+    color: #2e7d32;
+}
+
+.shipping-result.error {
+    color: #d32f2f;
+}
+
+.shipping-result.loading {
+    color: #666;
+}
+
+/* Melhoria visual para os radio buttons de pagamento */
+.payment-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--input-bg);
+    margin-bottom: 0.5rem;
+}
+
+.payment-option:hover {
+    border-color: var(--accent-color);
+    background-color: rgba(205, 133, 63, 0.05);
+}
+
+.payment-option input[type="radio"] {
+    display: none;
+}
+
+.payment-option:has(input[type="radio"]:checked) {
+    border-color: var(--accent-color);
+    background-color: rgba(205, 133, 63, 0.1);
+    box-shadow: 0 0 0 2px rgba(205, 133, 63, 0.2);
+}
+
+.payment-option span {
+    font-weight: 500;
+}
+
+.payment-option i {
+    color: var(--accent-color);
+}
+
+/* Estilos para mensagens de validação */
+#mensagem-validacao {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#mensagem-validacao i {
+    margin-right: 8px;
+}

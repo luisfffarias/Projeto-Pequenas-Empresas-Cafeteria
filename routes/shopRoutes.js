@@ -46,4 +46,74 @@ router.post("/montar-carrinho", async (req, res) => {
   }
 });
 
+// Endpoint para finalizar compra - CORRIGIDO
+// Endpoint CORRIGIDO para finalizar compra
+router.post("/comprar", async (req, res) => {
+    console.log("🎯 ENDPOINT /comprar CHAMADO!");
+    
+    try {
+        const {
+            emailUsuario,
+            itens,
+            enderecoEntrega,
+            valor,
+            metodoPagamento
+        } = req.body;
+
+        console.log("📊 Dados recebidos:");
+        console.log("- Email:", emailUsuario);
+        console.log("- Itens:", itens);
+        console.log("- CEP:", enderecoEntrega?.cep);
+        console.log("- Subtotal:", valor?.subtotal);
+        console.log("- Frete:", valor?.frete);
+        console.log("- Total:", valor?.total);
+        console.log("- Método:", metodoPagamento);
+
+        // Conectar ao banco
+        const pool = await sql.connect(dbConfig);
+        console.log("✅ Conectado ao banco");
+        
+        // CORREÇÃO: Remover PrecoTotal do INSERT (é computado automaticamente)
+        const insertQuery = `
+            INSERT INTO HistoricoDeCompra (
+                EmailUsuario, Subtotal, PrecoFrete, Desconto,
+                MetodoPagamento, CepEntrega, DataDaCompra, StatusCompra
+            ) 
+            OUTPUT INSERTED.IdCompra
+            VALUES (@emailUsuario, @subtotal, @frete, @desconto, 
+                    @metodoPagamento, @cep, GETDATE(), 'pendente')
+        `;
+
+        console.log("📝 Inserindo no banco...");
+        const result = await pool.request()
+            .input('emailUsuario', sql.NVarChar(255), emailUsuario)
+            .input('subtotal', sql.Decimal(10, 2), valor?.subtotal || 0)
+            .input('frete', sql.Decimal(10, 2), valor?.frete || 0)
+            .input('desconto', sql.Decimal(10, 2), 0) // Desconto fixo em 0
+            .input('metodoPagamento', sql.NVarChar(50), metodoPagamento)
+            .input('cep', sql.NVarChar(10), enderecoEntrega?.cep || '')
+            .query(insertQuery);
+
+        const idCompra = result.recordset[0].IdCompra;
+        console.log("✅ Compra salva! ID:", idCompra);
+
+        await pool.close();
+
+        // 🔥 GARANTIR que retorna como JSON
+        res.json({
+            success: true,
+            idCompra: idCompra,
+            message: "Compra finalizada com sucesso!"
+        });
+
+    } catch (error) {
+        console.error("❌ Erro:", error);
+        // 🔥 GARANTIR que retorna como JSON mesmo no erro
+        res.status(500).json({
+            success: false,
+            message: "Erro: " + error.message
+        });
+    }
+});
+
 module.exports = router;

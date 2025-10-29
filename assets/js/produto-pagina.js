@@ -78,8 +78,28 @@ function preencherDadosProduto(produto) {
     btnComprar.dataset.id = produto.IdProduto;
     btnComprar.addEventListener('click', (e) => {
         e.preventDefault();
-        // A lógica do carrinho virá aqui
-        alert(`Adicionando "${produto.Nome}" ao carrinho! (Lógica do carrinho pendente)`);
-        console.log("Adicionar ao carrinho (detalhe):", produto);
+         const id = e.currentTarget.dataset.id;
+        adicionarAoCarrinho(id);
+        
+        
     });
+}
+
+ 
+function adicionarAoCarrinho(idProduto) {
+    // Pega o item no localStorage
+    let carrinho = JSON.parse(localStorage.getItem("carrinhoSelecionados")) || [];
+
+    // Verifica se já existe
+    const existe = carrinho.find(i => i.id == idProduto);
+    if (existe) {
+        alert("Produto já está no carrinho!");
+        return;
+    }
+
+    // Adiciona o produto com quantidade 1
+    alert("Produto adicionado ao carrinho!");
+    carrinho.push({ id: parseInt(idProduto), quantidade: 1 });
+    localStorage.setItem("carrinhoSelecionados", JSON.stringify(carrinho));
+
 }

@@ -8,7 +8,6 @@ const db = require("../config/dbconfig.js");
 
 // 1. Listar todos os planos
 router.get("/", async (req, res) => {
-<<<<<<< HEAD
    try {
       const pool = await sql.connect(db);
     // Usamos SELECT * para pegar a nova coluna 'Imagem' automaticamente
@@ -18,17 +17,6 @@ router.get("/", async (req, res) => {
       console.error("Erro ao buscar planos:", err);
       res.status(500).send("Erro ao buscar planos");
    }
-=======
-  try {
-    const pool = await sql.connect(db);
-    // Ordena por ID por padrão
-    const result = await pool.request().query("SELECT * FROM Planos ORDER BY IdPlano ASC");
-    res.json(result.recordset);
-  } catch (err) {
-    console.error("Erro ao buscar planos:", err);
-    res.status(500).send("Erro ao buscar planos");
-  }
->>>>>>> cd0de02dd3711f89f63e9ebd2d0b171804faaa9e
 });
 
 // 2. Buscar um plano específico pelo ID

@@ -29,15 +29,24 @@
         <div class="carrinho-resumo">
             <h3>Resumo do Pedido</h3>
             
-            <div class="resumo-linha">
-                <span>Subtotal (3 itens)</span>
-                <span>R$ 209,00</span>
+            <!-- NOVA SEÇÃO: Cálculo de Frete -->
+            <div class="shipping-section">
+                <h4>Calcular Frete</h4>
+                <div class="shipping-input-group">
+                    <input type="text" id="cep-input" placeholder="Digite seu CEP" maxlength="9">
+                    <button class="btn-calcular-frete" id="btn-calcular-frete">
+                        <i class="fas fa-truck"></i>
+                    </button>
+                </div>
+                <div id="shipping-result" class="shipping-result"></div>
             </div>
             
-            <div class="resumo-linha">
-                <span>Frete Estimado</span>
-                <span>R$ 25,00</span>
+           <div class="resumo-linha">
+            <span id="subtotal-label">Subtotal (0 itens)</span>
+            <span id="subtotal-value"></span>
             </div>
+            
+            
             
             <div class="coupon-section">
                 <h4>Aplicar Cupom</h4>
@@ -47,12 +56,38 @@
                 </div>
             </div>
             
-            <div class="resumo-linha resumo-total">
-                <span>Total</span>
-                <span>R$ 234,00</span>
+            <!-- SEÇÃO: Modo de Pagamento -->
+            <div class="payment-section">
+                <h4>Método de Pagamento</h4>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <span>Cartão de Crédito</span><i class="fas fa-credit-card"></i>
+                        <input type="radio" name="payment-method" value="credit-card" checked>
+                    </label>
+                    
+                    <label class="payment-option">
+                        <span>Cartão de Débito</span><i class="fas fa-credit-card"></i>
+                        <input type="radio" name="payment-method" value="debit-card">
+                    </label>
+                    
+                    <label class="payment-option">
+                        <span>PIX</span> <i class="fas fa-qrcode"></i>
+                        <input type="radio" name="payment-method" value="pix">
+                    </label>
+                    
+                    <label class="payment-option">
+                        <span>Boleto Bancário</span> <i class="fas fa-barcode"></i>
+                        <input type="radio" name="payment-method" value="boleto">
+                    </label>
+                </div>
             </div>
             
-            <a href="checkout.html" class="btn-finalizar">Finalizar Compra</a>
+            <div class="resumo-linha resumo-total">
+                <span>Total</span>
+                <span></span>
+            </div>
+            
+            <a  class="btn-finalizar">Finalizar Compra</a>
         </div>
 
     </div>

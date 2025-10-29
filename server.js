@@ -1,9 +1,7 @@
-// server.js (Completo e Corrigido)
-
 const express = require("express");
 const path = require("path");
 require("dotenv").config();
-const connectDB = require("./config/db"); // Presume que este é o seu conector SQL Server
+const connectDB = require("./config/db");
 
 // Rotas existentes
 const rssRoutes = require("./routes/rssRoutes");
@@ -14,24 +12,33 @@ const productsRoute = require("./routes/productsRoutes");
 const planosRoutes = require("./routes/planosRoutes");
 const cursosRoutes = require("./routes/cursosRoutes");
 const receitasRoutes = require("./routes/receitasRoutes");
-<<<<<<< HEAD
 const shopRoutes = require("./routes/shopRoutes");
-=======
-const adminUserRoutes = require("./routes/adminUserRoutes");
-const adminHistoricoRoutes = require("./routes/adminHistoricoRoutes");
-//const shopRoutes = require("./routes/shopRoutes");
->>>>>>> cd0de02dd3711f89f63e9ebd2d0b171804faaa9e
 
 // Novas rotas de usuário
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
-// Conecta ao banco
-connectDB(); // Garanta que este arquivo (db.js) exporte a função connectDB
-
-// Middleware para JSON
+// ============ MIDDLEWARES ESSENCIAIS ============
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// 🔥 MIDDLEWARE CORS - ADICIONE AQUI, DEPOIS DO app = express()
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin, X-Requested-With, Accept");
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
+// ================================================
+
+// Conecta ao banco
+connectDB();
 
 // ----------------------------------------------------
 // Arquivos estáticos
@@ -43,7 +50,7 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 // Rotas HTML existentes
 // ----------------------------------------------------
 app.get("/principal", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "principal.html"));
+  res.sendFile(path.join(__dirname, "views", "principal.html"));
 });
 
 // ----------------------------------------------------
@@ -60,25 +67,17 @@ app.use("/api/usuarios", userRoutes);
 // ----------------------------------------------------
 // Novas rotas da loja
 // ----------------------------------------------------
-// A URL '/api/produtos' deve bater com a BASE_URL do seu produtos.js (fábrica)
 app.use("/api/produtos", productsRoute);
 app.use("/api/planos", planosRoutes);
 app.use("/api/cursos", cursosRoutes);
 app.use("/api/receitas", receitasRoutes);
-<<<<<<< HEAD
 app.use("/api/shop", shopRoutes);
-=======
-app.use("/api/admin/usuarios", adminUserRoutes);
-app.use("/api/admin/historico", adminHistoricoRoutes);
-
-//app.use("/api/shop", shopRoutes);
->>>>>>> cd0de02dd3711f89f63e9ebd2d0b171804faaa9e
 
 // ----------------------------------------------------
 // Rota raiz
 // ----------------------------------------------------
 app.get("/", (req, res) => {
-  res.send("Servidor rodando com SQL Server, RSS, Chatbot e Loja!");
+  res.send("Servidor rodando com SQL Server, RSS, Chatbot e Loja!");
 });
 
 // ----------------------------------------------------
@@ -86,5 +85,5 @@ app.get("/", (req, res) => {
 // ----------------------------------------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
