@@ -7,13 +7,13 @@
   APENAS quando esta folha de estilo (cursos.css) é carregada.
 */
 :root {
-    --primary-bg: #f4f4f4;       /* Invertido: Fundo principal (claro) */
-    --secondary-bg: #ffffff;     /* Invertido: Fundo dos cards (branco) */
-    --text-color: #333333;       /* Invertido: Texto principal (escuro) */
-    --heading-color: #111111;    /* Invertido: Títulos (preto) */
-    --accent-color: #cd853f;       /* Mantido: Cor de destaque */
-    --border-color: #dddddd;     /* Invertido: Bordas (cinza claro) */
-    --button-hover-bg: #b07234;   /* Mantido: Hover do botão */
+    --primary-bg: #f4f4f4;       /* Invertido: Fundo principal (claro) */
+    --secondary-bg: #ffffff;     /* Invertido: Fundo dos cards (branco) */
+    --text-color: #333333;       /* Invertido: Texto principal (escuro) */
+    --heading-color: #111111;    /* Invertido: Títulos (preto) */
+    --accent-color: #cd853f;       /* Mantido: Cor de destaque */
+    --border-color: #dddddd;     /* Invertido: Bordas (cinza claro) */
+    --button-hover-bg: #b07234;   /* Mantido: Hover do botão */
     
     /* Variáveis bônus para sombras e tags no tema claro */
     --shadow-color: rgba(0,0,0,0.1);
@@ -210,12 +210,12 @@ body {
 
 /* Responsividade */
 @media (max-width: 900px) {
-    .cursos-wrapper {
-        flex-direction: column; 
-    }
-    .filtro-sidebar {
-        width: 100%;
+    .cursos-wrapper {
+        flex-direction: column; 
+    }
+    .filtro-sidebar {
+        width: 100%;
         box-sizing: border-box; 
-        margin-bottom: 30px;
-    }
+    margin-bottom: 30px;
+    }
 }

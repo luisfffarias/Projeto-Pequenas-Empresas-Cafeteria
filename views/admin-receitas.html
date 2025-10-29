@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gerir Receitas</title>
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/admin-panel.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="admin-container">
+        <h1>Gerir Receitas</h1>
+        <p><a href="admin.html" class="link-voltar">&larr; Voltar ao Painel Principal</a></p>
+
+        <div class="admin-actions">
+            <button id="btn-show-add-modal" class="btn btn-primary"><i class="fas fa-plus"></i> Adicionar Nova Receita</button>
+        </div>
+
+        <section class="admin-section list-receitas-section">
+            <h2>Receitas Existentes</h2>
+            <div class="table-container">
+                <table id="receitas-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Dificuldade</th>
+                            <th>Tempo (min)</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="receitas-table-body">
+                        <tr><td colspan="6">A carregar receitas...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="list-receitas-message" class="message"></p>
+        </section>
+
+        <div id="receita-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal-btn">&times;</span>
+                <h2 id="modal-title">Adicionar Receita</h2>
+                <form id="receita-form" class="admin-form">
+                    <input type="hidden" id="receitaId" name="IdReceita">
+                    <div class="form-grid-modal">
+                        <div class="form-group full-width">
+                            <label for="nomeReceita">Nome:</label>
+                            <input type="text" id="nomeReceita" name="Nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoReceita">Tipo (Bebida/Comida):</label>
+                            <input type="text" id="tipoReceita" name="Tipo" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="dificuldadeReceita">Dificuldade:</label>
+                            <input type="text" id="dificuldadeReceita" name="Dificuldade">
+                        </div>
+                         <div class="form-group">
+                            <label for="tempoReceita">Tempo Preparo (min):</label>
+                            <input type="number" id="tempoReceita" name="TempoPreparoMin">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="imagemReceita">URL da Imagem:</label>
+                            <input type="url" id="imagemReceita" name="ImagemURL">
+                        </div>
+                         <div class="form-group full-width">
+                            <label for="descReceita">Descrição (breve):</label>
+                            <textarea id="descReceita" name="Descricao" rows="3"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="ingredientesReceita">Ingredientes (separados por ;):</label>
+                            <textarea id="ingredientesReceita" name="Ingredientes" rows="5" placeholder="Ex: Açúcar; Leite; Café solúvel"></textarea>
+                        </div>
+                         <div class="form-group full-width">
+                            <label for="preparoReceita">Modo de Preparo (separado por ,):</label>
+                            <textarea id="preparoReceita" name="ModoPreparo" rows="8" placeholder="Ex: Misture o café, Aqueça o leite, Sirva quente"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-save-receita">Salvar Receita</button>
+                    <p id="modal-message" class="message"></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/js/receitasFactory.js" type="module"></script>
+    <script src="../assets/js/admin-receitas.js" type="module"></script>
+</body>
+</html>

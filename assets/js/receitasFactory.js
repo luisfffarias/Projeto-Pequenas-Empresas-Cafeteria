@@ -1,50 +1,94 @@
 // assets/js/receitasFactory.js
-// Fábrica dedicada para buscar dados da API de Receitas
+// Fábrica COMPLETA para CRUD de Receitas
 
 const receitasFactory = {
-    // URL base da API (agora em português)
-    BASE_URL: '/api/receitas', 
+    BASE_URL: '/api/receitas', // Mantém o URL da API
 
-    /**
-     * Busca todas as receitas da API.
-     * @returns {Promise<Array>} Lista de receitas.
-     */
+    // GET Todos (Existente)
     async getTodasReceitas() {
         try {
             const response = await fetch(this.BASE_URL);
-            if (!response.ok) {
-                throw new Error(`Erro HTTP: ${response.status}`);
-            }
-            const receitas = await response.json();
-            return receitas;
+            if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+            return await response.json();
         } catch (error) {
             console.error('Falha ao buscar receitas:', error);
-            return []; 
+            throw error; // Propaga erro
         }
     },
 
-    /**
-     * Busca uma receita específica pelo ID.
-     * @param {number} id - O ID da receita.
-     * @returns {Promise<Object|null>} O objeto da receita ou null se falhar.
-     */
+    // GET por ID (Existente)
     async getReceitaPorId(id) {
         try {
             const response = await fetch(`${this.BASE_URL}/${id}`);
             if (!response.ok) {
-                // Se der 404 (não encontrado), não loga como erro grave
-                if (response.status === 404) {
-                    console.log(`Receita com ID ${id} não encontrada.`);
-                    return null; 
-                }
+                if (response.status === 404) return null;
                 throw new Error(`Erro HTTP: ${response.status}`);
             }
             return await response.json();
         } catch (error) {
             console.error(`Falha ao buscar receita ${id}:`, error);
-            return null;
+            return null; // Retorna null em erro
+        }
+    },
+
+    // --- NOVAS FUNÇÕES ADMIN ---
+
+    /**
+     * (Admin) Cria uma nova receita.
+     */
+    async criarReceita(dadosReceita) {
+        try {
+            const response = await fetch(this.BASE_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dadosReceita),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || `Erro HTTP: ${response.status}`);
+            return data;
+        } catch (error) {
+            console.error('Falha ao criar receita:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * (Admin) Atualiza uma receita existente.
+     */
+    async atualizarReceita(id, dadosReceita) {
+        try {
+            const response = await fetch(`${this.BASE_URL}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dadosReceita),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || `Erro HTTP: ${response.status}`);
+            return data;
+        } catch (error) {
+            console.error(`Falha ao atualizar receita ${id}:`, error);
+            throw error;
+        }
+    },
+
+    /**
+     * (Admin) Exclui uma receita.
+     */
+    async excluirReceita(id) {
+        try {
+            const response = await fetch(`${this.BASE_URL}/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok && response.status !== 204) {
+                 const data = await response.json().catch(() => ({ error: `Erro HTTP: ${response.status}` }));
+                 throw new Error(data.error || `Erro HTTP: ${response.status}`);
+            }
+        } catch (error) {
+            console.error(`Falha ao excluir receita ${id}:`, error);
+            throw error;
         }
     }
+    // --- FIM NOVAS FUNÇÕES ADMIN ---
 };
 
 export default receitasFactory;

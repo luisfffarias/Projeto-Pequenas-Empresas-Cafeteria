@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel - Usuários - Coffee</title>
+
+    <link rel="stylesheet" href="../assets/css/navbar.css"> <link rel="stylesheet" href="../assets/css/admin-panel.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <main class="admin-container">
+        <h1>Painel do administrador - Usuários</h1>
+
+        <section class="admin-section add-user-section">
+            <h2>Adicionar novo usuário</h2>
+            <form id="add-user-form" class="admin-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" name="Senha" required>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label for="isAdmin">
+                            <input type="checkbox" id="isAdmin" name="IsAdmin" value="1"> Administrador
+                        </label>
+                    </div>
+                     <div class="form-group checkbox-group">
+                        <label for="isAssinante">
+                            <input type="checkbox" id="isAssinante" name="IsAssinante" value="1"> Assinante
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Adicionar usuário</button>
+                <p id="add-user-message" class="message"></p>
+            </form>
+        </section>
+
+        <section class="admin-section list-users-section">
+            <h2>Usuários</h2>
+            <div class="table-container">
+                <table id="users-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Administrador</th>
+                            <th>Assinante</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <tr><td colspan="6">Carregando usuários</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="list-users-message" class="message"></p>
+        </section>
+
+    </main>
+
+    <script src="../assets/js/adminUserFactory.js" type="module"></script>
+    <script src="../assets/js/admin-usuarios.js" type="module"></script>
+
+</body>
+</html>
