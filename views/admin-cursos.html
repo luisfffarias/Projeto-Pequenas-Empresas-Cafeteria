@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gerir Cursos</title>
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/admin-panel.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="admin-container">
+        <h1>Painel do administrador - Cursos</h1>
+        <p><a href="admin.html" class="link-voltar">&larr; Voltar ao Painel Principal</a></p>
+
+        <div class="admin-actions">
+            <button id="btn-show-add-modal" class="btn btn-primary"><i class="fas fa-plus"></i> Adicionar Novo Curso</button>
+        </div>
+
+        <section class="admin-section list-cursos-section">
+            <h2>Cursos Existentes</h2>
+            <div class="table-container">
+                <table id="cursos-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Duração (h)</th>
+                            <th>Tipo</th>
+                            <th>Modalidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cursos-table-body">
+                        <tr><td colspan="7">A carregar cursos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="list-cursos-message" class="message"></p>
+        </section>
+
+        <div id="curso-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal-btn">&times;</span>
+                <h2 id="modal-title">Adicionar Curso</h2>
+                <form id="curso-form" class="admin-form">
+                    <input type="hidden" id="cursoId" name="IdCurso">
+                    <div class="form-grid-modal">
+                        <div class="form-group full-width">
+                            <label for="nomeCurso">Nome:</label>
+                            <input type="text" id="nomeCurso" name="Nome" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="precoCurso">Preço (R$):</label>
+                            <input type="number" step="0.01" id="precoCurso" name="Preco" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="duracaoCurso">Duração (Horas):</label>
+                            <input type="number" id="duracaoCurso" name="DuracaoHoras">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoCurso">Tipo:</label>
+                            <input type="text" id="tipoCurso" name="Tipo">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalidadeCurso">Modalidade:</label>
+                            <input type="text" id="modalidadeCurso" name="Modalidade">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="imagemCurso">URL da Imagem:</label>
+                            <input type="url" id="imagemCurso" name="Imagem">
+                        </div>
+                         <div class="form-group full-width">
+                            <label for="descBasicaCurso">Descrição Básica (para lista):</label>
+                            <textarea id="descBasicaCurso" name="DescricaoBasica" rows="3"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="descCompletaCurso">Descrição Completa (para detalhe):</label>
+                            <textarea id="descCompletaCurso" name="DescricaoCompleta" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-save-curso">Salvar Curso</button>
+                    <p id="modal-message" class="message"></p>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../assets/js/cursosFactory.js" type="module"></script>
+    <script src="../assets/js/admin-cursos.js" type="module"></script>
+
+</body>
+</html>

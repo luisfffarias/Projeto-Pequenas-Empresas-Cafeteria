@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gerir Planos de Assinatura</title>
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/admin-panel.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <main class="admin-container">
+        <h1>Gerir Planos de Assinatura</h1>
+        <p><a href="admin.html" class="link-voltar">&larr; Voltar ao Painel Principal</a></p>
+
+        <div class="admin-actions">
+            <button id="btn-show-add-modal" class="btn btn-primary"><i class="fas fa-plus"></i> Adicionar Novo Plano</button>
+        </div>
+
+        <section class="admin-section list-planos-section">
+            <h2>Planos Existentes</h2>
+            <div class="table-container">
+                <table id="planos-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Tipo</th>
+                            <th>Modalidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planos-table-body">
+                        <tr><td colspan="6">A carregar planos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="list-planos-message" class="message"></p>
+        </section>
+
+        <div id="plano-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal-btn">&times;</span>
+                <h2 id="modal-title">Adicionar Plano</h2>
+                <form id="plano-form" class="admin-form">
+                    <input type="hidden" id="planoId" name="IdPlano">
+                    <div class="form-grid-modal">
+                        <div class="form-group full-width">
+                            <label for="nomePlano">Nome:</label>
+                            <input type="text" id="nomePlano" name="Nome" required>
+                        </div>
+                         <div class="form-group">
+                            <label for="precoPlano">Preço (R$):</label>
+                            <input type="number" step="0.01" id="precoPlano" name="Preco" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoPlano">Tipo (Ex: Mensal, Anual):</label>
+                            <input type="text" id="tipoPlano" name="Tipo">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalidadePlano">Modalidade (Ex: Online, Presencial):</label>
+                            <input type="text" id="modalidadePlano" name="Modalidade">
+                        </div>
+                       <div class="form-group full-width">
+                            <label for="imagemPlano">URL da Imagem:</label>
+                            <input type="url" id="imagemPlano" name="Imagem">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="descricaoPlano">Descrição:</label>
+                            <textarea id="descricaoPlano" name="Descricao" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-save-plano">Salvar Plano</button>
+                    <p id="modal-message" class="message"></p>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../assets/js/planosFactory.js" type="module"></script>
+    <script src="../assets/js/admin-planos.js" type="module"></script>
+
+</body>
+</html>

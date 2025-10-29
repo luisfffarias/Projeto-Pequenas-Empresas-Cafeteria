@@ -14,7 +14,13 @@ const productsRoute = require("./routes/productsRoutes");
 const planosRoutes = require("./routes/planosRoutes");
 const cursosRoutes = require("./routes/cursosRoutes");
 const receitasRoutes = require("./routes/receitasRoutes");
+<<<<<<< HEAD
 const shopRoutes = require("./routes/shopRoutes");
+=======
+const adminUserRoutes = require("./routes/adminUserRoutes");
+const adminHistoricoRoutes = require("./routes/adminHistoricoRoutes");
+//const shopRoutes = require("./routes/shopRoutes");
+>>>>>>> cd0de02dd3711f89f63e9ebd2d0b171804faaa9e
 
 // Novas rotas de usuário
 const userRoutes = require("./routes/userRoutes");
@@ -59,7 +65,14 @@ app.use("/api/produtos", productsRoute);
 app.use("/api/planos", planosRoutes);
 app.use("/api/cursos", cursosRoutes);
 app.use("/api/receitas", receitasRoutes);
+<<<<<<< HEAD
 app.use("/api/shop", shopRoutes);
+=======
+app.use("/api/admin/usuarios", adminUserRoutes);
+app.use("/api/admin/historico", adminHistoricoRoutes);
+
+//app.use("/api/shop", shopRoutes);
+>>>>>>> cd0de02dd3711f89f63e9ebd2d0b171804faaa9e
 
 // ----------------------------------------------------
 // Rota raiz
